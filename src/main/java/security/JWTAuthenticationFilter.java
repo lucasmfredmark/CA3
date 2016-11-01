@@ -6,7 +6,7 @@ import com.nimbusds.jose.JWSVerifier;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.SignedJWT;
 import entity.User;
-import facades.UserFacade;
+import facades.Facade;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.security.Principal;
