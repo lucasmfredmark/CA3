@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.5-10.1.18-MariaDB)
 # Database: ca3
-# Generation Time: 2016-11-01 15:03:23 +0000
+# Generation Time: 2016-11-01 15:26:27 +0000
 # ************************************************************
 
 
@@ -142,9 +142,9 @@ LOCK TABLES `USER` WRITE;
 
 INSERT INTO `USER` (`username`, `firstname`, `gender`, `lastname`, `passwordhash`, `points`)
 VALUES
-	('Lucas','Lucas','Fredmark','Male','sha1:64000:18:N6QG2dco4u+Gnpfbx85nUP1iv2UdEl0z:z4v5u/fWFFzSgnTBrCrtFOCB',NULL),
-	('Patrick','Patrick','Johansen','Male','sha1:64000:18:ypldmeTGk7mnDJrkotqM8s1FMD4pqwus:n5fTcltBhyfxrwRjledJ6oQh',NULL),
-	('Thomas','Thomas','Staal','Male','sha1:64000:18:n0lauWKYOJ3FWUJ/C5mlkVV2kVQjGJk2:crKgpou10zkd2rZZkdmT5fBd',NULL);
+	('Lucas','Lucas','Fredmark','Male','sha1:64000:18:N6QG2dco4u+Gnpfbx85nUP1iv2UdEl0z:z4v5u/fWFFzSgnTBrCrtFOCB',100),
+	('Patrick','Patrick','Johansen','Male','sha1:64000:18:ypldmeTGk7mnDJrkotqM8s1FMD4pqwus:n5fTcltBhyfxrwRjledJ6oQh',100),
+	('Thomas','Thomas','Staal','Male','sha1:64000:18:n0lauWKYOJ3FWUJ/C5mlkVV2kVQjGJk2:crKgpou10zkd2rZZkdmT5fBd',100);
 
 /*!40000 ALTER TABLE `USER` ENABLE KEYS */;
 UNLOCK TABLES;
