@@ -2,7 +2,7 @@ package utils;
 
 import entity.Role;
 import entity.User;
-import facades.UserFacade;
+import facades.Facade;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -36,7 +36,7 @@ public class makeTestUsers {
         System.out.println("Created TEST Users");
       }
     } catch (Exception ex) {
-      Logger.getLogger(UserFacade.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(Facade.class.getName()).log(Level.SEVERE, null, ex);
       em.getTransaction().rollback();
     } finally {
       em.close();

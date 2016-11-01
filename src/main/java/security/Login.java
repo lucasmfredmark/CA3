@@ -7,7 +7,7 @@ import com.google.gson.JsonSyntaxException;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jwt.*;
-import facades.UserFacade;
+import facades.Facade;
 import java.security.SecureRandom;
 import java.util.Date;
 import java.util.List;

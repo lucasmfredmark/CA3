@@ -11,8 +11,9 @@ import javax.ws.rs.core.MediaType;
 public class User {
   
   @GET
+  @Path("all")
   @Produces(MediaType.APPLICATION_JSON)
-  public String getSomething(){
+  public String getAllUsers(){
     return "{\"message\" : \"REST call accesible by only authenticated USERS\"}"; 
   }
  
