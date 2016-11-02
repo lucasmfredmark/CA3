@@ -1,5 +1,6 @@
 package facades;
 
+import entity.Team;
 import security.IUserFacade;
 import entity.User;
 import java.util.List;
@@ -8,9 +9,8 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-import rest.FollowList;
-import rest.Pokemon;
-import rest.Team;
+import entity.Pokemon;
+import entity.Follower;
 import security.IUser;
 import security.PasswordStorage;
 
@@ -54,16 +54,16 @@ public class Facade implements IUserFacade {
         EntityManager em = getEntityManager();
 
         try {
-            TypedQuery<User> user = em.createQuery("SELECT * FROM User", User.class);
-            List<User> u = user.getResultList();
-            return u;
+            TypedQuery<User> result = em.createNamedQuery("User.findAll", User.class);
+            List<User> users = result.getResultList();
+            return users;
 
         } finally {
             em.close();
         }
     }
 
-    public User getUserByName(User name) {
+    public User getUserByName(String name) {
         EntityManager em = getEntityManager();
 
         try {
@@ -87,29 +87,31 @@ public class Facade implements IUserFacade {
         }
     }
 
-    public List<FollowList> getfollowList() {
+    public List<Follower> getfollowList() {
         EntityManager em = getEntityManager();
 
         try {
-            TypedQuery<FollowList> followlist = em.createQuery("SELECT * FROM FollowList", FollowList.class);
-            List<FollowList> fl = followlist.getResultList();
-            return fl;
+            TypedQuery<Follower> result = em.createNamedQuery("Follower.findAll", Follower.class);
+            List<Follower> followList = result.getResultList();
+            return followList;
         } finally {
             em.close();
         }
     }
 
-    public FollowList addUserToFollowList(FollowList FollowList) {
+    public List<Follower> addUserToFollowList(Follower FollowList) {
         EntityManager em = getEntityManager();
-
-        try {
-            em.getTransaction().begin();
-            em.persist(FollowList);
-            em.getTransaction().commit();
-            return FollowList;
-        } finally {
-            em.close();
-        }
+        
+//      I don't think this one is implemented as intended
+//        try {
+//            em.getTransaction().begin();
+//            em.persist(FollowList);
+//            em.getTransaction().commit();
+//            return Follower;
+//        } finally {
+//            em.close();
+//        }
+        return null;
     }
 
     public Team createTeam(Team Team) {
@@ -129,9 +131,9 @@ public class Facade implements IUserFacade {
         EntityManager em = getEntityManager();
 
         try {
-            TypedQuery<Team> teams = em.createQuery("SELECT * Team", Team.class);
-            List<Team> t = teams.getResultList();
-            return t;
+            TypedQuery<Team> result = em.createNamedQuery("Team.findAll", Team.class);
+            List<Team> teams = result.getResultList();
+            return teams;
         } finally {
             em.close();
         }
@@ -141,21 +143,21 @@ public class Facade implements IUserFacade {
         EntityManager em = getEntityManager();
 
         try {
-            em.find(Team.class, id);
-            return id;
+            return em.find(Team.class, id);
+//            return id;
         } finally {
             em.close();
         }
     }
 
-    public Pokemon createPokemon(Pokemon Pokemon) {
+    public Pokemon createPokemon(Pokemon pokemon) {
         EntityManager em = getEntityManager();
 
         try {
             em.getTransaction().begin();
-            em.persist(Pokemon);
+            em.persist(pokemon);
             em.getTransaction().commit();
-            return Pokemon;
+            return pokemon;
         } finally {
             em.close();
         }
@@ -165,9 +167,9 @@ public class Facade implements IUserFacade {
         EntityManager em = getEntityManager();
 
         try {
-            TypedQuery<Pokemon> pokemon = em.createQuery("SELECT * Pokemon", Pokemon.class);
-            List<Pokemon> p = pokemon.getResultList();
-            return p;
+            TypedQuery<Pokemon> result = em.createNamedQuery("Pokemon.findAll", Pokemon.class);
+            List<Pokemon> pokemon = result.getResultList();
+            return pokemon;
         } finally {
             em.close();
         }
@@ -177,20 +179,20 @@ public class Facade implements IUserFacade {
         EntityManager em = getEntityManager();
 
         try {
-            Pokemon p = em.find(Pokemon.class, id);
-            return p;
+            return em.find(Pokemon.class, id);
         } finally {
             em.close();
         }
     }
 
-    public Team getPokemonByTeam(int team_id) {
+    public List<Pokemon> getPokemonByTeam(int team_id) {
         EntityManager em = getEntityManager();
 
         try {
             Team t = em.find(Team.class, team_id);
-            //Collection<Pokemon> pokemon = t.getAllPokemon()
-            return t;
+            
+             List<Pokemon> pokemon = t.getPokemonList();
+            return pokemon;
 
         } finally {
             em.close();
@@ -200,7 +202,7 @@ public class Facade implements IUserFacade {
     public User addPoints(int points) {
         EntityManager em = getEntityManager();
         User u = em.find(User.class, points);
-        
+        u.addPoints(points);
         try {
             em.getTransaction().begin(); 
             em.persist(u);

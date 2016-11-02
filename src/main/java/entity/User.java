@@ -118,8 +118,12 @@ public class User implements IUser, Serializable {
         return points;
     }
 
-    public void setPoints(Integer points) {
-        this.points = points;
+    public void addPoints(Integer points) {
+        this.points += points;
+    }
+    
+    public void removePoints(Integer points) {
+        this.points -= points;
     }
 
     @XmlTransient
