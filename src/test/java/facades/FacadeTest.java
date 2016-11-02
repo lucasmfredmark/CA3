@@ -67,13 +67,9 @@ public class FacadeTest {
      */
     @Test
     public void testGetAllUsers() {
-        System.out.println("getAllUsers");
-        Facade instance = null;
-        List<User> expResult = null;
-        List<User> result = instance.getAllUsers();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<User> users = facade.getAllUsers();
+        // If fails, check database for users. Should have 3
+        assertTrue(users.size() > 1);
     }
 
     /**
@@ -87,62 +83,45 @@ public class FacadeTest {
     }
 
     /**
-     * Test of createUser method, of class Facade.
-     */
-    @Test
-    public void testCreateUser() {
-        System.out.println("createUser");
-        User User = null;
-        Facade instance = null;
-        User expResult = null;
-        User result = instance.createUser(User);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getfollowList method, of class Facade.
+     * Test will fail because facade needs to be refactored and method implemented
+     * properly
      */
     @Test
     public void testGetfollowList() {
-        System.out.println("getfollowList");
-        Facade instance = null;
-        List<Follower> expResult = null;
-        List<Follower> result = instance.getfollowList();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int forUser = 1;
+        List<Follower> followList = facade.getfollowList(forUser);
+        assertTrue(followList.size() > 1);
     }
 
     /**
      * Test of addUserToFollowList method, of class Facade.
+     * Test will fail because of missing implementation in facade. addUserToFollowList
+     * is not properly implemented
      */
     @Test
     public void testAddUserToFollowList() {
-        System.out.println("addUserToFollowList");
-        Follower FollowList = null;
-        Facade instance = null;
-        List<Follower> expResult = null;
-        List<Follower> result = instance.addUserToFollowList(FollowList);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int forUser = 1;
+        String lookUp = "Lucas";
+        List<Follower> followList = facade.getfollowList(forUser);
+        int beforeAdd = followList.size();
+        User user = facade.getUserByName(lookUp);
+        facade.addUserToFollowList(user);
     }
 
     /**
      * Test of createTeam method, of class Facade.
+     * Missing implementation of facade method
      */
     @Test
     public void testCreateTeam() {
-        System.out.println("createTeam");
-        Team Team = null;
-        Facade instance = null;
-        Team expResult = null;
-        Team result = instance.createTeam(Team);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Team team = new Team();
+        String lookUp = "Lucas";
+        team.setName("FacadeTeam");
+        User user = facade.getUserByName(lookUp);
+        facade.addTeamToUser(user);
+        user = facade.getUserByName(lookUp);
+        assertTrue(user.getTeamList().size() > 0);
     }
 
     /**
@@ -150,28 +129,20 @@ public class FacadeTest {
      */
     @Test
     public void testGetTeams() {
-        System.out.println("getTeams");
-        Facade instance = null;
-        List<Team> expResult = null;
-        List<Team> result = instance.getTeams();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String lookUp = "Lucas";
+        User user = facade.getUserByName(lookUp);
+        assertTrue(user.getTeamList().size() > 0);
     }
 
     /**
      * Test of getTeamById method, of class Facade.
+     * Refactor facade method to take an int instead of Team
      */
     @Test
     public void testGetTeamById() {
-        System.out.println("getTeamById");
-        Team id = null;
-        Facade instance = null;
-        Team expResult = null;
-        Team result = instance.getTeamById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int team_id = 1;
+        Team team = facade.getTeamById(team_id);
+        assertTrue(team != null);
     }
 
     /**
@@ -179,14 +150,17 @@ public class FacadeTest {
      */
     @Test
     public void testCreatePokemon() {
-        System.out.println("createPokemon");
-        Pokemon pokemon = null;
-        Facade instance = null;
-        Pokemon expResult = null;
-        Pokemon result = instance.createPokemon(pokemon);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Pokemon pokemon = new Pokemon();
+        pokemon.setPokedexId(13);
+        int team_id = 1;
+        facade.addPokemonToTeam(team_id);
+        List<Pokemon> pokemonList = facade.getPokemonByTeam(team_id);
+        for (Pokemon p : pokemonList) {
+            if (p.getPokedexId().equals(13)) {
+                pokemon = p;
+            }
+        }
+        assertTrue(pokemon.getPokedexId().equals(13));
     }
 
     /**
@@ -194,43 +168,29 @@ public class FacadeTest {
      */
     @Test
     public void testGetAllPokemon() {
-        System.out.println("getAllPokemon");
-        Facade instance = null;
-        List<Pokemon> expResult = null;
-        List<Pokemon> result = instance.getAllPokemon();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<Pokemon> pokemonMasterList = facade.getAllPokemon();
+        assertTrue(pokemonMasterList.size() > 1);
     }
 
     /**
      * Test of getPokemonById method, of class Facade.
+     * Refactor getPokemonById to take int instead of object
      */
     @Test
     public void testGetPokemonById() {
-        System.out.println("getPokemonById");
-        Pokemon id = null;
-        Facade instance = null;
-        Pokemon expResult = null;
-        Pokemon result = instance.getPokemonById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Pokemon pokemon = facade.getPokemonById(1);
+        assertTrue(pokemon != null);
     }
 
     /**
      * Test of getPokemonByTeam method, of class Facade.
+     * Refactor getTeamById to take int instead of object
      */
     @Test
     public void testGetPokemonByTeam() {
-        System.out.println("getPokemonByTeam");
-        int team_id = 0;
-        Facade instance = null;
-        List<Pokemon> expResult = null;
-        List<Pokemon> result = instance.getPokemonByTeam(team_id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Team t = facade.getTeamById(1);
+        List<Pokemon> pokemonInTeam = t.getPokemonList();
+        assertTrue(pokemonInTeam.size() > 0);
     }
 
     /**
@@ -238,14 +198,14 @@ public class FacadeTest {
      */
     @Test
     public void testAddPoints() {
-        System.out.println("addPoints");
-        int points = 0;
-        Facade instance = null;
-        User expResult = null;
-        User result = instance.addPoints(points);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String lookUp = "Lucas";
+        User user = facade.getUserByName(lookUp);
+        int pointsToAdd = 100;
+        int beforeAdd = user.getPoints();
+        user.addPoints(pointsToAdd);
+        user = facade.getUserByName(lookUp);
+        int afterAdd = user.getPoints();
+        assertTrue(afterAdd > beforeAdd);
     }
     
 }
