@@ -6,6 +6,7 @@
 package facades;
 
 import entity.Follower;
+import entity.User;
 import java.util.List;
 
 /**
@@ -14,8 +15,8 @@ import java.util.List;
  */
 public interface IFollowerFacade {
 
-    Follower addUserToFollowList(String followerid, String username);
+    Follower addUserToFollowList(User friend, User me);
 
-    List<Follower> getFollowList(String forUser);
+    List<Follower> getFollowList(User forUser);
     
 }

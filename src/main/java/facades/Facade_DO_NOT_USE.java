@@ -99,21 +99,21 @@ public class Facade_DO_NOT_USE implements IUserFacadeOld {
         }
     }
 
-    public Follower addUserToFollowList(String followerid, String username) {
-        EntityManager em = getEntityManager();
-        Follower fw = new Follower();
-        try {
-            em.getTransaction().begin();
-            fw.setFkUserFollowUsername(followerid);
-            fw.setFkUserUsername(username);
-            em.persist(fw);
-            em.getTransaction().commit();
-            return fw;
-        } finally {
-            em.close();
-        }
-
-    }
+//    public Follower addUserToFollowList(String followerid, String username) {
+//        EntityManager em = getEntityManager();
+//        Follower fw = new Follower();
+//        try {
+//            em.getTransaction().begin();
+//            fw.setFkUserFollowUsername(followerid);
+//            fw.setFkUserUsername(username);
+//            em.persist(fw);
+//            em.getTransaction().commit();
+//            return fw;
+//        } finally {
+//            em.close();
+//        }
+//
+//    }
 
     public Team createTeam(Team team) {
         EntityManager em = getEntityManager();

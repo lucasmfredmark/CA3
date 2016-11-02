@@ -57,16 +57,16 @@ public class Follower implements Serializable {
         return fkUserFollowUsername;
     }
 
-    public String setFkUserFollowUsername(String fkUserFollowUsername) {
-        return fkUserFollowUsername;
+    public void setFkUserFollowUsername(User friend) {
+        fkUserFollowUsername = friend;
     }
 
     public User getFkUserUsername() {
         return fkUserUsername;
     }
 
-    public String setFkUserUsername(String fkUserUsername) {
-        return fkUserUsername;
+    public void setFkUserUsername(User me) {
+        fkUserUsername = me;
     }
 
     @Override

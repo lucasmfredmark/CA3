@@ -6,6 +6,7 @@
 package facades;
 
 import entity.Follower;
+import entity.User;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -28,12 +29,12 @@ public class FollowerFacade implements IFollowerFacade {
     }
     
     @Override
-    public List<Follower> getFollowList(String forUser) {
+    public List<Follower> getFollowList(User forUser) {
         EntityManager em = getEntityManager();
         // May not work *NOTICE
         try {
             TypedQuery<Follower> result = em.createNamedQuery("Follower.findByOwner", Follower.class);
-            List<Follower> followList = result.setParameter(forUser, Follower.class).getResultList();
+            List<Follower> followList = result.setParameter("username", forUser).getResultList();
             return followList;
         } finally {
             em.close();
@@ -41,16 +42,17 @@ public class FollowerFacade implements IFollowerFacade {
     }
 
     @Override
-    public Follower addUserToFollowList(String followerid, String username) {
+    public Follower addUserToFollowList(User friend, User me) {
         EntityManager em = getEntityManager();
-        Follower fw = new Follower();
+        
         try {
+            Follower fEntry = new Follower();
+            fEntry.setFkUserFollowUsername(friend);
+            fEntry.setFkUserUsername(me);
             em.getTransaction().begin();
-            fw.setFkUserFollowUsername(followerid);
-            fw.setFkUserUsername(username);
-            em.persist(fw);
+            em.persist(fEntry);
             em.getTransaction().commit();
-            return fw;
+            return fEntry;
         } finally {
             em.close();
         }
