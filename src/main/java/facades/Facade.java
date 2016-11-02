@@ -216,4 +216,29 @@ public class Facade implements IUserFacade {
 
     }
 
+    public Team addTeamToUser(Team team) {
+        EntityManager em = getEntityManager();
+
+        try {
+            em.getTransaction().begin();
+            em.persist(team);
+            em.getTransaction().commit();
+            return team;
+        } finally {
+            em.close();
+        }
+    }
+
+    public Pokemon addPokemonToTeam(Pokemon pokemon) {
+        EntityManager em = getEntityManager();
+
+        try {
+            em.getTransaction();
+            em.persist(pokemon);
+            em.getTransaction().commit();
+            return pokemon;
+        } finally {
+            em.close();
+        }
+    }
 }
