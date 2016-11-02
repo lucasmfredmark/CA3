@@ -5,6 +5,12 @@
  */
 package rest;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import entity.Pokemon;
+import facades.IPokemonFacade;
+import facades.PokemonFacade;
+import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -25,6 +31,9 @@ public class PokemonService {
     @Context
     private UriInfo context;
 
+     private static final IPokemonFacade FACADE = new PokemonFacade(Persistence.createEntityManagerFactory("PU"));
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+
     /**
      * Creates a new instance of Pokemon
      */
@@ -36,18 +45,22 @@ public class PokemonService {
      * @return an instance of java.lang.String
      */
     @GET
+    @Path("addPokemonToTeam")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+    public String addPokemonToTeam(String json_pokemon) {
+        Pokemon pm = GSON.fromJson(json_pokemon, Pokemon.class);
+        return GSON.toJson(pm);
+        
     }
 
     /**
      * PUT method for updating or creating an instance of Pokemon
      * @param content representation for the resource
      */
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
-    }
+//    @PUT
+//    @Path("createPokemon")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public String createPokemon(String json_pokemon) {
+//        
+//    }
 }

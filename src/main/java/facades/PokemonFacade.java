@@ -82,6 +82,7 @@ public class PokemonFacade implements IPokemonFacade {
         }
     }
     
+    //Fix! skal hente en pokemon og den skal tilknyttes teamid
     @Override
     public Pokemon addPokemonToTeam(Pokemon pokemon) {
         EntityManager em = getEntityManager();

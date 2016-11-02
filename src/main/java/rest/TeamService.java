@@ -5,13 +5,18 @@
  */
 package rest;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import entity.Team;
+import facades.ITeamFacade;
+import facades.TeamFacade;
+import java.util.List;
+import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -25,6 +30,9 @@ public class TeamService {
     @Context
     private UriInfo context;
 
+    private static final ITeamFacade FACADE = new TeamFacade(Persistence.createEntityManagerFactory("PU"));
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+
     /**
      * Creates a new instance of Team
      */
@@ -33,21 +41,24 @@ public class TeamService {
 
     /**
      * Retrieves representation of an instance of rest.Team
+     *
      * @return an instance of java.lang.String
      */
     @GET
+    @Path("createTeam")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getJson() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+    public String createTeam(String json_team) {
+        Team team = GSON.fromJson(json_team, Team.class);
+        Team t = (Team) FACADE.createTeam(team);
+        return GSON.toJson(t);
     }
 
-    /**
-     * PUT method for updating or creating an instance of Team
-     * @param content representation for the resource
-     */
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
+    @GET
+    @Path("getTeams")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getTeams(String json_teams) {
+        List<Team> li = FACADE.getTeams();
+        return GSON.toJson(li);
     }
+
 }
