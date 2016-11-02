@@ -63,7 +63,7 @@ public class Facade implements IUserFacade {
         }
     }
 
-    public User getUserByName(User name) {
+    public User getUserByName(String name) {
         EntityManager em = getEntityManager();
 
         try {
