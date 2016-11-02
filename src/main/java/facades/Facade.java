@@ -2,6 +2,7 @@ package facades;
 
 import security.IUserFacade;
 import entity.User;
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -54,9 +55,9 @@ public class Facade implements IUserFacade {
         EntityManager em = getEntityManager();
 
         try {
-            TypedQuery<User> user = em.createQuery("SELECT * FROM User", User.class);
-            List<User> u = user.getResultList();
-            return u;
+            TypedQuery<User> result = em.createQuery("SELECT * FROM User", User.class);
+            List<User> users = result.getResultList();
+            return users;
 
         } finally {
             em.close();
@@ -91,9 +92,9 @@ public class Facade implements IUserFacade {
         EntityManager em = getEntityManager();
 
         try {
-            TypedQuery<FollowList> followlist = em.createQuery("SELECT * FROM FollowList", FollowList.class);
-            List<FollowList> fl = followlist.getResultList();
-            return fl;
+            TypedQuery<FollowList> result = em.createQuery("SELECT * FROM FollowList", FollowList.class);
+            List<FollowList> followList = result.getResultList();
+            return followList;
         } finally {
             em.close();
         }
@@ -129,9 +130,9 @@ public class Facade implements IUserFacade {
         EntityManager em = getEntityManager();
 
         try {
-            TypedQuery<Team> teams = em.createQuery("SELECT * Team", Team.class);
-            List<Team> t = teams.getResultList();
-            return t;
+            TypedQuery<Team> result = em.createQuery("SELECT * Team", Team.class);
+            List<Team> teams = result.getResultList();
+            return teams;
         } finally {
             em.close();
         }
@@ -141,21 +142,21 @@ public class Facade implements IUserFacade {
         EntityManager em = getEntityManager();
 
         try {
-            em.find(Team.class, id);
-            return id;
+            return em.find(Team.class, id);
+//            return id;
         } finally {
             em.close();
         }
     }
 
-    public Pokemon createPokemon(Pokemon Pokemon) {
+    public Pokemon createPokemon(Pokemon pokemon) {
         EntityManager em = getEntityManager();
 
         try {
             em.getTransaction().begin();
-            em.persist(Pokemon);
+            em.persist(pokemon);
             em.getTransaction().commit();
-            return Pokemon;
+            return pokemon;
         } finally {
             em.close();
         }
@@ -165,9 +166,9 @@ public class Facade implements IUserFacade {
         EntityManager em = getEntityManager();
 
         try {
-            TypedQuery<Pokemon> pokemon = em.createQuery("SELECT * Pokemon", Pokemon.class);
-            List<Pokemon> p = pokemon.getResultList();
-            return p;
+            TypedQuery<Pokemon> result = em.createQuery("SELECT * Pokemon", Pokemon.class);
+            List<Pokemon> pokemon = result.getResultList();
+            return pokemon;
         } finally {
             em.close();
         }
@@ -177,20 +178,23 @@ public class Facade implements IUserFacade {
         EntityManager em = getEntityManager();
 
         try {
-            Pokemon p = em.find(Pokemon.class, id);
-            return p;
+            return em.find(Pokemon.class, id);
+//            return p;
         } finally {
             em.close();
         }
     }
 
-    public Team getPokemonByTeam(int team_id) {
+    public Collection<Pokemon> getPokemonByTeam(int team_id) {
         EntityManager em = getEntityManager();
 
         try {
             Team t = em.find(Team.class, team_id);
-            //Collection<Pokemon> pokemon = t.getAllPokemon()
-            return t;
+            
+            // Collection<Pokemon> pokemon = t.getAllPokemon();
+            // Placeholder below
+            Collection<Pokemon> pokemon = null;
+            return pokemon;
 
         } finally {
             em.close();
@@ -200,7 +204,7 @@ public class Facade implements IUserFacade {
     public User addPoints(int points) {
         EntityManager em = getEntityManager();
         User u = em.find(User.class, points);
-        
+        //u.addPoints(points);
         try {
             em.getTransaction().begin(); 
             em.persist(u);

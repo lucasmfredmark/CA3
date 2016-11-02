@@ -23,6 +23,8 @@
 # Dump of table FOLLOWER
 # ------------------------------------------------------------
 
+USE ca3;
+
 DROP TABLE IF EXISTS `FOLLOWER`;
 
 CREATE TABLE `FOLLOWER` (
