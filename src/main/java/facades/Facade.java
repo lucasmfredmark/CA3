@@ -63,11 +63,11 @@ public class Facade implements IUserFacade {
         }
     }
 
-    public User getUserByName(String name) {
+    public User getUserByUserName(String username) {
         EntityManager em = getEntityManager();
 
         try {
-            User p = em.find(User.class, name);
+            User p = em.find(User.class, username);
             return p;
         } finally {
             em.close();
@@ -87,7 +87,7 @@ public class Facade implements IUserFacade {
         }
     }
 
-    public List<Follower> getfollowList() {
+    public List<Follower> getFollowList() {
         EntityManager em = getEntityManager();
 
         try {
@@ -99,19 +99,20 @@ public class Facade implements IUserFacade {
         }
     }
 
-    public List<Follower> addUserToFollowList(Follower FollowList) {
+    public Follower addUserToFollowList(String followerid, String username) {
         EntityManager em = getEntityManager();
-        
-//      I don't think this one is implemented as intended
-//        try {
-//            em.getTransaction().begin();
-//            em.persist(FollowList);
-//            em.getTransaction().commit();
-//            return Follower;
-//        } finally {
-//            em.close();
-//        }
-        return null;
+        Follower fw = new Follower();
+        try {
+            em.getTransaction().begin();
+            fw.setFkUserFollowUsername(followerid);
+            fw.setFkUserUsername(username);
+            em.persist(fw);
+            em.getTransaction().commit();
+            return fw;
+        } finally {
+            em.close();
+        }
+
     }
 
     public Team createTeam(Team Team) {
@@ -139,12 +140,12 @@ public class Facade implements IUserFacade {
         }
     }
 
-    public Team getTeamById(Team id) {
+    public Team getTeamById(int id) {
         EntityManager em = getEntityManager();
 
         try {
-            return em.find(Team.class, id);
-//            return id;
+            Team t = em.find(Team.class, id);
+            return t;
         } finally {
             em.close();
         }
@@ -175,11 +176,12 @@ public class Facade implements IUserFacade {
         }
     }
 
-    public Pokemon getPokemonById(Pokemon id) {
+    public Pokemon getPokemonById(int id) {
         EntityManager em = getEntityManager();
 
         try {
-            return em.find(Pokemon.class, id);
+            Pokemon p = em.find(Pokemon.class, id);
+            return p;
         } finally {
             em.close();
         }
@@ -190,8 +192,8 @@ public class Facade implements IUserFacade {
 
         try {
             Team t = em.find(Team.class, team_id);
-            
-             List<Pokemon> pokemon = t.getPokemonList();
+
+            List<Pokemon> pokemon = t.getPokemonList();
             return pokemon;
 
         } finally {
@@ -204,7 +206,7 @@ public class Facade implements IUserFacade {
         User u = em.find(User.class, points);
         u.addPoints(points);
         try {
-            em.getTransaction().begin(); 
+            em.getTransaction().begin();
             em.persist(u);
             em.getTransaction().commit();
             return u;
