@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Follower.findAll", query = "SELECT f FROM Follower f"),
+    @NamedQuery(name = "Follower.findByOwner", query = "SELECT f FROM Follower f WHERE f.fkUserUsername = :username"),
     @NamedQuery(name = "Follower.findById", query = "SELECT f FROM Follower f WHERE f.id = :id")})
 public class Follower implements Serializable {
 
@@ -56,16 +57,16 @@ public class Follower implements Serializable {
         return fkUserFollowUsername;
     }
 
-    public void setFkUserFollowUsername(User fkUserFollowUsername) {
-        this.fkUserFollowUsername = fkUserFollowUsername;
+    public String setFkUserFollowUsername(String fkUserFollowUsername) {
+        return fkUserFollowUsername;
     }
 
     public User getFkUserUsername() {
         return fkUserUsername;
     }
 
-    public void setFkUserUsername(User fkUserUsername) {
-        this.fkUserUsername = fkUserUsername;
+    public String setFkUserUsername(String fkUserUsername) {
+        return fkUserUsername;
     }
 
     @Override

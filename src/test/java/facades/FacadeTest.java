@@ -24,10 +24,18 @@ import static org.junit.Assert.*;
  */
 public class FacadeTest {
     
-    private final Facade facade;
+//    private final Facade facade;
+    private final UserFacade uf;
+    private final TeamFacade tf;
+    private final FollowerFacade ff;
+    private final PokemonFacade pf;
     
     public FacadeTest() {
-        facade = new Facade(Persistence.createEntityManagerFactory("pu_development"));
+//        facade = new Facade(Persistence.createEntityManagerFactory("pu_development"));
+        uf = new UserFacade(Persistence.createEntityManagerFactory("pu_development"));
+        tf = new TeamFacade(Persistence.createEntityManagerFactory("pu_development"));
+        ff = new FollowerFacade(Persistence.createEntityManagerFactory("pu_development"));
+        pf = new PokemonFacade(Persistence.createEntityManagerFactory("pu_development"));
     }
     
     @BeforeClass
@@ -46,34 +54,15 @@ public class FacadeTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of authenticateUser method, of class Facade.
-     */
-    @Test
-    public void testAuthenticateUser() {
-        System.out.println("authenticateUser");
-        String userName = "";
-        String password = "";
-        Facade instance = null;
-        List<String> expResult = null;
-        List<String> result = instance.authenticateUser(userName, password);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of getAllUsers method, of class Facade.
      */
     @Test
     public void testGetAllUsers() {
-        System.out.println("getAllUsers");
-        Facade instance = null;
-        List<User> expResult = null;
-        List<User> result = instance.getAllUsers();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<User> users = uf.getAllUsers();
+        // If fails, check database for users. Should have 3
+        assertTrue(users.size() > 1);
     }
 
     /**
@@ -82,67 +71,51 @@ public class FacadeTest {
     @Test
     public void testGetUserByName() {
         String username = "Lucas";
-        User user = facade.getUserByName(username);
+        User user = uf.getUserByUsername(username);
         assertTrue(user != null);
     }
 
     /**
-     * Test of createUser method, of class Facade.
-     */
-    @Test
-    public void testCreateUser() {
-        System.out.println("createUser");
-        User User = null;
-        Facade instance = null;
-        User expResult = null;
-        User result = instance.createUser(User);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of getfollowList method, of class Facade.
+     * Test will fail because facade needs to be refactored and method implemented
+     * properly
      */
     @Test
     public void testGetfollowList() {
-        System.out.println("getfollowList");
-        Facade instance = null;
-        List<Follower> expResult = null;
-        List<Follower> result = instance.getfollowList();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String forUser = "Lucas";
+        List<Follower> followList = ff.getFollowList(forUser);
+        assertTrue(followList.size() > 1);
     }
 
     /**
      * Test of addUserToFollowList method, of class Facade.
+     * Test will fail because of missing implementation in facade. addUserToFollowList
+     * is not properly implemented
      */
     @Test
     public void testAddUserToFollowList() {
-        System.out.println("addUserToFollowList");
-        Follower FollowList = null;
-        Facade instance = null;
-        List<Follower> expResult = null;
-        List<Follower> result = instance.addUserToFollowList(FollowList);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String lookUp = "Lucas";
+        String friend = "Thomas";
+        List<Follower> followList = ff.getFollowList(lookUp);
+        int beforeAdd = followList.size();
+        ff.addUserToFollowList(friend, lookUp);
+        followList = ff.getFollowList(lookUp);
+        int afterAdd = followList.size();
+        assertTrue(afterAdd > beforeAdd);
     }
 
     /**
      * Test of createTeam method, of class Facade.
+     * Missing implementation of facade method
      */
     @Test
     public void testCreateTeam() {
-        System.out.println("createTeam");
-        Team Team = null;
-        Facade instance = null;
-        Team expResult = null;
-        Team result = instance.createTeam(Team);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Team team = new Team();
+        String lookUp = "Lucas";
+        team.setName("FacadeTeam");
+        tf.addTeamToUser(team);
+        User user = uf.getUserByUsername(lookUp);
+        assertTrue(user.getTeamList().size() > 0);
     }
 
     /**
@@ -150,28 +123,20 @@ public class FacadeTest {
      */
     @Test
     public void testGetTeams() {
-        System.out.println("getTeams");
-        Facade instance = null;
-        List<Team> expResult = null;
-        List<Team> result = instance.getTeams();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String lookUp = "Lucas";
+        User user = uf.getUserByUsername(lookUp);
+        assertTrue(user.getTeamList().size() > 0);
     }
 
     /**
      * Test of getTeamById method, of class Facade.
+     * Refactor facade method to take an int instead of Team
      */
     @Test
     public void testGetTeamById() {
-        System.out.println("getTeamById");
-        Team id = null;
-        Facade instance = null;
-        Team expResult = null;
-        Team result = instance.getTeamById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int team_id = 1;
+        Team team = tf.getTeamById(team_id);
+        assertTrue(team != null);
     }
 
     /**
@@ -179,14 +144,11 @@ public class FacadeTest {
      */
     @Test
     public void testCreatePokemon() {
-        System.out.println("createPokemon");
-        Pokemon pokemon = null;
-        Facade instance = null;
-        Pokemon expResult = null;
-        Pokemon result = instance.createPokemon(pokemon);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Pokemon pokemon = new Pokemon();
+        pokemon.setPokedexId(13);
+        pf.createPokemon(pokemon);
+        Pokemon returnedPokemon = pf.getPokemonById(7);
+        assertTrue(returnedPokemon != null);
     }
 
     /**
@@ -194,43 +156,29 @@ public class FacadeTest {
      */
     @Test
     public void testGetAllPokemon() {
-        System.out.println("getAllPokemon");
-        Facade instance = null;
-        List<Pokemon> expResult = null;
-        List<Pokemon> result = instance.getAllPokemon();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<Pokemon> pokemonMasterList = pf.getAllPokemon();
+        assertTrue(pokemonMasterList.size() > 1);
     }
 
     /**
      * Test of getPokemonById method, of class Facade.
+     * Refactor getPokemonById to take int instead of object
      */
     @Test
     public void testGetPokemonById() {
-        System.out.println("getPokemonById");
-        Pokemon id = null;
-        Facade instance = null;
-        Pokemon expResult = null;
-        Pokemon result = instance.getPokemonById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Pokemon pokemon = pf.getPokemonById(1);
+        assertTrue(pokemon != null);
     }
 
     /**
      * Test of getPokemonByTeam method, of class Facade.
+     * Refactor getTeamById to take int instead of object
      */
     @Test
     public void testGetPokemonByTeam() {
-        System.out.println("getPokemonByTeam");
-        int team_id = 0;
-        Facade instance = null;
-        List<Pokemon> expResult = null;
-        List<Pokemon> result = instance.getPokemonByTeam(team_id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Team t = tf.getTeamById(1);
+        List<Pokemon> pokemonInTeam = t.getPokemonList();
+        assertTrue(pokemonInTeam.size() > 0);
     }
 
     /**
@@ -238,14 +186,14 @@ public class FacadeTest {
      */
     @Test
     public void testAddPoints() {
-        System.out.println("addPoints");
-        int points = 0;
-        Facade instance = null;
-        User expResult = null;
-        User result = instance.addPoints(points);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String lookUp = "Lucas";
+        User user = uf.getUserByUsername(lookUp);
+        int pointsToAdd = 100;
+        int beforeAdd = user.getPoints();
+        user.addPoints(pointsToAdd);
+        user = uf.getUserByUsername(lookUp);
+        int afterAdd = user.getPoints();
+        assertTrue(afterAdd > beforeAdd);
     }
     
 }

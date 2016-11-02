@@ -1,6 +1,6 @@
 package security;
 
-import facades.Facade;
+import facades.Facade_DO_NOT_USE;
 import javax.persistence.Persistence;
 
 /**
@@ -10,9 +10,9 @@ import javax.persistence.Persistence;
 public class UserFacadeFactory {
 //    private static final IUserFacade instance = 
 //            new UserFacade(Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME));
-private static final IUserFacade instance = 
-            new Facade(Persistence.createEntityManagerFactory("pu_development"));
-    public static IUserFacade getInstance(){
+private static final IUserFacadeOld instance = 
+            new Facade_DO_NOT_USE(Persistence.createEntityManagerFactory("pu_development"));
+    public static IUserFacadeOld getInstance(){
         return instance;
     }
 }
