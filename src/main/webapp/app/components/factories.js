@@ -3,12 +3,12 @@
 /* Place your global Factory-service in this file */
 
 angular.module('myApp.factories', []).
-  factory('InfoFactory', function () {
-    var info = "Hello World from a Factory";
-    var getInfo = function getInfo(){
-      return info;
-    };
+  factory('TeamFactory', ['$http', '$q', function ($http, $q) {
+    var apiUrl = 'api/team/';
+    
     return {
-      getInfo: getInfo
+      getTeamCount: function() {
+        return 3;
+      }
     };
-  });
+  }]);

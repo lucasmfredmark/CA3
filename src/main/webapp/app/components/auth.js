@@ -138,9 +138,3 @@ function clearUserDetails($scope) {
   $scope.isAdmin = false;
   $scope.isUser = false;
 }
-
-
-
-
-
-

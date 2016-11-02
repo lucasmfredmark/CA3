@@ -3,9 +3,8 @@
  */
 
 angular.module('myApp.controllers', []).
-  controller('AppCtrl', function () {
-
-  });
-
-
-
+  controller('AppCtrl', ['TeamFactory', function (TeamFactory) {
+    var self = this;
+    this.title = 'MyPokéTrainer';
+    this.teamCount = TeamFactory.getTeamCount();
+  }]);
