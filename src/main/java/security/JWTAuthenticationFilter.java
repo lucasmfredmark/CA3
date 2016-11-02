@@ -6,7 +6,7 @@ import com.nimbusds.jose.JWSVerifier;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.SignedJWT;
 import entity.User;
-import facades.Facade;
+import facades.Facade_DO_NOT_USE;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.security.Principal;
@@ -87,7 +87,7 @@ public class JWTAuthenticationFilter implements ContainerRequestFilter {
   }
   
   private UserPrincipal getPricipalByUserId(String userId) {
-    IUserFacade facade = UserFacadeFactory.getInstance();
+    IUserFacadeOld facade = UserFacadeFactory.getInstance();
     IUser user = facade.getUserByUserId(userId);
     if (user != null) {
       return new UserPrincipal(user.getUserName(), user.getRolesAsStrings());  

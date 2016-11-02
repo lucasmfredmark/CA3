@@ -1,7 +1,6 @@
 package facades;
 
 import entity.Team;
-import security.IUserFacade;
 import entity.User;
 import java.util.List;
 import java.util.logging.Level;
@@ -13,12 +12,13 @@ import entity.Pokemon;
 import entity.Follower;
 import security.IUser;
 import security.PasswordStorage;
+import security.IUserFacadeOld;
 
-public class Facade implements IUserFacade {
+public class Facade_DO_NOT_USE implements IUserFacadeOld {
 
     EntityManagerFactory emf;
 
-    public Facade(EntityManagerFactory emf) {
+    public Facade_DO_NOT_USE(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
@@ -45,7 +45,7 @@ public class Facade implements IUserFacade {
         try {
             return user != null && PasswordStorage.verifyPassword(password, user.getPassword()) ? user.getRolesAsStrings() : null;
         } catch (PasswordStorage.CannotPerformOperationException | PasswordStorage.InvalidHashException ex) {
-            Logger.getLogger(Facade.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Facade_DO_NOT_USE.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }
@@ -87,12 +87,12 @@ public class Facade implements IUserFacade {
         }
     }
 
-    public List<Follower> getFollowList() {
+    public List<Follower> getFollowList(String forUser) {
         EntityManager em = getEntityManager();
-
+        // May not work *NOTICE
         try {
-            TypedQuery<Follower> result = em.createNamedQuery("Follower.findAll", Follower.class);
-            List<Follower> followList = result.getResultList();
+            TypedQuery<Follower> result = em.createNamedQuery("Follower.findByOwner", Follower.class);
+            List<Follower> followList = result.setParameter(forUser, Follower.class).getResultList();
             return followList;
         } finally {
             em.close();
@@ -115,14 +115,13 @@ public class Facade implements IUserFacade {
 
     }
 
-    public Team createTeam(Team Team) {
+    public Team createTeam(Team team) {
         EntityManager em = getEntityManager();
-
         try {
             em.getTransaction().begin();
-            em.persist(Team);
+            em.persist(team);
             em.getTransaction().commit();
-            return Team;
+            return team;
         } finally {
             em.close();
         }

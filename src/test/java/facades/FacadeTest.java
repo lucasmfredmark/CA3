@@ -24,10 +24,18 @@ import static org.junit.Assert.*;
  */
 public class FacadeTest {
     
-    private final Facade facade;
+//    private final Facade facade;
+    private final UserFacade uf;
+    private final TeamFacade tf;
+    private final FollowerFacade ff;
+    private final PokemonFacade pf;
     
     public FacadeTest() {
-        facade = new Facade(Persistence.createEntityManagerFactory("pu_development"));
+//        facade = new Facade(Persistence.createEntityManagerFactory("pu_development"));
+        uf = new UserFacade(Persistence.createEntityManagerFactory("pu_development"));
+        tf = new TeamFacade(Persistence.createEntityManagerFactory("pu_development"));
+        ff = new FollowerFacade(Persistence.createEntityManagerFactory("pu_development"));
+        pf = new PokemonFacade(Persistence.createEntityManagerFactory("pu_development"));
     }
     
     @BeforeClass
@@ -46,28 +54,13 @@ public class FacadeTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of authenticateUser method, of class Facade.
-     */
-    @Test
-    public void testAuthenticateUser() {
-        System.out.println("authenticateUser");
-        String userName = "";
-        String password = "";
-        Facade instance = null;
-        List<String> expResult = null;
-        List<String> result = instance.authenticateUser(userName, password);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of getAllUsers method, of class Facade.
      */
     @Test
     public void testGetAllUsers() {
-        List<User> users = facade.getAllUsers();
+        List<User> users = uf.getAllUsers();
         // If fails, check database for users. Should have 3
         assertTrue(users.size() > 1);
     }
@@ -78,7 +71,7 @@ public class FacadeTest {
     @Test
     public void testGetUserByName() {
         String username = "Lucas";
-        User user = facade.getUserByName(username);
+        User user = uf.getUserByUsername(username);
         assertTrue(user != null);
     }
 
@@ -89,8 +82,8 @@ public class FacadeTest {
      */
     @Test
     public void testGetfollowList() {
-        int forUser = 1;
-        List<Follower> followList = facade.getfollowList(forUser);
+        String forUser = "Lucas";
+        List<Follower> followList = ff.getFollowList(forUser);
         assertTrue(followList.size() > 1);
     }
 
@@ -101,12 +94,14 @@ public class FacadeTest {
      */
     @Test
     public void testAddUserToFollowList() {
-        int forUser = 1;
         String lookUp = "Lucas";
-        List<Follower> followList = facade.getfollowList(forUser);
+        String friend = "Thomas";
+        List<Follower> followList = ff.getFollowList(lookUp);
         int beforeAdd = followList.size();
-        User user = facade.getUserByName(lookUp);
-        facade.addUserToFollowList(user);
+        ff.addUserToFollowList(friend, lookUp);
+        followList = ff.getFollowList(lookUp);
+        int afterAdd = followList.size();
+        assertTrue(afterAdd > beforeAdd);
     }
 
     /**
@@ -118,9 +113,8 @@ public class FacadeTest {
         Team team = new Team();
         String lookUp = "Lucas";
         team.setName("FacadeTeam");
-        User user = facade.getUserByName(lookUp);
-        facade.addTeamToUser(user);
-        user = facade.getUserByName(lookUp);
+        tf.addTeamToUser(team);
+        User user = uf.getUserByUsername(lookUp);
         assertTrue(user.getTeamList().size() > 0);
     }
 
@@ -130,7 +124,7 @@ public class FacadeTest {
     @Test
     public void testGetTeams() {
         String lookUp = "Lucas";
-        User user = facade.getUserByName(lookUp);
+        User user = uf.getUserByUsername(lookUp);
         assertTrue(user.getTeamList().size() > 0);
     }
 
@@ -141,7 +135,7 @@ public class FacadeTest {
     @Test
     public void testGetTeamById() {
         int team_id = 1;
-        Team team = facade.getTeamById(team_id);
+        Team team = tf.getTeamById(team_id);
         assertTrue(team != null);
     }
 
@@ -152,15 +146,9 @@ public class FacadeTest {
     public void testCreatePokemon() {
         Pokemon pokemon = new Pokemon();
         pokemon.setPokedexId(13);
-        int team_id = 1;
-        facade.addPokemonToTeam(team_id);
-        List<Pokemon> pokemonList = facade.getPokemonByTeam(team_id);
-        for (Pokemon p : pokemonList) {
-            if (p.getPokedexId().equals(13)) {
-                pokemon = p;
-            }
-        }
-        assertTrue(pokemon.getPokedexId().equals(13));
+        pf.createPokemon(pokemon);
+        Pokemon returnedPokemon = pf.getPokemonById(7);
+        assertTrue(returnedPokemon != null);
     }
 
     /**
@@ -168,7 +156,7 @@ public class FacadeTest {
      */
     @Test
     public void testGetAllPokemon() {
-        List<Pokemon> pokemonMasterList = facade.getAllPokemon();
+        List<Pokemon> pokemonMasterList = pf.getAllPokemon();
         assertTrue(pokemonMasterList.size() > 1);
     }
 
@@ -178,7 +166,7 @@ public class FacadeTest {
      */
     @Test
     public void testGetPokemonById() {
-        Pokemon pokemon = facade.getPokemonById(1);
+        Pokemon pokemon = pf.getPokemonById(1);
         assertTrue(pokemon != null);
     }
 
@@ -188,7 +176,7 @@ public class FacadeTest {
      */
     @Test
     public void testGetPokemonByTeam() {
-        Team t = facade.getTeamById(1);
+        Team t = tf.getTeamById(1);
         List<Pokemon> pokemonInTeam = t.getPokemonList();
         assertTrue(pokemonInTeam.size() > 0);
     }
@@ -199,11 +187,11 @@ public class FacadeTest {
     @Test
     public void testAddPoints() {
         String lookUp = "Lucas";
-        User user = facade.getUserByName(lookUp);
+        User user = uf.getUserByUsername(lookUp);
         int pointsToAdd = 100;
         int beforeAdd = user.getPoints();
         user.addPoints(pointsToAdd);
-        user = facade.getUserByName(lookUp);
+        user = uf.getUserByUsername(lookUp);
         int afterAdd = user.getPoints();
         assertTrue(afterAdd > beforeAdd);
     }

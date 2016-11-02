@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Follower.findAll", query = "SELECT f FROM Follower f"),
+    @NamedQuery(name = "Follower.findByOwner", query = "SELECT f FROM Follower f WHERE f.fkUserUsername = :username"),
     @NamedQuery(name = "Follower.findById", query = "SELECT f FROM Follower f WHERE f.id = :id")})
 public class Follower implements Serializable {
 
