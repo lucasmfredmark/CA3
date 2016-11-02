@@ -151,6 +151,41 @@ VALUES
 /*!40000 ALTER TABLE `USER` ENABLE KEYS */;
 UNLOCK TABLES;
 
+-- LOCK TABLES `TEAM` WRITE;
+/*!40000 ALTER TABLE `TEAM` DISABLE KEYS */;
+
+INSERT INTO `TEAM` (`name`, `fk_user_username`)
+VALUES
+('My awesome team', 'Lucas');
+
+/*!40000 ALTER TABLE `TEAM` ENABLE KEYS */;
+-- UNLOCK TABLES
+
+-- LOCK TABLES `POKEMON` WRITE;
+/*!40000 ALTER TABLE `POKEMON` DISABLE KEYS */;
+
+INSERT INTO `POKEMON` (`pokedex_id`, `fk_user_username`, fk_team_id)
+VALUES
+(3,'Lucas',1),
+(6, 'Lucas', 1),
+(9, 'Lucas',1),
+(25, 'Lucas',1),
+(208, 'Lucas',1),
+(150, 'Lucas',1);
+
+/*!40000 ALTER TABLE `POKEMON` ENABLE KEYS */;
+-- UNLOCK TABLES
+
+-- LOCK TABLES `FOLLOWER` WRITE;
+/*!40000 ALTER TABLE `FOLLOWER` DISABLE KEYS */;
+
+INSERT INTO `FOLLOWER` (`fk_user_follow_username`, `fk_user_username`)
+VALUES
+('Thomas', 'Lucas'),
+('Patrick', 'Lucas');
+
+/*!40000 ALTER TABLE `FOLLOWER` ENABLE KEYS */;
+-- UNLOCK TABLES
 
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

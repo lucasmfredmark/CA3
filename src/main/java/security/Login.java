@@ -55,7 +55,7 @@ public class Login {
 
   
   private List<String> authenticate(String userName, String password) {
-    IUserFacade facade = UserFacadeFactory.getInstance();
+    IUserFacadeOld facade = UserFacadeFactory.getInstance();
     return facade.authenticateUser(userName, password);
   }
 

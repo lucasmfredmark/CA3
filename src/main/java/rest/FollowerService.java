@@ -8,7 +8,11 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.Follower;
-import facades.Facade;
+import facades.FollowerFacade;
+import facades.IFollowerFacade;
+import facades.IUserFacade;
+import facades.UserFacade;
+
 import java.util.List;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
@@ -19,6 +23,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
+
 
 /**
  * REST Web Service
@@ -31,7 +36,7 @@ public class FollowerService {
     @Context
     private UriInfo context;
 
-    private static final Facade FACADE = new Facade(Persistence.createEntityManagerFactory("PU"));
+    private static final IFollowerFacade FACADE = new FollowerFacade(Persistence.createEntityManagerFactory("PU"));
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     /**
@@ -48,8 +53,8 @@ public class FollowerService {
     @GET
     @Path("getFollowList")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getFollowList() {
-        List<Follower> fl = FACADE.getFollowList();
+    public String getFollowList(String forUser) {
+        List<Follower> fl = FACADE.getFollowList(forUser);
         return GSON.toJson(fl);
     }
 

@@ -8,7 +8,8 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.User;
-import facades.Facade;
+import facades.IUserFacade;
+import facades.UserFacade;
 import java.util.List;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
@@ -31,7 +32,7 @@ public class UserService {
     @Context
     private UriInfo context;
 
-    private static final Facade FACADE = new Facade(Persistence.createEntityManagerFactory("PU"));
+    private static final IUserFacade FACADE = new UserFacade(Persistence.createEntityManagerFactory("PU"));
      private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     /**
      * Creates a new instance of User
@@ -56,7 +57,7 @@ public class UserService {
     @Path("userByUsername")
     @Consumes(MediaType.APPLICATION_JSON)
     public String getUserByUsername(String json_user) {
-        FACADE.getUserByUserName(json_user);
+        FACADE.getUserByUsername(json_user);
         return GSON.toJson(json_user);
     }
     
