@@ -16,6 +16,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 
@@ -59,6 +60,15 @@ public class TeamService {
     public String getTeams(String json_teams) {
         List<Team> li = FACADE.getTeams();
         return GSON.toJson(li);
+    }
+
+    @GET
+    @Path("getTeamById")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getTeamById(String json_id) {
+        Team team = GSON.fromJson(json_id, Team.class);
+        Team t = (Team) FACADE.getTeamById(team.getId());
+        return GSON.toJson(t);
     }
 
 }
