@@ -2,7 +2,6 @@
 tests:
 <div ng-bind="pokeapi.controllerTest"></div> <br>
 <div ng-bind="pokeapi.pokeApiFactoryTest"></div>
-<div ng-bind="pokeapi.pokemon.name"></div>
     
 <br> <br>
 
@@ -13,10 +12,10 @@ tests:
         <th>Pokedex entry</th>
         <th>Type(s)</th>
     </tr>
-    <tr>
-        <td><img src="images/sprites/{{pokeapi.pokemon.id}}.png"/></td>
-        <td>{{pokeapi.pokemon.name | uppercase}}</td>
-        <td>{{pokeapi.pokemon.id}}</td>
-        <td>{{pokeapi.pokemon.types[0].type.name}} / {{pokeapi.pokemon.types[1].type.name}}</td>
+    <tr ng-repeat="pokemon in pokeapi.pokemonList">
+        <td><img src="images/sprites/{{pokemon.$$state.value.id}}.png"/></td>
+        <td>{{pokemon.$$state.value.name | uppercase}}</td>
+        <td>{{pokemon.$$state.value.id}}</td>
+        <td>{{pokemon.$$state.value.types[0].type.name}} / {{pokemon.$$state.value.types[1].type.name}}</td>
     </tr>
 </table>

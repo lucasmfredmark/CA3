@@ -10,13 +10,11 @@ th {
     padding: 5pt;
 }
 
+tr:nth-child(odd) {
+    background-color: lightpink;
+}
+
 td {
-    
     border : 1px solid black;
     padding: 5pt;
 }
-
-/*td:nth-child(even) {
-    background: lightcoral;
-    padding: 5pt;
-}*/
