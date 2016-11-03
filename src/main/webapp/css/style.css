@@ -1,0 +1,22 @@
+table {
+    border : 1px solid black;
+    padding: 5pt;
+}
+
+th {
+    
+    background-color: red;
+    color: white;
+    padding: 5pt;
+}
+
+td {
+    
+    border : 1px solid black;
+    padding: 5pt;
+}
+
+/*td:nth-child(even) {
+    background: lightcoral;
+    padding: 5pt;
+}*/

@@ -8,24 +8,38 @@
 
 angular.module('myApp.pokeapi', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/pokeapi', {
-    templateUrl: 'app/external/apitest.html',
-    controller: 'pokeApiCtrl',
-    controllerAs : 'pokeapi'
-  });
-}])
+        .config(['$routeProvider', function ($routeProvider) {
+                $routeProvider.when('/pokeapi', {
+                    templateUrl: 'app/external/apitest.html',
+                    controller: 'pokeApiCtrl',
+                    controllerAs: 'pokeapi'
+                });
+            }])
 
-.controller('pokeApiCtrl', ['pokeApiFactory', function(pokeApiFactory) {
-        var self = this;
-        self.pokeApiTest = pokeApiFactory.getPokemonById();
-}])
+        .controller('pokeApiCtrl', ['pokeApiFactory', function (pokeApiFactory) {
+                var self = this;
+                self.pokeApiTest = pokeApiFactory.factoryTest();
+//                self.getPokemonById = function (id) {
+//                    console.log("Getting pokemon by id: " + id);
+//                    pokeApiFactory.getPokemonById(id)
+//                            .then(function (response) {
+//                                console.log("Response is: " + response);
+//                                self.pokemon = response.data;
+//                                console.log(self.countries_all);
+//                            }, function (error) {
+//                                self.status = 'Unable to load customer data: ' + error.message;
+//                            });
+//                };
+            }])
 
-.factory('pokeApiFactory', [function(){
-    var pokeapi = {};
-    pokeapi.getPokemonById = function() {
-        return "Response from pokeapi.getPokemonById";
-    };
-    
-    return pokeapi;
-}]);
+        .factory('pokeApiFactory' [function () {
+            var pokeapi = {};
+//            var baseUrl = "http://pokeapi.com/api/v2/pokemon/";
+            pokeapi.factoryTest = function () {
+                return "Response from pokeapi.getPokemonById";
+            };
+//            pokeapi.getPokemonById = function (id) {
+//                return $http.get(baseUrl + id);
+//            };
+            return pokeapi;
+        }]);

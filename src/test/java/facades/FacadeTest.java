@@ -112,10 +112,12 @@ public class FacadeTest {
     public void testCreateTeam() {
         Team team = new Team();
         String lookUp = "Lucas";
-        team.setName("FacadeTeam");
-        tf.addTeamToUser(team);
         User user = uf.getUserByUsername(lookUp);
-        assertTrue(user.getTeamList().size() > 0);
+        team.setName("FacadeTeam");
+        team.setFkUserUsername(user);
+        tf.createTeam(team);
+        user = uf.getUserByUsername(lookUp);
+        assertTrue(user.getTeamList().size() > 1);
     }
 
     /**
