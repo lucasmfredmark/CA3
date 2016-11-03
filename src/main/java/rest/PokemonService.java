@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import entity.Pokemon;
 import facades.IPokemonFacade;
 import facades.PokemonFacade;
+import java.util.List;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -25,13 +26,13 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Staal
  */
-@Path("api")
+@Path("pokemon")
 public class PokemonService {
 
     @Context
     private UriInfo context;
 
-     private static final IPokemonFacade FACADE = new PokemonFacade(Persistence.createEntityManagerFactory("PU"));
+    private static final IPokemonFacade FACADE = new PokemonFacade(Persistence.createEntityManagerFactory("PU"));
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     /**
@@ -42,25 +43,33 @@ public class PokemonService {
 
     /**
      * Retrieves representation of an instance of rest.Pokemon
+     *
+     * @param json_pokemon
      * @return an instance of java.lang.String
      */
-    @GET
-    @Path("addPokemonToTeam")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String addPokemonToTeam(String json_pokemon) {
-        Pokemon pm = GSON.fromJson(json_pokemon, Pokemon.class);
-        return GSON.toJson(pm);
-        
+    @PUT
+    @Path("createPokemon")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String createPokemon(String json_pokemon) {
+        Pokemon pokemon = GSON.fromJson(json_pokemon, Pokemon.class);
+        Pokemon p = (Pokemon) FACADE.createPokemon(pokemon);
+        return GSON.toJson(p);
     }
-
-    /**
-     * PUT method for updating or creating an instance of Pokemon
-     * @param content representation for the resource
-     */
-//    @PUT
-//    @Path("createPokemon")
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public String createPokemon(String json_pokemon) {
-//        
-//    }
+    
+    @GET
+    @Path("getAllPokemon")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllPokemon(String json_list) {
+        List <Pokemon> p = FACADE.getAllPokemon();
+        return GSON.toJson(p);
+    }
+    
+    @GET
+    @Path("getPokemonById")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getPokemonById(int json_id) {
+       FACADE.getPokemonById(json_id);
+       return GSON.toJson(json_id);
+       
+    }
 }

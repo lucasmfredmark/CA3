@@ -81,20 +81,4 @@ public class PokemonFacade implements IPokemonFacade {
             em.close();
         }
     }
-    
-    //Fix! skal hente en pokemon og den skal tilknyttes teamid
-    @Override
-    public Pokemon addPokemonToTeam(Pokemon pokemon) {
-        EntityManager em = getEntityManager();
-
-        try {
-            em.getTransaction();
-            em.persist(pokemon);
-            em.getTransaction().commit();
-            return pokemon;
-        } finally {
-            em.close();
-        }
-    }
-    
 }

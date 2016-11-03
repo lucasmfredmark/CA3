@@ -26,7 +26,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Staal
  */
-@Path("api")
+@Path("user")
 public class UserService {
 
     @Context

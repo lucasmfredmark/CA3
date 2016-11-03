@@ -112,6 +112,8 @@ public class FacadeTest {
     public void testCreateTeam() {
         Team team = new Team();
         String lookUp = "Lucas";
+        team.setName("FacadeTeam");
+        tf.createTeam(team);
         User user = uf.getUserByUsername(lookUp);
         team.setName("FacadeTeam");
         team.setFkUserUsername(user);
