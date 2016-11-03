@@ -12,6 +12,7 @@ import facades.ITeamFacade;
 import facades.TeamFacade;
 import java.util.List;
 import javax.persistence.Persistence;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
@@ -45,14 +46,15 @@ public class TeamService {
      *
      * @return an instance of java.lang.String
      */
-    /*@GET
+    
+    @PUT
     @Path("createTeam")
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public String createTeam(String json_team) {
         Team team = GSON.fromJson(json_team, Team.class);
         Team t = (Team) FACADE.createTeam(team);
         return GSON.toJson(t);
-    }*/
+    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
