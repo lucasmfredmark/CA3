@@ -14,8 +14,6 @@ import java.util.List;
  */
 public interface IPokemonFacade {
 
-    Pokemon addPokemonToTeam(Pokemon pokemon);
-
     Pokemon createPokemon(Pokemon pokemon);
 
     List<Pokemon> getAllPokemon();
@@ -23,5 +21,5 @@ public interface IPokemonFacade {
     Pokemon getPokemonById(int id);
 
     List<Pokemon> getPokemonByTeam(int team_id);
-    
+
 }
