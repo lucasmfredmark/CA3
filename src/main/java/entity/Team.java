@@ -39,10 +39,10 @@ public class Team implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "fkTeamId")
-    private List<Pokemon> pokemonList;
+    private transient List<Pokemon> pokemonList;
     @JoinColumn(name = "fk_user_username", referencedColumnName = "username")
     @ManyToOne
-    private User fkUserUsername;
+    private transient User fkUserUsername;
 
     public Team() {
     }

@@ -35,10 +35,10 @@ public class Pokemon implements Serializable {
     private Integer pokedexId;
     @JoinColumn(name = "fk_team_id", referencedColumnName = "id")
     @ManyToOne
-    private Team fkTeamId;
+    private transient Team fkTeamId;
     @JoinColumn(name = "fk_user_username", referencedColumnName = "username")
     @ManyToOne
-    private User fkUserUsername;
+    private transient User fkUserUsername;
 
     public Pokemon() {
     }
