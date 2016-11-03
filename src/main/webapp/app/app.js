@@ -13,7 +13,8 @@ angular.module('myApp', [
   'myApp.directives',
   'myApp.factories',
   'myApp.services',
-  'myApp.controllers'
+  'myApp.controllers',
+  'myApp.pokeapi'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/'});
