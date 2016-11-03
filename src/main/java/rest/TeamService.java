@@ -47,6 +47,12 @@ public class TeamService {
      * @return an instance of java.lang.String
      */
     
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getGreeting() {
+        return "Hello from Team Service";
+    }
+    
     @PUT
     @Path("createTeam")
     @Consumes(MediaType.APPLICATION_JSON)
