@@ -64,19 +64,4 @@ public class TeamFacade implements ITeamFacade {
             em.close();
         }
     }
-    
-    @Override
-    public Team addTeamToUser(Team team) {
-        EntityManager em = getEntityManager();
-
-        try {
-            em.getTransaction().begin();
-            em.persist(team);
-            em.getTransaction().commit();
-            return team;
-        } finally {
-            em.close();
-        }
-    }
-    
 }

@@ -8,12 +8,15 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.Follower;
+import entity.User;
 import facades.FollowerFacade;
 import facades.IFollowerFacade;
+import java.util.List;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Produces;
@@ -40,15 +43,14 @@ public class FollowerService {
     public FollowerService() {
     }
 
-    //try to fix
-//    @GET
-//    @Path("getFollowList")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public String getFollowList(String forUser) {
-//        Follower f = GSON.fromJson(forUser, Follower.class);
-//        List<Follower> fl = FACADE.getFollowList(f);
-//        return GSON.toJson(fl);
-//    }
+    @GET
+    @Path("getFollowList")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getFollowList(String forUser) {
+        User u = GSON.fromJson(forUser, User.class);
+        List<Follower> fl = FACADE.getFollowList(u);
+        return GSON.toJson(fl);
+    }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)

@@ -14,8 +14,6 @@ import java.util.List;
  */
 public interface ITeamFacade {
 
-    Team addTeamToUser(Team team);
-
     Team createTeam(Team team);
 
     Team getTeamById(int id);

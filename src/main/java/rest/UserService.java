@@ -55,7 +55,7 @@ public class UserService {
     
     @GET
     @Path("userByUsername")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public String getUserByUsername(String json_user) {
         FACADE.getUserByUsername(json_user);
         return GSON.toJson(json_user);
