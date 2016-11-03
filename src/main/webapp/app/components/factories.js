@@ -7,8 +7,16 @@ angular.module('myApp.factories', []).
     var apiUrl = 'api/team/';
     
     return {
-      getTeamCount: function() {
-        return 3;
+      getTeams: function() {
+        var q = $q.defer();
+        
+        $http.get(apiUrl).then(function(response) {
+            q.resolve(response.data);
+        }, function(response) {
+            q.reject(response.data);
+        });
+        
+        return q.promise;
       }
     };
   }]);

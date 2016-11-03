@@ -10,6 +10,7 @@ import entity.Pokemon;
 import entity.Team;
 import entity.User;
 import java.util.List;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -24,18 +25,14 @@ import static org.junit.Assert.*;
  */
 public class FacadeTest {
     
-//    private final Facade facade;
-    private final UserFacade uf;
-    private final TeamFacade tf;
-    private final FollowerFacade ff;
-    private final PokemonFacade pf;
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
+//    private static final Facade facade = = new Facade(emf);
+    private static final UserFacade uf = new UserFacade(emf);
+    private static final TeamFacade tf = new TeamFacade(emf);
+    private static final FollowerFacade ff = new FollowerFacade(emf);
+    private static final PokemonFacade pf = new PokemonFacade(emf);
     
     public FacadeTest() {
-//        facade = new Facade(Persistence.createEntityManagerFactory("pu_development"));
-        uf = new UserFacade(Persistence.createEntityManagerFactory("pu_development"));
-        tf = new TeamFacade(Persistence.createEntityManagerFactory("pu_development"));
-        ff = new FollowerFacade(Persistence.createEntityManagerFactory("pu_development"));
-        pf = new PokemonFacade(Persistence.createEntityManagerFactory("pu_development"));
     }
     
     @BeforeClass

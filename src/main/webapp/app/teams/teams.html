@@ -1,4 +1,17 @@
-<h1>My Teams <span class="badge">{{app.teamCount}}</span></h1>
-<ul>
-    <li ng-repeat="i in [1, 2, 3]">Team {{i}}</li>
-</ul>
+<h1>My Teams <span class="badge">{{app.myTeams.length}}</span></h1>
+<div class="panel-group" id="teamsAccordion" role="tablist" aria-multiselectable="true" ng-repeat="">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="heading1">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#teamsAccordion" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
+          Collapsible Group Item #2
+        </a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading1">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>

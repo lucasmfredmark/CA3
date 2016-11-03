@@ -16,6 +16,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 
@@ -24,7 +25,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Staal
  */
-@Path("api")
+@Path("follower")
 public class FollowerService {
 
     @Context
@@ -39,11 +40,6 @@ public class FollowerService {
     public FollowerService() {
     }
 
-    /**
-     * Retrieves representation of an instance of rest.Follower
-     *
-     * @return an instance of java.lang.String
-     */
     //try to fix
 //    @GET
 //    @Path("getFollowList")
@@ -56,6 +52,7 @@ public class FollowerService {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public String addUserToFollowList(String json) {
         Follower fw = GSON.fromJson(json, Follower.class);
         Follower f = (Follower) FACADE.addUserToFollowList(fw.getFkUserFollowUsername(), fw.getFkUserUsername());

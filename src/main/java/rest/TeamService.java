@@ -25,13 +25,13 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Staal
  */
-@Path("api")
+@Path("team")
 public class TeamService {
 
     @Context
     private UriInfo context;
 
-    private static final ITeamFacade FACADE = new TeamFacade(Persistence.createEntityManagerFactory("PU"));
+    private static final ITeamFacade FACADE = new TeamFacade(Persistence.createEntityManagerFactory("pu_development"));
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     /**
@@ -45,19 +45,18 @@ public class TeamService {
      *
      * @return an instance of java.lang.String
      */
-    @GET
+    /*@GET
     @Path("createTeam")
     @Produces(MediaType.APPLICATION_JSON)
     public String createTeam(String json_team) {
         Team team = GSON.fromJson(json_team, Team.class);
         Team t = (Team) FACADE.createTeam(team);
         return GSON.toJson(t);
-    }
+    }*/
 
     @GET
-    @Path("getTeams")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getTeams(String json_teams) {
+    public String getTeams() {
         List<Team> li = FACADE.getTeams();
         return GSON.toJson(li);
     }

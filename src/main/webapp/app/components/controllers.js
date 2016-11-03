@@ -5,6 +5,13 @@
 angular.module('myApp.controllers', []).
   controller('AppCtrl', ['TeamFactory', function (TeamFactory) {
     var self = this;
-    this.title = 'MyPokéTrainer';
-    this.teamCount = TeamFactory.getTeamCount();
+    
+    self.title = 'MyPokéTrainer';
+    self.getTeams = function() {
+        TeamFactory.getTeams().then(function(teams) {
+            self.myTeams = teams;
+        });
+    };
+    
+    self.getTeams();
   }]);
