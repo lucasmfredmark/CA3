@@ -1,8 +1,10 @@
 <link href="css/style.css" rel="stylesheet" type="text/css"/>
-test:
-<div ng-bind="pokeapi.pokeApiTest">
+tests:
+<div ng-bind="pokeapi.controllerTest"></div> <br>
+<div ng-bind="pokeapi.pokeApiFactoryTest"></div>
+<div ng-bind="pokeapi.pokemon.name"></div>
     
-</div> <br> <br>
+<br> <br>
 
 <table>
     <tr>
@@ -12,9 +14,9 @@ test:
         <th>Type(s)</th>
     </tr>
     <tr>
-        <td><img src="images/sprites/1.png"/></td>
-        <td>Bulbasaur</td>
-        <td>1</td>
-        <td>Grass/Poison</td>
+        <td><img src="images/sprites/{{pokeapi.pokemon.id}}.png"/></td>
+        <td>{{pokeapi.pokemon.name | uppercase}}</td>
+        <td>{{pokeapi.pokemon.id}}</td>
+        <td>{{pokeapi.pokemon.types[0].type.name}} / {{pokeapi.pokemon.types[1].type.name}}</td>
     </tr>
 </table>
