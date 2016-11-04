@@ -1,9 +1,8 @@
 <link href="css/style.css" rel="stylesheet" type="text/css"/>
-<!--tests:
-<div ng-bind="pokeapi.controllerTest"></div> <br>
-<div ng-bind="pokeapi.pokeApiFactoryTest"></div>-->
-    
+<link href="css/types.css" rel="stylesheet" type="text/css"/>
+
 <br> <br>
+<div class="container">
 <h1>The table below generates 6 random pokemon from generation I using pokeapi controller in pokeapi.js</h1>
 <h3>The calls are using $http.get() -> to external API at www.pokeapi.co</h3>
 <table>
@@ -15,8 +14,14 @@
     </tr>
     <tr ng-repeat="pokemon in pokeapi.pokemonList">
         <td><img src="images/sprites/{{pokemon.$$state.value.id}}.png"/></td>
-        <td>{{pokemon.$$state.value.name | uppercase}}</td>
+        <td>{{pokemon.$$state.value.name| uppercase}}</td>
         <td>{{pokemon.$$state.value.id}}</td>
-        <td>{{pokemon.$$state.value.types[0].type.name}} / {{pokemon.$$state.value.types[1].type.name}}</td>
+        <!--<td>{{pokemon.$$state.value.types[0].type.name}} / {{pokemon.$$state.value.types[1].type.name}}</td>-->
+        <td>
+            <span ng-repeat="type in pokemon.$$state.value.types">
+                <button class="type-icon type-{{type.type.name}}">{{type.type.name}}</button>
+            </span>
+        </td>
     </tr>
 </table>
+</div>
