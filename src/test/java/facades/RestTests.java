@@ -52,7 +52,9 @@ public class RestTests {
         given().when().get().then().statusCode(200);
 
     }
-
+    
+    //We are sure this test works, but i will not pass becuase, 
+    //our REST dosent work and, gives us stackoverflow
     @Test
     public void GetUserByUsername() {
         given().param("username", "Thomas")
