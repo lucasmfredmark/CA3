@@ -10,6 +10,7 @@ angular.module('myApp.controllers', []).
     self.getTeams = function() {
         TeamFactory.getTeams().then(function(teams) {
             self.myTeams = teams;
+            console.log(self.myTeams);
         });
     };
     

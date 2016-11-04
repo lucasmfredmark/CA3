@@ -7,11 +7,14 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import entity.Pokemon;
 import entity.Team;
 import facades.ITeamFacade;
 import facades.TeamFacade;
 import httpErrors.TeamNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
@@ -43,13 +46,13 @@ public class TeamService {
      */
     public TeamService() {
     }
-    
+
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String getGreeting() {
         return "Hello from Team Service";
     }
-    
+
     @PUT
     @Path("add")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -64,8 +67,22 @@ public class TeamService {
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public String getTeams() throws TeamNotFoundException {
-        List<Team> li = FACADE.getTeams();
-        return GSON.toJson(li);
+        List<Team> teams = FACADE.getTeams();
+        List<JsonObject> jsonTeams = new ArrayList();
+        for (Team t : teams) {
+            JsonArray pokedex_ids = new JsonArray();
+            JsonObject jo = new JsonObject();
+            jo.addProperty("id", t.getId());
+            jo.addProperty("name", t.getName());
+            jo.addProperty("creator", t.getFkUserUsername().getUserName());
+            for (Pokemon p : t.getPokemonList()) {
+                pokedex_ids.add(p.getPokedexId());
+            }
+            jo.addProperty("pokemon", pokedex_ids.toString());
+            jsonTeams.add(jo);
+        }
+//        return "I work";
+        return GSON.toJson(jsonTeams);
     }
 
     @GET
@@ -73,10 +90,15 @@ public class TeamService {
     @Produces(MediaType.APPLICATION_JSON)
     public String getTeamById(@PathParam("id") int id) throws TeamNotFoundException {
         Team t = (Team) FACADE.getTeamById(id);
+        JsonArray pokedex_ids = new JsonArray();
         JsonObject jo = new JsonObject();
         jo.addProperty("id", t.getId());
         jo.addProperty("name", t.getName());
         jo.addProperty("creator", t.getFkUserUsername().getUserName());
+        for (Pokemon p : t.getPokemonList()) {
+            pokedex_ids.add(p.getPokedexId());
+        }
+        jo.addProperty("pokemon", pokedex_ids.toString());
         return GSON.toJson(jo);
     }
 
