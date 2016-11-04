@@ -19,6 +19,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -40,12 +41,6 @@ public class TeamService {
      */
     public TeamService() {
     }
-
-    /**
-     * Retrieves representation of an instance of rest.Team
-     *
-     * @return an instance of java.lang.String
-     */
     
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -54,8 +49,9 @@ public class TeamService {
     }
     
     @PUT
-    @Path("createTeam")
+    @Path("add")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public String createTeam(String json_team) {
         Team team = GSON.fromJson(json_team, Team.class);
         Team t = (Team) FACADE.createTeam(team);
@@ -63,6 +59,7 @@ public class TeamService {
     }
 
     @GET
+    @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public String getTeams() {
         List<Team> li = FACADE.getTeams();
@@ -70,11 +67,10 @@ public class TeamService {
     }
 
     @GET
-    @Path("getTeamById")
+    @Path("{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getTeamById(String json_id) {
-        Team team = GSON.fromJson(json_id, Team.class);
-        Team t = (Team) FACADE.getTeamById(team.getId());
+    public String getTeamById(@PathParam("id") int id) {
+        Team t = (Team) FACADE.getTeamById(id);
         return GSON.toJson(t);
     }
 

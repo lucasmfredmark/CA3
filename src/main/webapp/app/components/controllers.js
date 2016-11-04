@@ -10,20 +10,6 @@ angular.module('myApp.controllers', []).
     self.getTeams = function() {
         TeamFactory.getTeams().then(function(teams) {
             self.myTeams = teams;
-            self.myTeams[0].pokemonList = [
-                {
-                    name: 'Din mor',
-                    pokedexId: 1
-                },
-                {
-                    name: 'Din far',
-                    pokedexId: 2
-                },
-                {
-                    name: 'Din mormor',
-                    pokedexId: 3
-                }
-            ];
         });
     };
     
