@@ -32,14 +32,14 @@ public class UserService {
     @Context
     private UriInfo context;
 
-    private static final IUserFacade FACADE = new UserFacade(Persistence.createEntityManagerFactory("PU"));
+    private static final IUserFacade FACADE = new UserFacade(Persistence.createEntityManagerFactory("pu_development"));
      private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     /**
      * Creates a new instance of User
      */
     public UserService() {
     }
-
+    
     /**
      * Retrieves representation of an instance of rest.User
      * @return an instance of java.lang.String
@@ -51,7 +51,13 @@ public class UserService {
         List <User> users = FACADE.getAllUsers();      
         return GSON.toJson(users);
     }
-
+    
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("greeting")
+    public String getGreeting() {
+        return "Hello from User Service";
+    }
     
     @GET
     @Path("userByUsername")
