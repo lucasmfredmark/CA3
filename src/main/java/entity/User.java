@@ -58,9 +58,9 @@ public class User implements IUser, Serializable {
     @ManyToMany(mappedBy = "userList")
     private List<Role> roleList;
     @OneToMany(mappedBy = "fkUserUsername")
-    private transient List<Pokemon> pokemonList;
+    private List<Pokemon> pokemonList;
     @OneToMany(mappedBy = "fkUserUsername")
-    private transient List<Team> teamList;
+    private List<Team> teamList;
     @OneToMany(mappedBy = "fkUserFollowUsername")
     private List<Follower> followerList;
     @OneToMany(mappedBy = "fkUserUsername")

@@ -32,7 +32,7 @@ public class PokemonService {
     @Context
     private UriInfo context;
 
-    private static final IPokemonFacade FACADE = new PokemonFacade(Persistence.createEntityManagerFactory("PU"));
+    private static final IPokemonFacade FACADE = new PokemonFacade(Persistence.createEntityManagerFactory("pu_development"));
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     /**
