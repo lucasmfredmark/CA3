@@ -113,9 +113,7 @@ public class FacadeTest {
         Team team = new Team();
         String lookUp = "Lucas";
         team.setName("FacadeTeam");
-        tf.createTeam(team);
         User user = uf.getUserByUsername(lookUp);
-        team.setName("FacadeTeam");
         team.setFkUserUsername(user);
         tf.createTeam(team);
         user = uf.getUserByUsername(lookUp);
@@ -182,6 +180,7 @@ public class FacadeTest {
     public void testGetPokemonByTeam() {
         Team t = tf.getTeamById(1);
         List<Pokemon> pokemonInTeam = t.getPokemonList();
+        System.out.println(pokemonInTeam.size());
         assertTrue(pokemonInTeam.size() > 0);
     }
 

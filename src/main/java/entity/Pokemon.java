@@ -1,5 +1,6 @@
 package entity;
 
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -35,10 +36,12 @@ public class Pokemon implements Serializable {
     private Integer pokedexId;
     @JoinColumn(name = "fk_team_id", referencedColumnName = "id")
     @ManyToOne
-    private transient Team fkTeamId;
+    @Expose(serialize = false)
+    private Team fkTeamId;
     @JoinColumn(name = "fk_user_username", referencedColumnName = "username")
     @ManyToOne
-    private transient User fkUserUsername;
+    @Expose(serialize = false)
+    private User fkUserUsername;
 
     public Pokemon() {
     }
