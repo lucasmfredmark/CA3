@@ -78,7 +78,7 @@ public class TeamService {
             for (Pokemon p : t.getPokemonList()) {
                 pokedex_ids.add(p.getPokedexId());
             }
-            jo.addProperty("pokemon", pokedex_ids.toString());
+            jo.add("pokemon", pokedex_ids);
             jsonTeams.add(jo);
         }
 //        return "I work";
@@ -98,7 +98,7 @@ public class TeamService {
         for (Pokemon p : t.getPokemonList()) {
             pokedex_ids.add(p.getPokedexId());
         }
-        jo.addProperty("pokemon", pokedex_ids.toString());
+        jo.add("pokemon", pokedex_ids);
         return GSON.toJson(jo);
     }
 

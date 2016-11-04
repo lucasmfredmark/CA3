@@ -9,6 +9,9 @@ import entity.Follower;
 import entity.Pokemon;
 import entity.Team;
 import entity.User;
+import httpErrors.PokemonNotFoundException;
+import httpErrors.TeamNotFoundException;
+import httpErrors.UserNotFoundException;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -56,7 +59,7 @@ public class FacadeTest {
      * Test of getAllUsers method, of class Facade.
      */
     @Test
-    public void testGetAllUsers() {
+    public void testGetAllUsers() throws UserNotFoundException {
         List<User> users = uf.getAllUsers();
         // If fails, check database for users. Should have 3
         assertTrue(users.size() > 1);
@@ -66,7 +69,7 @@ public class FacadeTest {
      * Test of getUserByName method, of class Facade.
      */
     @Test
-    public void testGetUserByName() {
+    public void testGetUserByName() throws UserNotFoundException {
         String username = "Lucas";
         User user = uf.getUserByUsername(username);
         assertTrue(user != null);
@@ -78,7 +81,7 @@ public class FacadeTest {
      * properly
      */
     @Test
-    public void testGetfollowList() {
+    public void testGetfollowList() throws UserNotFoundException {
         String user = "Lucas";
         User forUser = uf.getUserByUsername(user);
         List<Follower> followList = ff.getFollowList(forUser);
@@ -91,7 +94,7 @@ public class FacadeTest {
      * is not properly implemented
      */
     @Test
-    public void testAddUserToFollowList() {
+    public void testAddUserToFollowList() throws UserNotFoundException {
         String username = "Lucas";
         String usernameF = "Thomas";
         User me = uf.getUserByUsername(username);
@@ -109,7 +112,7 @@ public class FacadeTest {
      * Missing implementation of facade method
      */
     @Test
-    public void testCreateTeam() {
+    public void testCreateTeam() throws UserNotFoundException {
         Team team = new Team();
         String lookUp = "Lucas";
         team.setName("FacadeTeam");
@@ -124,7 +127,7 @@ public class FacadeTest {
      * Test of getTeams method, of class Facade.
      */
     @Test
-    public void testGetTeams() {
+    public void testGetTeams() throws UserNotFoundException {
         String lookUp = "Lucas";
         User user = uf.getUserByUsername(lookUp);
         assertTrue(user.getTeamList().size() > 0);
@@ -135,7 +138,7 @@ public class FacadeTest {
      * Refactor facade method to take an int instead of Team
      */
     @Test
-    public void testGetTeamById() {
+    public void testGetTeamById() throws TeamNotFoundException {
         int team_id = 1;
         Team team = tf.getTeamById(team_id);
         assertTrue(team != null);
@@ -145,7 +148,7 @@ public class FacadeTest {
      * Test of createPokemon method, of class Facade.
      */
     @Test
-    public void testCreatePokemon() {
+    public void testCreatePokemon() throws PokemonNotFoundException {
         Pokemon pokemon = new Pokemon();
         pokemon.setPokedexId(13);
         pf.createPokemon(pokemon);
@@ -157,7 +160,7 @@ public class FacadeTest {
      * Test of getAllPokemon method, of class Facade.
      */
     @Test
-    public void testGetAllPokemon() {
+    public void testGetAllPokemon() throws PokemonNotFoundException {
         List<Pokemon> pokemonMasterList = pf.getAllPokemon();
         assertTrue(pokemonMasterList.size() > 1);
     }
@@ -167,7 +170,7 @@ public class FacadeTest {
      * Refactor getPokemonById to take int instead of object
      */
     @Test
-    public void testGetPokemonById() {
+    public void testGetPokemonById() throws PokemonNotFoundException {
         Pokemon pokemon = pf.getPokemonById(1);
         assertTrue(pokemon != null);
     }
@@ -177,7 +180,7 @@ public class FacadeTest {
      * Refactor getTeamById to take int instead of object
      */
     @Test
-    public void testGetPokemonByTeam() {
+    public void testGetPokemonByTeam() throws TeamNotFoundException {
         Team t = tf.getTeamById(1);
         List<Pokemon> pokemonInTeam = t.getPokemonList();
         System.out.println(pokemonInTeam.size());
