@@ -4,7 +4,7 @@
 
 angular.module('myApp.factories', []).
   factory('TeamFactory', ['$http', '$q', function ($http, $q) {
-    var apiUrl = 'api/team/';
+    var apiUrl = 'api/team/all';
     
     return {
       getTeams: function() {
