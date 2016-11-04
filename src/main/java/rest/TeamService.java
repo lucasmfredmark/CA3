@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import entity.Team;
 import facades.ITeamFacade;
 import facades.TeamFacade;
+import httpErrors.TeamNotFoundException;
 import java.util.List;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
@@ -61,7 +62,7 @@ public class TeamService {
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getTeams() {
+    public String getTeams() throws TeamNotFoundException {
         List<Team> li = FACADE.getTeams();
         return GSON.toJson(li);
     }
@@ -69,7 +70,7 @@ public class TeamService {
     @GET
     @Path("{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getTeamById(@PathParam("id") int id) {
+    public String getTeamById(@PathParam("id") int id) throws TeamNotFoundException {
         Team t = (Team) FACADE.getTeamById(id);
         return GSON.toJson(t);
     }
