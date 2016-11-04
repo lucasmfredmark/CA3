@@ -20,6 +20,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -61,11 +62,17 @@ public class UserService {
     }
     
     @GET
-    @Path("userByUsername")
+    @Path("username/{username}")
     @Produces(MediaType.APPLICATION_JSON)
+<<<<<<< HEAD
     public String getUserByUsername(String json_user) throws UserNotFoundException {
         FACADE.getUserByUsername(json_user);
         return GSON.toJson(json_user);
+=======
+    public String getUserByUsername(@PathParam("username") String json_user) {
+        User user = FACADE.getUserByUsername(json_user);
+        return GSON.toJson(user);
+>>>>>>> 1bc42606936f535cab9d7f2688e1390ec4b94497
     }
     
     @PUT
