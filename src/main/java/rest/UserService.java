@@ -64,15 +64,9 @@ public class UserService {
     @GET
     @Path("username/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-<<<<<<< HEAD
     public String getUserByUsername(String json_user) throws UserNotFoundException {
         FACADE.getUserByUsername(json_user);
         return GSON.toJson(json_user);
-=======
-    public String getUserByUsername(@PathParam("username") String json_user) {
-        User user = FACADE.getUserByUsername(json_user);
-        return GSON.toJson(user);
->>>>>>> 1bc42606936f535cab9d7f2688e1390ec4b94497
     }
     
     @PUT
