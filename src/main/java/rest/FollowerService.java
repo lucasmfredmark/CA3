@@ -34,7 +34,7 @@ public class FollowerService {
     @Context
     private UriInfo context;
 
-    private static final IFollowerFacade FACADE = new FollowerFacade(Persistence.createEntityManagerFactory("PU"));
+    private static final IFollowerFacade FACADE = new FollowerFacade(Persistence.createEntityManagerFactory("pu_development"));
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     /**

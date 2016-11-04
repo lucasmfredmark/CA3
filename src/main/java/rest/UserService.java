@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import entity.User;
 import facades.IUserFacade;
 import facades.UserFacade;
+import httpErrors.UserNotFoundException;
 import java.util.List;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
@@ -47,7 +48,7 @@ public class UserService {
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
-    public String allUsers() {
+    public String allUsers() throws UserNotFoundException {
         List <User> users = FACADE.getAllUsers();      
         return GSON.toJson(users);
     }
@@ -62,7 +63,7 @@ public class UserService {
     @GET
     @Path("userByUsername")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getUserByUsername(String json_user) {
+    public String getUserByUsername(String json_user) throws UserNotFoundException {
         FACADE.getUserByUsername(json_user);
         return GSON.toJson(json_user);
     }
@@ -79,7 +80,7 @@ public class UserService {
     @PUT
     @Path("addPoints")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String addPoints(int json_points){
+    public String addPoints(int json_points) throws UserNotFoundException{
         User u = (User) FACADE.addPoints(json_points);        
         return GSON.toJson(u);
     }

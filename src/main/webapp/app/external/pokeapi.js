@@ -51,7 +51,11 @@ angular.module('myApp.pokeapi', ['ngRoute'])
                 factory.getPokemonById = function(id) {
 //                    console.log($http.get(baseUrl + id));
 //                    return "Get pokemon with id: " + id + " & url: " + baseUrl;
-                    return $http.get(baseUrl + id);
+                    return $http({
+                        url: baseUrl + id,
+                        skipAuthorization: true,
+                        method: 'GET'
+                    });
                 };
                 return factory;
             }]);

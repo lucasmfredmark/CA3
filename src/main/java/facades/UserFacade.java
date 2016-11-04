@@ -6,6 +6,7 @@
 package facades;
 
 import entity.User;
+import httpErrors.UserNotFoundException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +15,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import security.IUser;
 import security.PasswordStorage;
-import security.IUserFacadeOld;
 
 /**
  *
@@ -36,7 +36,8 @@ public class UserFacade implements IUserFacade{
     public IUser getUserByUserId(String id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(User.class, id);
+            User user = em.find(User.class, id);
+            return user;
         } finally {
             em.close();
         }
@@ -57,12 +58,13 @@ public class UserFacade implements IUserFacade{
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<User> getAllUsers() throws UserNotFoundException {
         EntityManager em = getEntityManager();
 
         try {
             TypedQuery<User> result = em.createNamedQuery("User.findAll", User.class);
             List<User> users = result.getResultList();
+            if (users.isEmpty()) throw new UserNotFoundException("No users found in database");
             return users;
 
         } finally {
@@ -71,11 +73,12 @@ public class UserFacade implements IUserFacade{
     }
 
     @Override
-    public User getUserByUsername(String username) {
+    public User getUserByUsername(String username) throws UserNotFoundException {
         EntityManager em = getEntityManager();
 
         try {
             User p = em.find(User.class, username);
+            if (p == null) throw new UserNotFoundException("No user found by name: " + username);
             return p;
         } finally {
             em.close();
@@ -97,9 +100,10 @@ public class UserFacade implements IUserFacade{
     }
     
     @Override
-    public User addPoints(int points) {
+    public User addPoints(int points) throws UserNotFoundException {
         EntityManager em = getEntityManager();
         User u = em.find(User.class, points);
+        if (u == null) throw new UserNotFoundException("No user found to add points to");
         u.addPoints(points);
         try {
             em.getTransaction().begin();

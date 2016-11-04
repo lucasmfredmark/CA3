@@ -6,6 +6,7 @@
 package facades;
 
 import entity.Team;
+import httpErrors.TeamNotFoundException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,12 +42,13 @@ public class TeamFacade implements ITeamFacade {
     }
 
     @Override
-    public List<Team> getTeams() {
+    public List<Team> getTeams() throws TeamNotFoundException {
         EntityManager em = getEntityManager();
 
         try {
             TypedQuery<Team> result = em.createNamedQuery("Team.findAll", Team.class);
             List<Team> teams = result.getResultList();
+            if (teams.isEmpty()) throw new TeamNotFoundException("No teams found in the database");
             return teams;
         } finally {
             em.close();
@@ -54,11 +56,12 @@ public class TeamFacade implements ITeamFacade {
     }
 
     @Override
-    public Team getTeamById(int id) {
+    public Team getTeamById(int id) throws TeamNotFoundException{
         EntityManager em = getEntityManager();
 
         try {
             Team t = em.find(Team.class, id);
+            if (t == null) throw new TeamNotFoundException("No team found with id: " + id);
             return t;
         } finally {
             em.close();

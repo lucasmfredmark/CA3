@@ -7,6 +7,8 @@ package facades;
 
 import entity.Pokemon;
 import entity.Team;
+import httpErrors.PokemonNotFoundException;
+import httpErrors.TeamNotFoundException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -43,12 +45,13 @@ public class PokemonFacade implements IPokemonFacade {
     }
 
     @Override
-    public List<Pokemon> getAllPokemon() {
+    public List<Pokemon> getAllPokemon() throws PokemonNotFoundException {
         EntityManager em = getEntityManager();
 
         try {
             TypedQuery<Pokemon> result = em.createNamedQuery("Pokemon.findAll", Pokemon.class);
             List<Pokemon> pokemon = result.getResultList();
+            if (pokemon.isEmpty()) throw new PokemonNotFoundException("No pokemon found in database");
             return pokemon;
         } finally {
             em.close();
@@ -56,11 +59,12 @@ public class PokemonFacade implements IPokemonFacade {
     }
 
     @Override
-    public Pokemon getPokemonById(int id) {
+    public Pokemon getPokemonById(int id) throws PokemonNotFoundException {
         EntityManager em = getEntityManager();
 
         try {
             Pokemon p = em.find(Pokemon.class, id);
+            if (p == null) throw new PokemonNotFoundException("No pokemon found with id: " + id);
             return p;
         } finally {
             em.close();
@@ -68,13 +72,14 @@ public class PokemonFacade implements IPokemonFacade {
     }
 
     @Override
-    public List<Pokemon> getPokemonByTeam(int team_id) {
+    public List<Pokemon> getPokemonByTeam(int team_id) throws PokemonNotFoundException, TeamNotFoundException {
         EntityManager em = getEntityManager();
 
         try {
             Team t = em.find(Team.class, team_id);
-
+            if (t == null) throw new TeamNotFoundException("No team found with id: " + team_id);
             List<Pokemon> pokemon = t.getPokemonList();
+            if (pokemon.isEmpty()) throw new PokemonNotFoundException("No pokemon in team: " + team_id);
             return pokemon;
 
         } finally {

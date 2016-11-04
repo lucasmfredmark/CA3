@@ -6,6 +6,7 @@
 package facades;
 
 import entity.User;
+import httpErrors.UserNotFoundException;
 import java.util.List;
 import security.IUser;
 import security.IUserFacadeOld;
@@ -16,7 +17,7 @@ import security.IUserFacadeOld;
  */
 public interface IUserFacade extends IUserFacadeOld {
 
-    User addPoints(int points);
+    User addPoints(int points) throws UserNotFoundException;
 
     /*
     Return the Roles if users could be authenticated, otherwise null
@@ -26,11 +27,11 @@ public interface IUserFacade extends IUserFacadeOld {
 
     User createUser(User User);
 
-    List<User> getAllUsers();
+    List<User> getAllUsers() throws UserNotFoundException;
     
     @Override
     IUser getUserByUserId(String id);
 
-    User getUserByUsername(String username);
+    User getUserByUsername(String username) throws UserNotFoundException;
     
 }

@@ -6,6 +6,7 @@
 package facades;
 
 import entity.Team;
+import httpErrors.TeamNotFoundException;
 import java.util.List;
 
 /**
@@ -16,8 +17,8 @@ public interface ITeamFacade {
 
     Team createTeam(Team team);
 
-    Team getTeamById(int id);
+    Team getTeamById(int id) throws TeamNotFoundException;
 
-    List<Team> getTeams();
+    List<Team> getTeams() throws TeamNotFoundException;
     
 }

@@ -5,7 +5,7 @@
  */
 package security;
 
-import entity.User;
+import httpErrors.UserNotFoundException;
 import java.util.List;
 
 /**

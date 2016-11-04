@@ -6,6 +6,8 @@
 package facades;
 
 import entity.Pokemon;
+import httpErrors.PokemonNotFoundException;
+import httpErrors.TeamNotFoundException;
 import java.util.List;
 
 /**
@@ -16,10 +18,10 @@ public interface IPokemonFacade {
 
     Pokemon createPokemon(Pokemon pokemon);
 
-    List<Pokemon> getAllPokemon();
+    List<Pokemon> getAllPokemon() throws PokemonNotFoundException;
 
-    Pokemon getPokemonById(int id);
+    Pokemon getPokemonById(int id) throws PokemonNotFoundException;
 
-    List<Pokemon> getPokemonByTeam(int team_id);
+    List<Pokemon> getPokemonByTeam(int team_id) throws PokemonNotFoundException, TeamNotFoundException;
 
 }

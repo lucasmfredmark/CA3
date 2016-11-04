@@ -21,6 +21,9 @@ public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(httpErrors.GenericExceptionMapper.class);
         resources.add(httpErrors.NotFoundExceptionMapper.class);
+        resources.add(httpErrors.PokemonNotFoundMapper.class);
+        resources.add(httpErrors.TeamNotFoundMapper.class);
+        resources.add(httpErrors.UserNotFoundMapper.class);
         resources.add(rest.FollowerService.class);
         resources.add(rest.PokemonService.class);
         resources.add(rest.TeamService.class);
