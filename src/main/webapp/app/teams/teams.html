@@ -1,10 +1,10 @@
 <h1>My Teams <span class="badge">{{app.myTeams.length}}</span></h1>
 <uib-accordion>
-    <uib-accordion-group ng-repeat="team in app.myTeams">
+    <uib-accordion-group ng-repeat="team in app.myTeams track by $index">
         <uib-accordion-heading>{{team.name}} (<span>{{team.pokemonList.length|| 0}}</span>)</uib-accordion-heading>
         <p class="text-muted" ng-show="!!!team.pokemonList.length">This team has no Pokémon.</p>
         <div class="row">
-            <div class="col-sm-2" ng-repeat="pokemon in team.pokemonList">
+            <div class="col-sm-2" ng-repeat="pokemon in team.pokemonList track by $index">
                 <h5 class="text-center">{{pokemon.name}}</h5>
                 <img src="images/sprites/{{pokemon.pokedexId}}.png" class="img-responsive center-block" alt="{{pokemon.name}}" title="{{pokemon.name}}">
             </div>
