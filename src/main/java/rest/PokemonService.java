@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import entity.Pokemon;
 import facades.IPokemonFacade;
 import facades.PokemonFacade;
+import httpErrors.PokemonNotFoundException;
 import java.util.List;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
@@ -59,7 +60,7 @@ public class PokemonService {
     @GET
     @Path("getAllPokemon")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllPokemon(String json_list) {
+    public String getAllPokemon(String json_list) throws PokemonNotFoundException {
         List <Pokemon> p = FACADE.getAllPokemon();
         return GSON.toJson(p);
     }
@@ -67,7 +68,7 @@ public class PokemonService {
     @GET
     @Path("getPokemonById")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPokemonById(int json_id) {
+    public String getPokemonById(int json_id) throws PokemonNotFoundException {
        FACADE.getPokemonById(json_id);
        return GSON.toJson(json_id);
        
