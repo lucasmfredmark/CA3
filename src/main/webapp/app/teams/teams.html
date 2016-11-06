@@ -4,9 +4,10 @@
         <uib-accordion-heading>{{team.name}} (<span>{{team.pokemon.length|| 0}}</span>)</uib-accordion-heading>
         <p class="text-muted" ng-show="!!!team.pokemon.length">This team has no Pokémon.</p>
         <div class="row">
-            <div class="col-sm-2" ng-repeat="pokemon in team.pokemon track by $index">
-                <h5 class="text-center">{{pokemon.name}}</h5>
-                <img src="images/sprites/{{pokemon}}.png" class="img-responsive center-block" alt="{{pokemon.name}}" title="{{pokemon.name}}">
+            <div class="col-sm-2" ng-repeat="pokedexId in team.pokemon track by $index">
+                <a href="#/pokemon/{{pokedexId}}" uib-tooltip="Click to show details">
+                    <img src="images/sprites/{{pokedexId}}.png" class="img-responsive center-block" alt="#{{pokedexId}}" title="#{{pokedexId}}">
+                </a>
             </div>
         </div>
     </uib-accordion-group>

@@ -43,7 +43,6 @@ public class Team implements Serializable {
     private List<Pokemon> pokemonList;
     @JoinColumn(name = "fk_user_username", referencedColumnName = "username")
     @ManyToOne
-    @Expose(serialize = false)
     private User fkUserUsername;
 
     public Team() {

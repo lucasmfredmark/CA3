@@ -36,11 +36,9 @@ public class Pokemon implements Serializable {
     private Integer pokedexId;
     @JoinColumn(name = "fk_team_id", referencedColumnName = "id")
     @ManyToOne
-    @Expose(serialize = false)
     private Team fkTeamId;
     @JoinColumn(name = "fk_user_username", referencedColumnName = "username")
     @ManyToOne
-    @Expose(serialize = false)
     private User fkUserUsername;
 
     public Pokemon() {

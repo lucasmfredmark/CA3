@@ -9,12 +9,12 @@ angular.module('myApp', [
   'myApp.security',
   'myApp.index',
   'myApp.teams',
+  'myApp.pokemon',
   'myApp.filters',
   'myApp.directives',
   'myApp.factories',
   'myApp.services',
-  'myApp.controllers',
-  'myApp.pokeapi'
+  'myApp.controllers'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/'});
