@@ -5,7 +5,6 @@
  */
 package security;
 
-import httpErrors.UserNotFoundException;
 import java.util.List;
 
 /**

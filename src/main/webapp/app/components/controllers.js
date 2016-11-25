@@ -3,15 +3,18 @@
  */
 
 angular.module('myApp.controllers', []).
-  controller('AppCtrl', ['TeamFactory', function (TeamFactory) {
+  controller('AppCtrl', ['teamFactory', function (teamFactory) {
     var self = this;
     
     self.title = 'MyPokéTrainer';
-    self.getTeams = function() {
-        TeamFactory.getTeams().then(function(teams) {
+    /*self.getTeamsByUsername = function(username) {
+        teamFactory.getTeamsByUsername(username).then(function(teams) {
             self.myTeams = teams;
+            console.log(self.myTeams);
+        }, function() {
+            console.log('Error in getTeamsByUsername()');
         });
     };
     
-    self.getTeams();
+    self.getTeamsByUsername("Lucas");*/
   }]);

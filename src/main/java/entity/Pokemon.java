@@ -1,6 +1,5 @@
 package entity;
 
-import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -36,10 +35,10 @@ public class Pokemon implements Serializable {
     private Integer pokedexId;
     @JoinColumn(name = "fk_team_id", referencedColumnName = "id")
     @ManyToOne
-    private Team fkTeamId;
+    private Team team;
     @JoinColumn(name = "fk_user_username", referencedColumnName = "username")
     @ManyToOne
-    private User fkUserUsername;
+    private User user;
 
     public Pokemon() {
     }
@@ -64,20 +63,20 @@ public class Pokemon implements Serializable {
         this.pokedexId = pokedexId;
     }
 
-    public Team getFkTeamId() {
-        return fkTeamId;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setFkTeamId(Team fkTeamId) {
-        this.fkTeamId = fkTeamId;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
-    public User getFkUserUsername() {
-        return fkUserUsername;
+    public User getUser() {
+        return user;
     }
 
-    public void setFkUserUsername(User fkUserUsername) {
-        this.fkUserUsername = fkUserUsername;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

@@ -5,22 +5,15 @@
  */
 package facades;
 
-import entity.User;
-import httpErrors.UserNotFoundException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import facades.interfaces.IUserFacade;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.TypedQuery;
-import security.IUser;
-import security.PasswordStorage;
 
 /**
  *
  * @author Låne PC
  */
-public class UserFacade implements IUserFacade{
+public class UserFacade implements IUserFacade {
     
     EntityManagerFactory emf;
 
@@ -32,6 +25,7 @@ public class UserFacade implements IUserFacade{
         return emf.createEntityManager();
     }
     
+    /*
     @Override
     public IUser getUserByUserId(String id) {
         EntityManager em = getEntityManager();
@@ -40,20 +34,6 @@ public class UserFacade implements IUserFacade{
             return user;
         } finally {
             em.close();
-        }
-    }
-
-    /*
-  Return the Roles if users could be authenticated, otherwise null
-     */
-    @Override
-    public List<String> authenticateUser(String userName, String password) {
-        IUser user = getUserByUserId(userName);
-        try {
-            return user != null && PasswordStorage.verifyPassword(password, user.getPassword()) ? user.getRolesAsStrings() : null;
-        } catch (PasswordStorage.CannotPerformOperationException | PasswordStorage.InvalidHashException ex) {
-            Logger.getLogger(Facade_DO_NOT_USE.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
         }
     }
 
@@ -115,5 +95,5 @@ public class UserFacade implements IUserFacade{
         }
 
     }
-    
+    */
 }

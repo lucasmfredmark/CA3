@@ -8,19 +8,19 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.Pokemon;
-import facades.IPokemonFacade;
+import facades.interfaces.IPokemonFacade;
 import facades.PokemonFacade;
 import httpErrors.PokemonNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
+import jsonMappers.PokemonMapper;
 
 /**
  * REST Web Service
@@ -41,13 +41,8 @@ public class PokemonService {
      */
     public PokemonService() {
     }
-
-    /**
-     * Retrieves representation of an instance of rest.Pokemon
-     *
-     * @param json_pokemon
-     * @return an instance of java.lang.String
-     */
+    
+    /*
     @PUT
     @Path("createPokemon")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -56,21 +51,28 @@ public class PokemonService {
         Pokemon p = (Pokemon) FACADE.createPokemon(pokemon);
         return GSON.toJson(p);
     }
+    */
     
     @GET
-    @Path("getAllPokemon")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllPokemon(String json_list) throws PokemonNotFoundException {
-        List <Pokemon> p = FACADE.getAllPokemon();
-        return GSON.toJson(p);
+    public String getAllPokemon() throws PokemonNotFoundException {
+        List<Pokemon> p = FACADE.getAllPokemon();
+        List<PokemonMapper> pm = new ArrayList();
+        
+        for (Pokemon pokemon : p) {
+            pm.add(new PokemonMapper(pokemon));
+        }
+        
+        return GSON.toJson(pm);
     }
     
+    /*
     @GET
     @Path("getPokemonById")
     @Produces(MediaType.APPLICATION_JSON)
     public String getPokemonById(int json_id) throws PokemonNotFoundException {
        FACADE.getPokemonById(json_id);
        return GSON.toJson(json_id);
-       
     }
+    */
 }

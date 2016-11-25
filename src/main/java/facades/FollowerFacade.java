@@ -5,17 +5,16 @@
  */
 package facades;
 
-import entity.Follower;
-import entity.User;
-import java.util.List;
+import facades.interfaces.IFollowerFacade;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.TypedQuery;
 
 /**
  *
  * @author Låne PC
  */
+@RolesAllowed("User")
 public class FollowerFacade implements IFollowerFacade {
     
     EntityManagerFactory emf;
@@ -28,6 +27,7 @@ public class FollowerFacade implements IFollowerFacade {
         return emf.createEntityManager();
     }
     
+    /*
     @Override
     public List<Follower> getFollowList(User forUser) {
         EntityManager em = getEntityManager();
@@ -56,7 +56,7 @@ public class FollowerFacade implements IFollowerFacade {
         } finally {
             em.close();
         }
-
     }
+    */
     
 }

@@ -3,20 +3,21 @@
 /* Place your global Factory-service in this file */
 
 angular.module('myApp.factories', []).
-  factory('TeamFactory', ['$http', '$q', function ($http, $q) {
-    var apiUrl = 'api/team/all';
+  factory('teamFactory', ['$http', function ($http) {
+    var baseUrl = 'api/team';
+    var teamFactory = {};
     
-    return {
-      getTeams: function() {
-        var q = $q.defer();
-        
-        $http.get(apiUrl).then(function(response) {
-            q.resolve(response.data);
-        }, function(response) {
-            q.reject(response.data);
-        });
-        
-        return q.promise;
-      }
+    teamFactory.createTeam = function(team) {
+        return $http.put(baseUrl, team);
     };
+    
+    teamFactory.deleteTeam = function(teamId) {
+        return $http.delete(baseUrl + '/' + teamId);
+    };
+    
+    teamFactory.getTeamsByUsername = function(username) {
+        return $http.get(baseUrl + "/username/" + username);
+    };
+    
+    return teamFactory;
   }]);

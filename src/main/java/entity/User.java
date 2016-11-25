@@ -57,13 +57,13 @@ public class User implements IUser, Serializable {
     private Integer points;
     @ManyToMany(mappedBy = "userList")
     private List<Role> roleList;
-    @OneToMany(mappedBy = "fkUserUsername")
+    @OneToMany(mappedBy = "user")
     private List<Pokemon> pokemonList;
-    @OneToMany(mappedBy = "fkUserUsername")
+    @OneToMany(mappedBy = "user")
     private List<Team> teamList;
-    @OneToMany(mappedBy = "fkUserFollowUsername")
+    @OneToMany(mappedBy = "followUser")
     private List<Follower> followerList;
-    @OneToMany(mappedBy = "fkUserUsername")
+    @OneToMany(mappedBy = "user")
     private List<Follower> followerList1;
 
     public User() {

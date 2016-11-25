@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package facades;
+package facades.interfaces;
 
 import entity.Team;
 import httpErrors.TeamNotFoundException;
@@ -14,11 +14,9 @@ import java.util.List;
  * @author Låne PC
  */
 public interface ITeamFacade {
-
     Team createTeam(Team team);
-
+    Team deleteTeam(int id) throws TeamNotFoundException;
+    //List<Team> getTeams() throws TeamNotFoundException;
     Team getTeamById(int id) throws TeamNotFoundException;
-
-    List<Team> getTeams() throws TeamNotFoundException;
-    
+    List<Team> getTeamsByUsername(String username) throws TeamNotFoundException;
 }

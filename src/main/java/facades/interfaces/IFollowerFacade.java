@@ -3,11 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package facades;
-
-import entity.Follower;
-import entity.User;
-import java.util.List;
+package facades.interfaces;
 
 /**
  *
@@ -15,8 +11,8 @@ import java.util.List;
  */
 public interface IFollowerFacade {
 
-    Follower addUserToFollowList(User friend, User me);
+    //Follower addUserToFollowList(User friend, User me);
 
-    List<Follower> getFollowList(User forUser);
+    //List<Follower> getFollowList(User forUser);
     
 }

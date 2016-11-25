@@ -7,21 +7,12 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import entity.User;
-import facades.IUserFacade;
+import facades.interfaces.IUserFacade;
 import facades.UserFacade;
-import httpErrors.UserNotFoundException;
-import java.util.List;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.Produces;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.core.MediaType;
 
 /**
  * REST Web Service
@@ -35,30 +26,21 @@ public class UserService {
     private UriInfo context;
 
     private static final IUserFacade FACADE = new UserFacade(Persistence.createEntityManagerFactory("pu_development"));
-     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+    
     /**
      * Creates a new instance of User
      */
     public UserService() {
     }
     
-    /**
-     * Retrieves representation of an instance of rest.User
-     * @return an instance of java.lang.String
-     */
+    /*
     @GET
     @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public String allUsers() throws UserNotFoundException {
         List <User> users = FACADE.getAllUsers();      
         return GSON.toJson(users);
-    }
-    
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    @Path("greeting")
-    public String getGreeting() {
-        return "Hello from User Service";
     }
     
     @GET
@@ -85,5 +67,5 @@ public class UserService {
         User u = (User) FACADE.addPoints(json_points);        
         return GSON.toJson(u);
     }
-    
+    */
 }

@@ -5,11 +5,13 @@
  */
 package facades;
 
+import facades.interfaces.IPokemonFacade;
 import entity.Pokemon;
 import entity.Team;
 import httpErrors.PokemonNotFoundException;
 import httpErrors.TeamNotFoundException;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
@@ -18,6 +20,7 @@ import javax.persistence.TypedQuery;
  *
  * @author Låne PC
  */
+@RolesAllowed("User")
 public class PokemonFacade implements IPokemonFacade {
     
     EntityManagerFactory emf;
@@ -30,6 +33,7 @@ public class PokemonFacade implements IPokemonFacade {
         return emf.createEntityManager();
     }
     
+    /*
     @Override
     public Pokemon createPokemon(Pokemon pokemon) {
         EntityManager em = getEntityManager();
@@ -43,6 +47,7 @@ public class PokemonFacade implements IPokemonFacade {
             em.close();
         }
     }
+    */
 
     @Override
     public List<Pokemon> getAllPokemon() throws PokemonNotFoundException {
@@ -50,14 +55,17 @@ public class PokemonFacade implements IPokemonFacade {
 
         try {
             TypedQuery<Pokemon> result = em.createNamedQuery("Pokemon.findAll", Pokemon.class);
-            List<Pokemon> pokemon = result.getResultList();
-            if (pokemon.isEmpty()) throw new PokemonNotFoundException("No pokemon found in database");
-            return pokemon;
+            List<Pokemon> p = result.getResultList();
+            
+            if (p == null) throw new PokemonNotFoundException("No Pokémon was found.");
+            
+            return p;
         } finally {
             em.close();
         }
     }
 
+    /*
     @Override
     public Pokemon getPokemonById(int id) throws PokemonNotFoundException {
         EntityManager em = getEntityManager();
@@ -86,4 +94,5 @@ public class PokemonFacade implements IPokemonFacade {
             em.close();
         }
     }
+    */
 }

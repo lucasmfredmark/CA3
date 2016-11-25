@@ -1,6 +1,5 @@
 package entity;
 
-import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -16,7 +15,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,11 +37,11 @@ public class Team implements Serializable {
     @Size(max = 255)
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "fkTeamId")
+    @OneToMany(mappedBy = "team")
     private List<Pokemon> pokemonList;
     @JoinColumn(name = "fk_user_username", referencedColumnName = "username")
     @ManyToOne
-    private User fkUserUsername;
+    private User user;
 
     public Team() {
     }
@@ -56,7 +54,7 @@ public class Team implements Serializable {
         return id;
     }
 
-    private void setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -68,7 +66,6 @@ public class Team implements Serializable {
         this.name = name;
     }
 
-    @XmlTransient
     public List<Pokemon> getPokemonList() {
         return pokemonList;
     }
@@ -77,12 +74,12 @@ public class Team implements Serializable {
         this.pokemonList = pokemonList;
     }
 
-    public User getFkUserUsername() {
-        return fkUserUsername;
+    public User getUser() {
+        return user;
     }
 
-    public void setFkUserUsername(User fkUserUsername) {
-        this.fkUserUsername = fkUserUsername;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
