@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-sm-2" ng-repeat="pokemon in team.pokemonList track by $index">
                 <a href="#/pokemon/{{pokemon.pokedexId}}" uib-tooltip="Click to show details">
-                    <img src="images/sprites/{{pokemon.pokedexId}}.png" class="img-responsive center-block" alt="#{{pokemon.pokedexId}}" title="#{{pokemon.pokedexId}}">
+                    <img ng-src="images/sprites/{{pokemon.pokedexId}}.png" class="img-responsive center-block" alt="#{{pokemon.pokedexId}}" title="#{{pokemon.pokedexId}}">
                 </a>
             </div>
         </div>
