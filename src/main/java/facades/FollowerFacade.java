@@ -14,7 +14,6 @@ import javax.persistence.EntityManagerFactory;
  *
  * @author Låne PC
  */
-@RolesAllowed("User")
 public class FollowerFacade implements IFollowerFacade {
     
     EntityManagerFactory emf;

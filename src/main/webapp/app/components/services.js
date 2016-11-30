@@ -4,6 +4,38 @@
 
 // Demonstrate how to register services
 angular.module('myApp.services', [])
-  .service('myService', [function () {
+  .service('userService', [function () {
+    var self = this;
     
+    self.username = '';
+    self.isAuthenticated = false;
+    self.isAdmin = false;
+    self.isUser = false;
+    
+    return {
+        getUsername: function () {
+            return self.username;
+        },
+        setUsername: function (username) {
+            self.username = username;
+        },
+        getIsAuthenticated: function () {
+            return self.isAuthenticated;
+        },
+        setIsAuthenticated: function (isAuthenticated) {
+            self.isAuthenticated = isAuthenticated;
+        },
+        getIsAdmin: function () {
+            return self.isAdmin;
+        },
+        setIsAdmin: function (isAdmin) {
+            self.isAdmin = isAdmin;
+        },
+        getIsUser: function () {
+            return self.isUser;
+        },
+        setIsUser: function (isUser) {
+            self.isUser = isUser;
+        }
+    };
   }]);

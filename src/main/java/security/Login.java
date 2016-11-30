@@ -37,7 +37,7 @@ public class Login {
       String password = json.get("password").getAsString();
       JsonObject responseJson = new JsonObject();
       List<String> roles;
-
+      
       if ((roles = authenticate(username, password)) != null) {
         String token = createToken(username, roles);
         responseJson.addProperty("username", username);
@@ -56,6 +56,7 @@ public class Login {
   
   private List<String> authenticate(String userName, String password) {
     IUserFacadeOld facade = UserFacadeFactory.getInstance();
+    
     return facade.authenticateUser(userName, password);
   }
 

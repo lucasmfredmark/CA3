@@ -3,18 +3,24 @@
  */
 
 angular.module('myApp.controllers', []).
-  controller('AppCtrl', ['teamFactory', function (teamFactory) {
+  controller('AppCtrl', ['userService', function (userService) {
     var self = this;
     
-    self.title = 'MyPokéTrainer';
-    /*self.getTeamsByUsername = function(username) {
-        teamFactory.getTeamsByUsername(username).then(function(teams) {
-            self.myTeams = teams;
-            console.log(self.myTeams);
-        }, function() {
-            console.log('Error in getTeamsByUsername()');
-        });
-    };
+    self.user = userService;
+          //console.log($scope.isAuthenticated);
+    //var self = this;
     
-    self.getTeamsByUsername("Lucas");*/
+    //self.myTeams = [];
+    
+    /*if ($scope.isAuthenticated) {
+        self.getTeamsByUsername = function(username) {
+            teamFactory.getTeamsByUsername(username).then(function(teams) {
+                self.myTeams = teams;
+            }, function() {
+                console.log('Couldn\'t get teams for user ' + username);
+            });
+        };
+        
+        self.getTeamsByUsername("Lucas");
+    }*/
   }]);

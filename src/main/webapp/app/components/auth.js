@@ -1,5 +1,5 @@
 angular.module('myApp.security', [])
-        .controller('AppLoginCtrl', function ($scope, $rootScope, $http, $window, $location, $uibModal, jwtHelper) {
+        .controller('AppLoginCtrl', function ($scope, $rootScope, $http, $window, $location, $uibModal, jwtHelper, userService) {
 
           $rootScope.$on('logOutEvent', function () {
             $scope.logout();
@@ -42,27 +42,25 @@ angular.module('myApp.security', [])
             }
           });
 
-          clearUserDetails($scope);
+          clearUserDetails(userService);
 
           $scope.login = function () {
             $http.post('api/login', $scope.user)
                     .success(function (data) {
                       $window.sessionStorage.id_token = data.token;
-                      initializeFromToken($scope, $window.sessionStorage.id_token, jwtHelper);
-                      $location.path("#/view1");
+                      initializeFromToken($scope, $window.sessionStorage.id_token, jwtHelper, userService);
+                      $location.path("#/");
                     })
                     .error(function (data) {
                       delete $window.sessionStorage.id_token;
-                      clearUserDetails($scope);
+                      clearUserDetails(userService);
                     });
           };
 
           $rootScope.logout = function () {
-            $scope.isAuthenticated = false;
-            $scope.isAdmin = false;
-            $scope.isUser = false;
+            clearUserDetails(userService);
             delete $window.sessionStorage.id_token;
-            $location.path("/view1");
+            $location.path("#/");
           };
 
           $rootScope.openErrorModal = function (text) {
@@ -83,7 +81,7 @@ angular.module('myApp.security', [])
           var init = function () {
             var token = $window.sessionStorage.id_token;
             if (token) {
-              initializeFromToken($scope, $window.sessionStorage.id_token, jwtHelper);
+              initializeFromToken($scope, $window.sessionStorage.id_token, jwtHelper, userService);
             }
           };
           init();// and fire it after definition
@@ -116,25 +114,27 @@ angular.module('myApp.security', [])
 
 
 
-function initializeFromToken($scope, token, jwtHelper) {
-  $scope.isAuthenticated = true;
+function initializeFromToken($scope, token, jwtHelper, userService) {
   var tokenPayload = jwtHelper.decodeToken(token);
-  $scope.username = tokenPayload.username;
-  $scope.isAdmin = false;
-  $scope.isUser = false;
+  
+  userService.setIsAuthenticated(true);
+  userService.setUsername(tokenPayload.username);
+  userService.setIsAdmin(false);
+  userService.setIsUser(false);
+  
   tokenPayload.roles.forEach(function (role) {
     if (role === "Admin") {
-      $scope.isAdmin = true;
+      userService.setIsAdmin(true);
     }
     if (role === "User") {
-      $scope.isUser = true;
+      userService.setIsUser(true);
     }
   });
 }
 
-function clearUserDetails($scope) {
-  $scope.username = "";
-  $scope.isAuthenticated = false;
-  $scope.isAdmin = false;
-  $scope.isUser = false;
+function clearUserDetails(userService) {
+  userService.setIsAuthenticated(false);
+  userService.setUsername('');
+  userService.setIsAdmin(false);
+  userService.setIsUser(false);
 }
