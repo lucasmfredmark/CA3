@@ -3,9 +3,9 @@
  */
 
 angular.module('myApp.controllers', []).
-  controller('AppCtrl', ['userService', 'teamFactory', function (userService, teamService, teamFactory) {
+  controller('AppCtrl', ['userService', 'teamService', function (userService, teamService) {
     var self = this;
     
     self.user = userService;
-    self.myTeams = teamService.teamList;
+    self.team = teamService;
   }]);

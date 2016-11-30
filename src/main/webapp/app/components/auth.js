@@ -48,8 +48,7 @@ angular.module('myApp.security', [])
             $http.post('api/login', $scope.user)
                     .success(function (data) {
                       $window.sessionStorage.id_token = data.token;
-                      initializeFromToken($scope, $window.sessionStorage.id_token, jwtHelper, userService);
-                      teamService.getTeamsByUsername(userService.getUsername());
+                      initializeFromToken($window.sessionStorage.id_token, jwtHelper, userService, teamService);
                       $location.path("#/");
                     })
                     .error(function (data) {
@@ -82,7 +81,7 @@ angular.module('myApp.security', [])
           var init = function () {
             var token = $window.sessionStorage.id_token;
             if (token) {
-              initializeFromToken($scope, $window.sessionStorage.id_token, jwtHelper, userService);
+              initializeFromToken($window.sessionStorage.id_token, jwtHelper, userService, teamService);
             }
           };
           init();// and fire it after definition
@@ -115,7 +114,7 @@ angular.module('myApp.security', [])
 
 
 
-function initializeFromToken($scope, token, jwtHelper, userService) {
+function initializeFromToken(token, jwtHelper, userService, teamService) {
   var tokenPayload = jwtHelper.decodeToken(token);
   
   userService.setIsAuthenticated(true);
@@ -131,6 +130,8 @@ function initializeFromToken($scope, token, jwtHelper, userService) {
       userService.setIsUser(true);
     }
   });
+  
+  teamService.getTeamsByUsername(userService.getUsername());
 }
 
 function clearUserDetails(userService) {

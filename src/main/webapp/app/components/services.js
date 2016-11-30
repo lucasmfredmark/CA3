@@ -44,11 +44,17 @@ angular.module('myApp.services', [])
     
     self.teamList = [];
     
-    self.getTeamsByUsername = function(username) {
-        teamFactory.getTeamsByUsername(username).then(function(teams) {
-            self.teamList = teams;
-        }, function() {
-            console.log('Couldn\'t get teams for user ' + username);
-        });
+    return {
+        getTeamsByUsername: function(username) {
+            teamFactory.getTeamsByUsername(username).then(function(response) {
+                self.teamList = response.data;
+                console.log(self.teamList);
+            }, function() {
+                console.log('Couldn\'t get teams for user ' + username);
+            });
+        },
+        getTeamList: function() {
+            return self.teamList;
+        }
     };
   }]);
