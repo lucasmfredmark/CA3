@@ -18,7 +18,6 @@ import javax.persistence.TypedQuery;
  *
  * @author Låne PC
  */
-@RolesAllowed("User")
 public class TeamFacade implements ITeamFacade {
     
     EntityManagerFactory emf;

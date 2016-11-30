@@ -3,8 +3,25 @@
  */
 
 angular.module('myApp.controllers', []).
-  controller('AppCtrl', [function () {
+
+  controller('AppCtrl', ['userService', function (userService) {
     var self = this;
     
-    self.title = 'MyPokéTrainer';
+    self.user = userService;
+          //console.log($scope.isAuthenticated);
+    //var self = this;
+    
+    //self.myTeams = [];
+    
+    /*if ($scope.isAuthenticated) {
+        self.getTeamsByUsername = function(username) {
+            teamFactory.getTeamsByUsername(username).then(function(teams) {
+                self.myTeams = teams;
+            }, function() {
+                console.log('Couldn\'t get teams for user ' + username);
+            });
+        };
+        
+        self.getTeamsByUsername("Lucas");
+    }*/
   }]);

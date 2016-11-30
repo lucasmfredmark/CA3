@@ -20,7 +20,6 @@ import javax.persistence.TypedQuery;
  *
  * @author Låne PC
  */
-@RolesAllowed("User")
 public class PokemonFacade implements IPokemonFacade {
     
     EntityManagerFactory emf;
