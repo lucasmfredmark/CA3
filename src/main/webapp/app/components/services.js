@@ -48,7 +48,6 @@ angular.module('myApp.services', [])
         getTeamsByUsername: function(username) {
             teamFactory.getTeamsByUsername(username).then(function(response) {
                 self.teamList = response.data;
-                console.log(self.teamList);
             }, function() {
                 console.log('Couldn\'t get teams for user ' + username);
             });

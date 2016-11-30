@@ -1,5 +1,6 @@
 <h1>My Teams <span class="badge">{{app.team.getTeamList().length}}</span></h1>
-<uib-accordion ng-hide="app.team.getTeamList().length">
+<h4 ng-show="!!!app.team.getTeamList().length">You have no teams.</h4>
+<uib-accordion ng-show="app.team.getTeamList().length">
     <uib-accordion-group ng-repeat="team in app.team.getTeamList() track by $index">
         <uib-accordion-heading>{{team.name}} (<span>{{team.pokemonList.length || 0}}</span>)</uib-accordion-heading>
         <p class="text-muted" ng-show="!!!team.pokemonList.length">This team has no Pokémon.</p>
@@ -12,4 +13,3 @@
         </div>
     </uib-accordion-group>
 </uib-accordion>
-<h4 ng-hide="app.team.getTeamList().length > 0">You have no teams.</h4>
