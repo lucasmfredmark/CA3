@@ -120,6 +120,5 @@ public class TeamFacade implements ITeamFacade {
         } finally {
             em.close();
         }
-        //return null;
     }
 }

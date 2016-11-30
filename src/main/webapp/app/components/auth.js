@@ -1,5 +1,5 @@
 angular.module('myApp.security', [])
-        .controller('AppLoginCtrl', function ($scope, $rootScope, $http, $window, $location, $uibModal, jwtHelper, userService) {
+        .controller('AppLoginCtrl', function ($scope, $rootScope, $http, $window, $location, $uibModal, jwtHelper, userService, teamService) {
 
           $rootScope.$on('logOutEvent', function () {
             $scope.logout();
@@ -49,6 +49,7 @@ angular.module('myApp.security', [])
                     .success(function (data) {
                       $window.sessionStorage.id_token = data.token;
                       initializeFromToken($scope, $window.sessionStorage.id_token, jwtHelper, userService);
+                      teamService.getTeamsByUsername(userService.getUsername());
                       $location.path("#/");
                     })
                     .error(function (data) {

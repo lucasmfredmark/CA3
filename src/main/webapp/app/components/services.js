@@ -38,4 +38,17 @@ angular.module('myApp.services', [])
             self.isUser = isUser;
         }
     };
+  }])
+  .service('teamService', ['teamFactory', function (teamFactory) {
+    var self = this;
+    
+    self.teamList = [];
+    
+    self.getTeamsByUsername = function(username) {
+        teamFactory.getTeamsByUsername(username).then(function(teams) {
+            self.teamList = teams;
+        }, function() {
+            console.log('Couldn\'t get teams for user ' + username);
+        });
+    };
   }]);
