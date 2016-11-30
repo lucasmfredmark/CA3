@@ -7,6 +7,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import entity.Team;
 import facades.interfaces.ITeamFacade;
 import facades.TeamFacade;
@@ -44,6 +45,12 @@ public class TeamService {
      * Creates a new instance of Team
      */
     public TeamService() {
+    }
+    
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getGreeting() {
+        return "Hello from team";
     }
     
     @PUT
