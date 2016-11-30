@@ -107,7 +107,6 @@ public class TeamFacade implements ITeamFacade {
 
     @Override
     public List<Team> getTeamsByUsername(String username) throws TeamNotFoundException {
-        /*
         EntityManager em = getEntityManager();
         
         try {
@@ -122,7 +121,6 @@ public class TeamFacade implements ITeamFacade {
         } finally {
             em.close();
         }
-        */
-        return null;
+        //return null;
     }
 }
