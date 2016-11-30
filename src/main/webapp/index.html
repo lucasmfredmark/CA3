@@ -52,7 +52,7 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="#/" uib-tooltip="Home" tooltip-placement="bottom"><div class="hidden-sm">Home</div><span class="glyphicon glyphicon-home visible-sm"></span></a></li>
-                        <li><a href="#/teams" uib-tooltip="My Teams" tooltip-placement="bottom" ng-show="app.user.getIsAuthenticated()"><div class="hidden-sm">My Teams <span class="badge">0</span></div><span class="glyphicon glyphicon-list-alt visible-sm"></span></a></li>
+                        <li><a href="#/teams" uib-tooltip="My Teams" tooltip-placement="bottom" ng-show="app.user.getIsAuthenticated()"><div class="hidden-sm">My Teams <span class="badge">{{app.myTeams.length}}</span></div><span class="glyphicon glyphicon-list-alt visible-sm"></span></a></li>
                         <li><a href="#/shop" uib-tooltip="PokéMart" tooltip-placement="bottom" ng-show="app.user.getIsAuthenticated()"><div class="hidden-sm">PokéMart</div><span class="glyphicon glyphicon-shopping-cart visible-sm"></span></a></li>
                         <li><a href="#/allusers" uib-tooltip="All users" tooltip-placement="bottom" ng-show="app.user.getIsAuthenticated()"><div class="hidden-sm">All users</div><span class="glyphicon glyphicon-user visible-sm"></span></a></li>
                         <li><a href="#/docs" uib-tooltip="Documentation" tooltip-placement="bottom"><div class="hidden-sm">Documentation</div><span class="glyphicon glyphicon-paperclip visible-sm"></span></a></li>
@@ -70,7 +70,7 @@
                             <button type="submit" class="btn btn-danger">Sign in</button>
                         </form>
                         <div class="navbar-right" ng-show="app.user.getIsAuthenticated()">
-
+                            
                             <p class="navbar-text">Logged on as: <a href="#/user/{{app.user.getUsername()}}">{{app.user.getUsername()}}</a></p>
 
                             <button type="submit" class="btn btn-danger navbar-btn"  ng-click="logout()">Logout</button>
