@@ -142,7 +142,7 @@ CREATE TABLE `USER` (
 LOCK TABLES `USER` WRITE;
 /*!40000 ALTER TABLE `USER` DISABLE KEYS */;
 
-INSERT INTO `USER` (`username`, `firstname`, `gender`, `lastname`, `passwordhash`, `points`)
+INSERT INTO `USER` (`username`, `firstname`, `lastname`, `gender`, `passwordhash`, `points`)
 VALUES
 	('Lucas','Lucas','Fredmark','Male','sha1:64000:18:N6QG2dco4u+Gnpfbx85nUP1iv2UdEl0z:z4v5u/fWFFzSgnTBrCrtFOCB',100),
 	('Patrick','Patrick','Johansen','Male','sha1:64000:18:ypldmeTGk7mnDJrkotqM8s1FMD4pqwus:n5fTcltBhyfxrwRjledJ6oQh',100),
@@ -156,7 +156,9 @@ UNLOCK TABLES;
 
 INSERT INTO `TEAM` (`name`, `fk_user_username`)
 VALUES
-('My awesome team', 'Lucas');
+('My awesome team', 'Lucas'),
+('Total Domination', 'Patrick'),
+('Team Lars', 'Thomas');
 
 /*!40000 ALTER TABLE `TEAM` ENABLE KEYS */;
 -- UNLOCK TABLES
@@ -171,7 +173,21 @@ VALUES
 (9, 'Lucas',1),
 (25, 'Lucas',1),
 (208, 'Lucas',1),
-(150, 'Lucas',1);
+(150, 'Lucas',1),
+
+(38,'Patrick',2),
+(134, 'Patrick', 2),
+(169, 'Patrick',2),
+(186, 'Patrick',2),
+(197, 'Patrick',2),
+(208, 'Patrick',2),
+
+(144,'Thomas',3),
+(145, 'Thomas', 3),
+(146, 'Thomas',3),
+(243, 'Thomas',3),
+(244, 'Thomas',3),
+(245, 'Thomas',3);
 
 /*!40000 ALTER TABLE `POKEMON` ENABLE KEYS */;
 -- UNLOCK TABLES
