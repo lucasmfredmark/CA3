@@ -142,7 +142,7 @@ CREATE TABLE `USER` (
 LOCK TABLES `USER` WRITE;
 /*!40000 ALTER TABLE `USER` DISABLE KEYS */;
 
-INSERT INTO `USER` (`username`, `firstname`, `gender`, `lastname`, `passwordhash`, `points`)
+INSERT INTO `USER` (`username`, `firstname`, `lastname`, `gender`, `passwordhash`, `points`)
 VALUES
 	('Lucas','Lucas','Fredmark','Male','sha1:64000:18:N6QG2dco4u+Gnpfbx85nUP1iv2UdEl0z:z4v5u/fWFFzSgnTBrCrtFOCB',100),
 	('Patrick','Patrick','Johansen','Male','sha1:64000:18:ypldmeTGk7mnDJrkotqM8s1FMD4pqwus:n5fTcltBhyfxrwRjledJ6oQh',100),
