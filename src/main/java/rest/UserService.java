@@ -14,6 +14,7 @@ import httpErrors.UserNotFoundException;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -76,12 +77,24 @@ public class UserService {
 
 */
     
-    @PUT
-    @Path("{username}/points/add/{value}")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @GET
+    
+    
+    @POST
+    @Path("{username}/points/add/{points:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String addPoints(@PathParam("value") int points, @PathParam("username") String username) throws UserNotFoundException{
-        User u = (User) FACADE.addPoints(points, username);        
-        return GSON.toJson(u);
+    public String addPoints(@PathParam("points") int points, @PathParam("username") String username) throws UserNotFoundException{
+        User user = FACADE.addPoints(points, username);
+        
+        return GSON.toJson(user);
+    }
+    
+    @POST
+    @Path("{username}/points/remove/{points:\\d+}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String removePoints(@PathParam("points") int points, @PathParam("username") String username) throws UserNotFoundException{
+        User user = FACADE.removePoints(points, username);
+        
+        return GSON.toJson(user);
     }
 }
