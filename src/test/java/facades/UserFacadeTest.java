@@ -46,41 +46,7 @@ public class UserFacadeTest {
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of removePoints method, of class UserFacade.
-     */
-//    @Test
-//    public void testRemovePoints() {
-//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
-//        
-//        System.out.println("removePoints");
-//        int points = 50;
-//        int userid = 1;
-//        UserFacade instance = null;
-//        User expResult = null;
-//        User result = instance.removePoints(points, userid);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of addPokemon method, of class UserFacade.
-//     */
-//    @Test
-//    public void testAddPokemon() {
-//        System.out.println("addPokemon");
-//        Pokemon pokemon = null;
-//        User userid = null;
-//        UserFacade instance = null;
-//        Pokemon expResult = null;
-//        Pokemon result = instance.addPokemon(pokemon, userid);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//    
+  
     @Test public void testAddPoints() throws UserNotFoundException {
         System.out.println("addPoints");
         String username = "Patrick";
@@ -91,6 +57,39 @@ public class UserFacadeTest {
         user = userFacade.getUserByUsername(username);
         int newBalance = user.getPoints();
         assertTrue(newBalance > oldBalance);
+    }
+    
+    @Test
+    public void testRemovePoints() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
+        
+
+        int points = 50;
+        String username = "Lucas";
+        Integer expResult = 50;
+        
+        UserFacade instance = new UserFacade(emf);
+        User result = instance.removePoints(points, username);
+        
+        assertEquals(expResult, result.getPoints());
+    }
+
+    /**
+     * Test of addPokemon method, of class UserFacade.
+     */
+    @Test
+    public void testAddPokemon() {
+        /*
+        System.out.println("addPokemon");
+        Pokemon pokemon = null;
+        User userid = null;
+        UserFacade instance = null;
+        Pokemon expResult = null;
+        Pokemon result = instance.addPokemon(pokemon, userid);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+*/
     }
     
 }
