@@ -25,17 +25,21 @@ angular.module('myApp.factories', []).
     var baseUrl = 'api/user';
     var userFactory = {};
     
-    /*userFactory.createTeam = function(team) {
-        return $http.put(baseUrl + '/create', team);
+    userFactory.addPoints = function(points, username) {
+        return $http.post(baseUrl + '/' + username + '/points/add/' + points);
     };
     
-    userFactory.deleteTeam = function(teamId) {
-        return $http.delete(baseUrl + '/delete/' + teamId);
+    userFactory.removePoints = function(points, username) {
+        return $http.post(baseUrl + '/' + username + '/points/remove/' + points);
     };
     
-    userFactory.getTeamsByUsername = function(username) {
-        return $http.get(baseUrl + "/username/" + username);
-    };*/
+    userFactory.addPokemon = function(pokemon, username) {
+        return $http.put(baseUrl + '/' + username + '/pokemon/add', pokemon);
+    };
+    
+    userFactory.getUserByUsername = function(username) {
+        return $http.get(baseUrl + '/' + username);
+    };
     
     return userFactory;
   }]);
