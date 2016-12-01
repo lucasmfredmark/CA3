@@ -54,6 +54,7 @@ public class TeamService {
     }
     
     @PUT
+    @Path("create")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String createTeam(String json_team) {
@@ -64,7 +65,7 @@ public class TeamService {
     }
     
     @DELETE
-    @Path("{id:\\d+}")
+    @Path("delete/{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
     public String deleteTeam(@PathParam("id") int id) throws TeamNotFoundException {
         Team t = FACADE.deleteTeam(id);
