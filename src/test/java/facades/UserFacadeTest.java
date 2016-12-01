@@ -49,15 +49,15 @@ public class UserFacadeTest {
     public void testRemovePoints() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
         
-        System.out.println("removePoints");
+
         int points = 50;
-        int userid = 1;
-        UserFacade instance = null;
-        User expResult = null;
-        User result = instance.removePoints(points, userid);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String username = "Lucas";
+        Integer expResult = 50;
+        
+        UserFacade instance = new UserFacade(emf);
+        User result = instance.removePoints(points, username);
+        
+        assertEquals(expResult, result.getPoints());
     }
 
     /**
@@ -65,6 +65,7 @@ public class UserFacadeTest {
      */
     @Test
     public void testAddPokemon() {
+        /*
         System.out.println("addPokemon");
         Pokemon pokemon = null;
         User userid = null;
@@ -74,6 +75,7 @@ public class UserFacadeTest {
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+*/
     }
     
 }

@@ -27,11 +27,11 @@ public class UserFacade implements IUserFacade {
         return emf.createEntityManager();
     }
     
-    public User removePoints(int points, int userid){
+    public User removePoints(int points, String username){
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            User user = em.find(User.class, userid);
+            User user = em.find(User.class, username);
             user.removePoints(points);
             em.persist(user);
             em.getTransaction().commit();
@@ -41,12 +41,12 @@ public class UserFacade implements IUserFacade {
         }
     }
     
-    public Pokemon addPokemon(Pokemon pokemon, User userid){
+    public Pokemon addPokemon(Pokemon pokemon, String username){
         EntityManager em = getEntityManager();
         
         try{
             em.getTransaction().begin();
-            User user = em.find(User.class, userid);
+            User user = em.find(User.class, username);
             user.addPokemon(pokemon);
             em.persist(user);
             em.getTransaction().commit();
