@@ -5,6 +5,8 @@
  */
 package facades;
 
+import entity.Pokemon;
+import entity.User;
 import facades.interfaces.IUserFacade;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -23,6 +25,35 @@ public class UserFacade implements IUserFacade {
 
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
+    }
+    
+    public User removePoints(int points, int userid){
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            User user = em.find(User.class, userid);
+            user.removePoints(points);
+            em.persist(user);
+            em.getTransaction().commit();
+            return user;
+        } finally {
+            em.close();
+        }
+    }
+    
+    public Pokemon addPokemon(Pokemon pokemon, User userid){
+        EntityManager em = getEntityManager();
+        
+        try{
+            em.getTransaction().begin();
+            User user = em.find(User.class, userid);
+            user.addPokemon(pokemon);
+            em.persist(user);
+            em.getTransaction().commit();
+            return pokemon;
+        }finally {
+            em.close();
+        }
     }
     
     /*

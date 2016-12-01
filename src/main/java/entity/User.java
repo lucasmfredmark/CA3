@@ -151,6 +151,10 @@ public class User implements IUser, Serializable {
     public void setPokemonList(List<Pokemon> pokemonList) {
         this.pokemonList = pokemonList;
     }
+    
+    public void addPokemon(Pokemon pokemon){
+        this.pokemonList.add(pokemon);
+    }
 
     @XmlTransient
     public List<Team> getTeamList() {
