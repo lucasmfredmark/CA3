@@ -33,8 +33,12 @@ angular.module('myApp.factories', []).
         return $http.post(baseUrl + '/' + username + '/points/remove/' + points);
     };
     
-    userFactory.getTeamsByUsername = function(username) {
-        return $http.get(baseUrl + "/username/" + username);
+    userFactory.addPokemon = function(pokemon, username) {
+        return $http.put(baseUrl + '/' + username + '/pokemon/add', pokemon);
+    };
+    
+    userFactory.getUserByUsername = function(username) {
+        return $http.get(baseUrl + '/' + username);
     };
     
     return userFactory;

@@ -29,6 +29,24 @@ public class UserFacade implements IUserFacade {
     }
     
     @Override
+    public User addPoints(int points, String username) throws UserNotFoundException {
+        EntityManager em = getEntityManager();
+        
+        try {
+            em.getTransaction().begin();
+            User user = em.find(User.class, username);
+            if (user == null) throw new UserNotFoundException("No user found to add points to");
+            user.addPoints(points);
+            em.persist(user);
+            em.getTransaction().commit();
+            return user;
+        } finally {
+            em.close();
+        }
+
+    }
+    
+    @Override
     public User removePoints(int points, String username){
         EntityManager em = getEntityManager();
         try {
@@ -43,6 +61,7 @@ public class UserFacade implements IUserFacade {
         }
     }
     
+    @Override
     public Pokemon addPokemon(Pokemon pokemon, String username){
         EntityManager em = getEntityManager();
         
@@ -54,6 +73,19 @@ public class UserFacade implements IUserFacade {
             em.getTransaction().commit();
             return pokemon;
         }finally {
+            em.close();
+        }
+    }
+    
+    @Override
+    public User getUserByUsername(String username) throws UserNotFoundException {
+        EntityManager em = getEntityManager();
+
+        try {
+            User p = em.find(User.class, username);
+            if (p == null) throw new UserNotFoundException("No user found by name: " + username);
+            return p;
+        } finally {
             em.close();
         }
     }
@@ -86,20 +118,7 @@ public class UserFacade implements IUserFacade {
     }
 
 */
-
-    @Override
-    public User getUserByUsername(String username) throws UserNotFoundException {
-        EntityManager em = getEntityManager();
-
-        try {
-            User p = em.find(User.class, username);
-            if (p == null) throw new UserNotFoundException("No user found by name: " + username);
-            return p;
-        } finally {
-            em.close();
-        }
-    }
-
+    
 //    @Override
 //    public User createUser(User User) {
 //        EntityManager em = getEntityManager();
@@ -113,25 +132,4 @@ public class UserFacade implements IUserFacade {
 //            em.close();
 //        }
 //    }
-
-
-    
-    @Override
-    public User addPoints(int points, String username) throws UserNotFoundException {
-        EntityManager em = getEntityManager();
-        
-        try {
-            em.getTransaction().begin();
-            User user = em.find(User.class, username);
-            if (user == null) throw new UserNotFoundException("No user found to add points to");
-            user.addPoints(points);
-            em.persist(user);
-            em.getTransaction().commit();
-            return user;
-        } finally {
-            em.close();
-        }
-
-    }
-    
 }

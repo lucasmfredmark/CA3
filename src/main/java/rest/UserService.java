@@ -7,6 +7,7 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import entity.Pokemon;
 import entity.User;
 import facades.interfaces.IUserFacade;
 import facades.UserFacade;
@@ -22,6 +23,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import jsonMappers.PokemonMapper;
 import jsonMappers.UserMapper;
 
 /**
@@ -85,7 +87,7 @@ public class UserService {
         User user = FACADE.addPoints(points, username); 
         UserMapper u = new UserMapper(user);
         
-        return GSON.toJson(user);
+        return GSON.toJson(u);
     }
     
     @POST
@@ -93,6 +95,27 @@ public class UserService {
     @Produces(MediaType.APPLICATION_JSON)
     public String removePoints(@PathParam("points") int points, @PathParam("username") String username) throws UserNotFoundException{
         User user = FACADE.removePoints(points, username);
+        UserMapper u = new UserMapper(user);
+        
+        return GSON.toJson(u);
+    }
+    
+    @PUT
+    @Path("{username}/pokemon/add")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public String addPokemon(String json_pokemon, @PathParam("username") String username) {
+        Pokemon pokemon = FACADE.addPokemon(GSON.fromJson(json_pokemon, Pokemon.class), username);
+        PokemonMapper p = new PokemonMapper(pokemon);
+        
+        return GSON.toJson(p);
+    }
+    
+    @GET
+    @Path("{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getUserByUsername(@PathParam("username") String username) throws UserNotFoundException {
+        User user = FACADE.getUserByUsername(username);
         UserMapper u = new UserMapper(user);
         
         return GSON.toJson(u);

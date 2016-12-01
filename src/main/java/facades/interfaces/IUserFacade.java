@@ -5,6 +5,7 @@
  */
 package facades.interfaces;
 
+import entity.Pokemon;
 import entity.User;
 import httpErrors.UserNotFoundException;
 
@@ -17,9 +18,9 @@ public interface IUserFacade {
     User addPoints(int points, String username) throws UserNotFoundException;
     
     User removePoints(int points, String username) throws UserNotFoundException;
-
-    //User createUser(User User);
-
+    
+    Pokemon addPokemon(Pokemon pokemon, String username);
+    
     User getUserByUsername(String username) throws UserNotFoundException;
     
 }
