@@ -21,6 +21,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import jsonMappers.UserMapper;
 
 /**
  * REST Web Service
@@ -81,7 +82,8 @@ public class UserService {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String addPoints(@PathParam("value") int points, @PathParam("username") String username) throws UserNotFoundException{
-        User u = (User) FACADE.addPoints(points, username);        
-        return GSON.toJson(u);
+        User u = (User) FACADE.addPoints(points, username); 
+        UserMapper user = new UserMapper(u);
+        return GSON.toJson(user);
     }
 }

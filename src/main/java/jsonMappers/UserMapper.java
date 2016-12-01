@@ -37,11 +37,15 @@ public class UserMapper {
         this.gender = user.getGender();
         this.passwordHash = user.getPasswordhash();
         this.points = user.getPoints();
-        this.roleList = user.getRoleList();
+        this.roleList = null;
+//        this.pokemonList = null;
+//        this.teamList = null;
+        this.followerList = null;
+        this.followerList1 = null;
         this.pokemonList = filterPokemonList(user.getPokemonList());
         this.teamList = filterTeamList(user.getTeamList());
-        this.followerList = filterFollowerList(user.getFollowerList());
-        this.followerList1 = filterFollowerList1(user.getFollowerList1());
+//        this.followerList = filterFollowerList(user.getFollowerList());
+//        this.followerList1 = filterFollowerList1(user.getFollowerList1());
     }
     
     private List<Pokemon> filterPokemonList(List<Pokemon> pl) {
@@ -65,6 +69,7 @@ public class UserMapper {
     private List<Follower> filterFollowerList(List<Follower> fl) {
         for (Follower f : fl) {
             f.setUser(null);
+            f.setFollowUser(null);
         }
         return fl;
     }
@@ -74,6 +79,7 @@ public class UserMapper {
     private List<Follower> filterFollowerList1(List<Follower> fl) {
         for (Follower f : fl) {
             f.setUser(null);
+            f.setFollowUser(null);
         }
         return fl;
     }
