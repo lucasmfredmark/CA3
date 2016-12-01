@@ -11,6 +11,7 @@ angular.module('myApp', [
   'myApp.teams',
   'myApp.pokemon',
   'myApp.docs',
+  'myApp.funds',
   'myApp.filters',
   'myApp.directives',
   'myApp.factories',

@@ -25,6 +25,7 @@
         <script src="app/teams/teams.js"></script>
         <script src="app/pokemon/pokemon.js"></script>
         <script src="app/docs/docs.js"></script>
+        <script src="app/funds/funds.js"></script>
         <script src="app/components/auth.js"></script>
         <script src="app/components/filters.js"></script>
         <script src="app/components/directives.js"></script>
@@ -54,6 +55,7 @@
                         <li><a href="#/" uib-tooltip="Home" tooltip-placement="bottom"><div class="hidden-sm">Home</div><span class="glyphicon glyphicon-home visible-sm"></span></a></li>
                         <li><a href="#/teams" uib-tooltip="My Teams" tooltip-placement="bottom" ng-show="app.user.getIsAuthenticated()"><div class="hidden-sm">My Teams <span class="badge">{{app.team.getTeamList().length}}</span></div><span class="glyphicon glyphicon-list-alt visible-sm"></span></a></li>
                         <li><a href="#/shop" uib-tooltip="PokéMart" tooltip-placement="bottom" ng-show="app.user.getIsAuthenticated()"><div class="hidden-sm">PokéMart</div><span class="glyphicon glyphicon-shopping-cart visible-sm"></span></a></li>
+                        <li><a href="#/funds" uib-tooltip="Funds" tooltip-placement="bottom" ng-show="app.user.getIsAuthenticated()"><div class="hidden-sm">Funds</div><span class="glyphicon glyphicon-credit-card visible-sm"></span></a></li>
                         <li><a href="#/allusers" uib-tooltip="All users" tooltip-placement="bottom" ng-show="app.user.getIsAuthenticated()"><div class="hidden-sm">All users</div><span class="glyphicon glyphicon-user visible-sm"></span></a></li>
                         <li><a href="#/docs" uib-tooltip="Documentation" tooltip-placement="bottom"><div class="hidden-sm">Documentation</div><span class="glyphicon glyphicon-paperclip visible-sm"></span></a></li>
                     </ul>
