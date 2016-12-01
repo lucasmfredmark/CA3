@@ -11,6 +11,7 @@ angular.module('myApp.services', [])
     self.isAuthenticated = false;
     self.isAdmin = false;
     self.isUser = false;
+    self.points = 0;
     
     return {
         getUsername: function () {
@@ -36,6 +37,12 @@ angular.module('myApp.services', [])
         },
         setIsUser: function (isUser) {
             self.isUser = isUser;
+        },
+        getPoints: function() {
+            return self.points;
+        },
+        setPoints: function(points) {
+            self.points = points;
         }
     };
   }])
