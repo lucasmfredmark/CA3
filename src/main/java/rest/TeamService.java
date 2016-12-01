@@ -64,7 +64,7 @@ public class TeamService {
     }
     
     @DELETE
-    @Path("{id:\\d+}")
+    @Path("delete/{id:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
     public String deleteTeam(@PathParam("id") int id) throws TeamNotFoundException {
         Team t = FACADE.deleteTeam(id);

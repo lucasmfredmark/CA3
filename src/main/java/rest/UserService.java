@@ -7,12 +7,17 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import entity.User;
 import facades.interfaces.IUserFacade;
 import facades.UserFacade;
+import httpErrors.UserNotFoundException;
 import javax.persistence.Persistence;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.PUT;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
 
 /**
  * REST Web Service
@@ -59,13 +64,14 @@ public class UserService {
         User p = (User) FACADE.createUser(user);
         return GSON.toJson(p);
     }
+
+*/
     
     @PUT
-    @Path("addPoints")
+    @Path("{username}/points/add/{value:\\d+}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String addPoints(int json_points) throws UserNotFoundException{
-        User u = (User) FACADE.addPoints(json_points);        
+    public String addPoints(int json_points, String username) throws UserNotFoundException{
+        User u = (User) FACADE.addPoints(json_points, username);        
         return GSON.toJson(u);
     }
-    */
 }
