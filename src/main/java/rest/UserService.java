@@ -13,10 +13,13 @@ import facades.UserFacade;
 import httpErrors.UserNotFoundException;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -37,6 +40,12 @@ public class UserService {
      * Creates a new instance of User
      */
     public UserService() {
+    }
+    
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getGreeting() {
+        return "Hello from user service";
     }
     
     /*
@@ -68,10 +77,11 @@ public class UserService {
 */
     
     @PUT
-    @Path("{username}/points/add/{value:\\d+}")
+    @Path("{username}/points/add/{value}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String addPoints(int json_points, String username) throws UserNotFoundException{
-        User u = (User) FACADE.addPoints(json_points, username);        
+    @Produces(MediaType.APPLICATION_JSON)
+    public String addPoints(@PathParam("value") int points, @PathParam("username") String username) throws UserNotFoundException{
+        User u = (User) FACADE.addPoints(points, username);        
         return GSON.toJson(u);
     }
 }

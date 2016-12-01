@@ -7,7 +7,6 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
 import entity.Team;
 import facades.interfaces.ITeamFacade;
 import facades.TeamFacade;
@@ -54,6 +53,7 @@ public class TeamService {
     }
     
     @PUT
+    @Path("create")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String createTeam(String json_team) {

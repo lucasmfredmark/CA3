@@ -39,64 +39,64 @@ public class TeamFacadeTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of createTeam method, of class TeamFacade.
-     */
-    @Test
-    public void testCreateTeam() {
-        System.out.println("createTeam");
-        Team team = null;
-        TeamFacade instance = null;
-        Team expResult = null;
-        Team result = instance.createTeam(team);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of deleteTeam method, of class TeamFacade.
-     */
-    @Test
-    public void testDeleteTeam() throws Exception {
-        System.out.println("deleteTeam");
-        int id = 0;
-        TeamFacade instance = null;
-        Team expResult = null;
-        Team result = instance.deleteTeam(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getTeamById method, of class TeamFacade.
-     */
-    @Test
-    public void testGetTeamById() throws Exception {
-        System.out.println("getTeamById");
-        int id = 0;
-        TeamFacade instance = null;
-        Team expResult = null;
-        Team result = instance.getTeamById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getTeamsByUsername method, of class TeamFacade.
-     */
-    @Test
-    public void testGetTeamsByUsername() throws Exception {
-        System.out.println("getTeamsByUsername");
-        String username = "";
-        TeamFacade instance = null;
-        List<Team> expResult = null;
-        List<Team> result = instance.getTeamsByUsername(username);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+//    /**
+//     * Test of createTeam method, of class TeamFacade.
+//     */
+//    @Test
+//    public void testCreateTeam() {
+//        System.out.println("createTeam");
+//        Team team = null;
+//        TeamFacade instance = null;
+//        Team expResult = null;
+//        Team result = instance.createTeam(team);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of deleteTeam method, of class TeamFacade.
+//     */
+//    @Test
+//    public void testDeleteTeam() throws Exception {
+//        System.out.println("deleteTeam");
+//        int id = 0;
+//        TeamFacade instance = null;
+//        Team expResult = null;
+//        Team result = instance.deleteTeam(id);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of getTeamById method, of class TeamFacade.
+//     */
+//    @Test
+//    public void testGetTeamById() throws Exception {
+//        System.out.println("getTeamById");
+//        int id = 0;
+//        TeamFacade instance = null;
+//        Team expResult = null;
+//        Team result = instance.getTeamById(id);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+//
+//    /**
+//     * Test of getTeamsByUsername method, of class TeamFacade.
+//     */
+//    @Test
+//    public void testGetTeamsByUsername() throws Exception {
+//        System.out.println("getTeamsByUsername");
+//        String username = "";
+//        TeamFacade instance = null;
+//        List<Team> expResult = null;
+//        List<Team> result = instance.getTeamsByUsername(username);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
     
 }
