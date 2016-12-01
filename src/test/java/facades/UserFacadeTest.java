@@ -5,7 +5,6 @@
  */
 package facades;
 
-import entity.Pokemon;
 import entity.User;
 import facades.interfaces.IUserFacade;
 import httpErrors.UserNotFoundException;
@@ -47,7 +46,8 @@ public class UserFacadeTest {
     public void tearDown() {
     }
   
-    @Test public void testAddPoints() throws UserNotFoundException {
+    @Test
+    public void testAddPoints() throws UserNotFoundException {
         System.out.println("addPoints");
         String username = "Lucas";
         int pointsToAdd = 1000;
@@ -61,11 +61,12 @@ public class UserFacadeTest {
     
     @Test
     public void testRemovePoints() throws UserNotFoundException {
-        int points = 50;
+        System.out.println("removePoints");
         String username = "Lucas";
+        int pointsToRemove = 50;
         User user = userFacade.getUserByUsername(username);
         int oldBalance = user.getPoints();
-        User result = userFacade.removePoints(points, username);
+        User result = userFacade.removePoints(pointsToRemove, username);
         int newBalance = result.getPoints();
         assertTrue(newBalance < oldBalance);
     }
