@@ -5,16 +5,19 @@
  */
 package facades.interfaces;
 
+import entity.User;
+import httpErrors.UserNotFoundException;
+
 /**
  *
  * @author Låne PC
  */
 public interface IUserFacade {
 
-    //User addPoints(int points) throws UserNotFoundException;
+    User addPoints(int points, String username) throws UserNotFoundException;
 
     //User createUser(User User);
 
-    //User getUserByUsername(String username) throws UserNotFoundException;
+    User getUserByUsername(String username) throws UserNotFoundException;
     
 }

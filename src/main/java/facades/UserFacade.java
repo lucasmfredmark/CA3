@@ -8,6 +8,7 @@ package facades;
 import entity.Pokemon;
 import entity.User;
 import facades.interfaces.IUserFacade;
+import httpErrors.UserNotFoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -83,6 +84,8 @@ public class UserFacade implements IUserFacade {
         }
     }
 
+*/
+
     @Override
     public User getUserByUsername(String username) throws UserNotFoundException {
         EntityManager em = getEntityManager();
@@ -96,35 +99,41 @@ public class UserFacade implements IUserFacade {
         }
     }
 
-    @Override
-    public User createUser(User User) {
-        EntityManager em = getEntityManager();
+//    @Override
+//    public User createUser(User User) {
+//        EntityManager em = getEntityManager();
+//
+//        try {
+//            em.getTransaction().begin();
+//            em.persist(User);
+//            em.getTransaction().commit();
+//            return User;
+//        } finally {
+//            em.close();
+//        }
+//    }
 
-        try {
-            em.getTransaction().begin();
-            em.persist(User);
-            em.getTransaction().commit();
-            return User;
-        } finally {
-            em.close();
-        }
-    }
+
     
     @Override
-    public User addPoints(int points) throws UserNotFoundException {
+    public User addPoints(int points, String username) throws UserNotFoundException {
         EntityManager em = getEntityManager();
-        User u = em.find(User.class, points);
-        if (u == null) throw new UserNotFoundException("No user found to add points to");
-        u.addPoints(points);
+        User user = getUserByUsername(username);
+        System.out.println("My user is: " + user + " and his/her balance is: " + user.getPoints());
+        if (user == null) throw new UserNotFoundException("No user found to add points to");
+        
         try {
             em.getTransaction().begin();
-            em.persist(u);
+            user.addPoints(points);
+        System.out.println(user.getPoints());
+            em.persist(user);
+            
             em.getTransaction().commit();
-            return u;
+            return user;
         } finally {
             em.close();
         }
 
     }
-    */
+    
 }
