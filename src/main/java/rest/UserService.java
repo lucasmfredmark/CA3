@@ -82,7 +82,8 @@ public class UserService {
     @Path("{username}/points/add/{points:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
     public String addPoints(@PathParam("points") int points, @PathParam("username") String username) throws UserNotFoundException{
-        User user = FACADE.addPoints(points, username);
+        User user = FACADE.addPoints(points, username); 
+        UserMapper u = new UserMapper(user);
         
         return GSON.toJson(user);
     }
@@ -92,7 +93,8 @@ public class UserService {
     @Produces(MediaType.APPLICATION_JSON)
     public String removePoints(@PathParam("points") int points, @PathParam("username") String username) throws UserNotFoundException{
         User user = FACADE.removePoints(points, username);
+        UserMapper u = new UserMapper(user);
         
-        return GSON.toJson(user);
+        return GSON.toJson(u);
     }
 }
