@@ -22,6 +22,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import jsonMappers.UserMapper;
 
 /**
  * REST Web Service
@@ -76,9 +77,6 @@ public class UserService {
     }
 
 */
-    
-    @GET
-    
     
     @POST
     @Path("{username}/points/add/{points:\\d+}")
