@@ -49,7 +49,7 @@ public class UserFacadeTest {
   
     @Test public void testAddPoints() throws UserNotFoundException {
         System.out.println("addPoints");
-        String username = "Patrick";
+        String username = "Lucas";
         int pointsToAdd = 1000;
         User user = userFacade.getUserByUsername(username);
         int oldBalance = user.getPoints();
@@ -60,36 +60,30 @@ public class UserFacadeTest {
     }
     
     @Test
-    public void testRemovePoints() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
-        
-
+    public void testRemovePoints() throws UserNotFoundException {
         int points = 50;
         String username = "Lucas";
-        Integer expResult = 50;
-        
-        UserFacade instance = new UserFacade(emf);
-        User result = instance.removePoints(points, username);
-        
-        assertEquals(expResult, result.getPoints());
+        User user = userFacade.getUserByUsername(username);
+        int oldBalance = user.getPoints();
+        User result = userFacade.removePoints(points, username);
+        int newBalance = result.getPoints();
+        assertTrue(newBalance < oldBalance);
     }
 
     /**
      * Test of addPokemon method, of class UserFacade.
      */
-    @Test
-    public void testAddPokemon() {
-        /*
-        System.out.println("addPokemon");
-        Pokemon pokemon = null;
-        User userid = null;
-        UserFacade instance = null;
-        Pokemon expResult = null;
-        Pokemon result = instance.addPokemon(pokemon, userid);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-*/
-    }
+//    @Test
+//    public void testAddPokemon() {
+//        System.out.println("addPokemon");
+//        Pokemon pokemon = null;
+//        User userid = null;
+//        UserFacade instance = null;
+//        Pokemon expResult = null;
+//        Pokemon result = instance.addPokemon(pokemon, userid);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
     
 }

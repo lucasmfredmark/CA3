@@ -28,6 +28,7 @@ public class UserFacade implements IUserFacade {
         return emf.createEntityManager();
     }
     
+    @Override
     public User removePoints(int points, String username){
         EntityManager em = getEntityManager();
         try {
@@ -118,16 +119,13 @@ public class UserFacade implements IUserFacade {
     @Override
     public User addPoints(int points, String username) throws UserNotFoundException {
         EntityManager em = getEntityManager();
-        User user = getUserByUsername(username);
-        System.out.println("My user is: " + user + " and his/her balance is: " + user.getPoints());
-        if (user == null) throw new UserNotFoundException("No user found to add points to");
         
         try {
             em.getTransaction().begin();
+            User user = em.find(User.class, username);
+            if (user == null) throw new UserNotFoundException("No user found to add points to");
             user.addPoints(points);
-        System.out.println(user.getPoints());
             em.persist(user);
-            
             em.getTransaction().commit();
             return user;
         } finally {

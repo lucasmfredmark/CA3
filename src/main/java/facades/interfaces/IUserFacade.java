@@ -15,6 +15,8 @@ import httpErrors.UserNotFoundException;
 public interface IUserFacade {
 
     User addPoints(int points, String username) throws UserNotFoundException;
+    
+    User removePoints(int points, String username) throws UserNotFoundException;
 
     //User createUser(User User);
 
