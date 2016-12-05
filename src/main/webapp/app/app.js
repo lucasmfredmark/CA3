@@ -13,6 +13,7 @@ angular.module('myApp', [
   'myApp.shop',
   'myApp.trainers',
   'myApp.docs',
+  'myApp.funds',
   'myApp.filters',
   'myApp.directives',
   'myApp.factories',

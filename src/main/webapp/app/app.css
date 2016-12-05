@@ -313,3 +313,28 @@
     height: 22px;
     line-height: 22px
 }
+
+#cards {
+    
+    height:200px;
+    width:300px;
+    display:block;
+    margin:auto;
+}
+
+.packsHead {
+    background-color:red;
+    border:1px solid black;
+    padding:20pt;
+    color:white;
+    font-weight: bold;
+}
+
+.packsRow {
+    border:1px solid black;
+}
+
+.packsData {
+    background-color:white;
+    border:1px solid black;
+}
