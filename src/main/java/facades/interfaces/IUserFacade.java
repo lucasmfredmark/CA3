@@ -8,6 +8,7 @@ package facades.interfaces;
 import entity.Pokemon;
 import entity.User;
 import httpErrors.UserNotFoundException;
+import java.util.List;
 
 /**
  *
@@ -22,5 +23,7 @@ public interface IUserFacade {
     Pokemon addPokemon(Pokemon pokemon, String username);
     
     User getUserByUsername(String username) throws UserNotFoundException;
+    
+    List<User> getAllUsers() throws UserNotFoundException;
     
 }

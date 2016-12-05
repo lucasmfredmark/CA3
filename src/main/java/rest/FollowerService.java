@@ -9,10 +9,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import facades.FollowerFacade;
 import facades.interfaces.IFollowerFacade;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.SecurityContext;
 
 
 /**
@@ -21,10 +23,14 @@ import javax.ws.rs.Path;
  * @author Staal
  */
 @Path("follower")
+@RolesAllowed({"User", "Admin"})
 public class FollowerService {
 
     @Context
     private UriInfo context;
+    
+    @Context
+    private SecurityContext securityContext;
 
     private static final IFollowerFacade FACADE = new FollowerFacade(Persistence.createEntityManagerFactory("pu_development"));
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();

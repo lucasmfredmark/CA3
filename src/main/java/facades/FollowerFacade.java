@@ -6,7 +6,6 @@
 package facades;
 
 import facades.interfaces.IFollowerFacade;
-import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 

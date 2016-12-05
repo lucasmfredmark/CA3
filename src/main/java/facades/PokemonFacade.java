@@ -7,11 +7,8 @@ package facades;
 
 import facades.interfaces.IPokemonFacade;
 import entity.Pokemon;
-import entity.Team;
 import httpErrors.PokemonNotFoundException;
-import httpErrors.TeamNotFoundException;
 import java.util.List;
-import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;

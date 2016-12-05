@@ -9,8 +9,10 @@ import entity.Pokemon;
 import entity.User;
 import facades.interfaces.IUserFacade;
 import httpErrors.UserNotFoundException;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -69,7 +71,7 @@ public class UserFacade implements IUserFacade {
             em.getTransaction().begin();
             User user = em.find(User.class, username);
             user.addPokemon(pokemon);
-            em.persist(user);
+            em.merge(user);
             em.getTransaction().commit();
             return pokemon;
         }finally {
@@ -85,6 +87,26 @@ public class UserFacade implements IUserFacade {
             User p = em.find(User.class, username);
             if (p == null) throw new UserNotFoundException("No user found by name: " + username);
             return p;
+        } finally {
+            em.close();
+        }
+    }
+    
+    @Override
+    public List<User> getAllUsers() throws UserNotFoundException {
+        EntityManager em = getEntityManager();
+        
+        try {
+            em.getTransaction().begin();
+            TypedQuery<User> query = em.createNamedQuery("User.findAll", User.class);
+            List<User> u = query.getResultList();
+            
+            if (u == null)
+                throw new UserNotFoundException("No users found.");
+            
+            em.getTransaction().commit();
+            
+            return u;
         } finally {
             em.close();
         }

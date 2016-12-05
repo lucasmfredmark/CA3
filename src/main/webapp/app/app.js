@@ -10,6 +10,8 @@ angular.module('myApp', [
   'myApp.index',
   'myApp.teams',
   'myApp.pokemon',
+  'myApp.shop',
+  'myApp.trainers',
   'myApp.docs',
   'myApp.filters',
   'myApp.directives',

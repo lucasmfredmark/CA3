@@ -9,7 +9,6 @@ import facades.interfaces.ITeamFacade;
 import entity.Team;
 import httpErrors.TeamNotFoundException;
 import java.util.List;
-import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;

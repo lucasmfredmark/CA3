@@ -13,6 +13,7 @@ import facades.TeamFacade;
 import httpErrors.TeamNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -24,6 +25,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 import jsonMappers.TeamMapper;
 
 /**
@@ -32,10 +34,14 @@ import jsonMappers.TeamMapper;
  * @author Staal
  */
 @Path("team")
+@RolesAllowed({"User", "Admin"})
 public class TeamService {
 
     @Context
     private UriInfo context;
+    
+    @Context
+    private SecurityContext securityContext;
 
     private static final ITeamFacade FACADE = new TeamFacade(Persistence.createEntityManagerFactory("pu_development"));
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();

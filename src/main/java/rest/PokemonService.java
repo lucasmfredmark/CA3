@@ -13,6 +13,7 @@ import facades.PokemonFacade;
 import httpErrors.PokemonNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -20,6 +21,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 import jsonMappers.PokemonMapper;
 
 /**
@@ -28,10 +30,14 @@ import jsonMappers.PokemonMapper;
  * @author Staal
  */
 @Path("pokemon")
+@RolesAllowed({"User", "Admin"})
 public class PokemonService {
 
     @Context
     private UriInfo context;
+    
+    @Context
+    private SecurityContext securityContext;
 
     private static final IPokemonFacade FACADE = new PokemonFacade(Persistence.createEntityManagerFactory("pu_development"));
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();

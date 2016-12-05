@@ -4,13 +4,15 @@
 
 // Demonstrate how to register services
 angular.module('myApp.services', [])
-  .service('userService', [function () {
+  .service('userService', ['userFactory', function (userFactory) {
     var self = this;
     
     self.username = '';
     self.isAuthenticated = false;
     self.isAdmin = false;
     self.isUser = false;
+    
+    self.userList = [];
     
     return {
         getUsername: function () {
@@ -36,6 +38,17 @@ angular.module('myApp.services', [])
         },
         setIsUser: function (isUser) {
             self.isUser = isUser;
+        },
+        getAllUsers: function() {
+            userFactory.getAllUsers().then(function(response) {
+                self.userList = response.data;
+                console.log(self.userList);
+            }, function() {
+                console.log('Couldn\'t get all users.');
+            });
+        },
+        getUserList: function() {
+            return self.userList;
         }
     };
   }])

@@ -5,9 +5,11 @@
  */
 package facades;
 
+import entity.Pokemon;
 import entity.User;
 import facades.interfaces.IUserFacade;
 import httpErrors.UserNotFoundException;
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.junit.After;
@@ -40,6 +42,7 @@ public class UserFacadeTest {
     
     @Before
     public void setUp() {
+        // reset database data
     }
     
     @After
@@ -70,21 +73,21 @@ public class UserFacadeTest {
         int newBalance = result.getPoints();
         assertTrue(newBalance < oldBalance);
     }
-
-    /**
-     * Test of addPokemon method, of class UserFacade.
-     */
-//    @Test
-//    public void testAddPokemon() {
-//        System.out.println("addPokemon");
-//        Pokemon pokemon = null;
-//        User userid = null;
-//        UserFacade instance = null;
-//        Pokemon expResult = null;
-//        Pokemon result = instance.addPokemon(pokemon, userid);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
     
+    @Test
+    public void testAddPokemon() {
+        System.out.println("addPokemon");
+        Pokemon pokemon = new Pokemon();
+        String username = "Lucas";
+        Pokemon expResult = new Pokemon();
+        Pokemon result = userFacade.addPokemon(pokemon, username);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testGetAllUsers() throws UserNotFoundException {
+        System.out.println("getAllUsers");
+        List<User> result = userFacade.getAllUsers();
+        assertTrue(result.size() > 0);
+    }
 }

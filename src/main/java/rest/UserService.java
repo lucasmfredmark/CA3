@@ -12,6 +12,9 @@ import entity.User;
 import facades.interfaces.IUserFacade;
 import facades.UserFacade;
 import httpErrors.UserNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -23,6 +26,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.SecurityContext;
 import jsonMappers.PokemonMapper;
 import jsonMappers.UserMapper;
 
@@ -32,10 +36,14 @@ import jsonMappers.UserMapper;
  * @author Staal
  */
 @Path("user")
+@RolesAllowed({"User", "Admin"})
 public class UserService {
 
     @Context
     private UriInfo context;
+    
+    @Context
+    private SecurityContext securityContext;
 
     private static final IUserFacade FACADE = new UserFacade(Persistence.createEntityManagerFactory("pu_development"));
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
@@ -81,31 +89,31 @@ public class UserService {
 */
     
     @POST
-    @Path("{username}/points/add/{points:\\d+}")
+    @Path("points/add/{points:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String addPoints(@PathParam("points") int points, @PathParam("username") String username) throws UserNotFoundException{
-        User user = FACADE.addPoints(points, username); 
+    public String addPoints(@PathParam("points") int points) throws UserNotFoundException{
+        User user = FACADE.addPoints(points, securityContext.getUserPrincipal().getName()); 
         UserMapper u = new UserMapper(user);
         
         return GSON.toJson(u);
     }
     
     @POST
-    @Path("{username}/points/remove/{points:\\d+}")
+    @Path("points/remove/{points:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String removePoints(@PathParam("points") int points, @PathParam("username") String username) throws UserNotFoundException{
-        User user = FACADE.removePoints(points, username);
+    public String removePoints(@PathParam("points") int points) throws UserNotFoundException{
+        User user = FACADE.removePoints(points, securityContext.getUserPrincipal().getName());
         UserMapper u = new UserMapper(user);
         
         return GSON.toJson(u);
     }
     
     @PUT
-    @Path("{username}/pokemon/add")
+    @Path("pokemon/add")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String addPokemon(String json_pokemon, @PathParam("username") String username) {
-        Pokemon pokemon = FACADE.addPokemon(GSON.fromJson(json_pokemon, Pokemon.class), username);
+    public String addPokemon(String json_pokemon) {
+        Pokemon pokemon = FACADE.addPokemon(GSON.fromJson(json_pokemon, Pokemon.class), securityContext.getUserPrincipal().getName());
         PokemonMapper p = new PokemonMapper(pokemon);
         
         return GSON.toJson(p);
@@ -117,6 +125,20 @@ public class UserService {
     public String getUserByUsername(@PathParam("username") String username) throws UserNotFoundException {
         User user = FACADE.getUserByUsername(username);
         UserMapper u = new UserMapper(user);
+        
+        return GSON.toJson(u);
+    }
+    
+    @GET
+    @Path("all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllUsers() throws UserNotFoundException {
+        List<User> users = FACADE.getAllUsers();
+        List<UserMapper> u = new ArrayList();
+        
+        for (User user : users) {
+            u.add(new UserMapper(user));
+        }
         
         return GSON.toJson(u);
     }
