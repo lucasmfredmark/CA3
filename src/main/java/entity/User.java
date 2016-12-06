@@ -11,6 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -23,6 +24,7 @@ import security.PasswordStorage;
  * @author lucasmfredmark
  */
 @Entity
+@Table(name="tbl_user")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
@@ -73,7 +75,7 @@ public class User implements IUser, Serializable {
         this.username = username;
         this.passwordhash = PasswordStorage.createHash(password);
     }
-
+    
     public String getUsername() {
         return username;
     }
