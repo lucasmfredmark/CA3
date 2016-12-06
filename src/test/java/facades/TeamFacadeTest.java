@@ -6,7 +6,12 @@
 package facades;
 
 import entity.Team;
+import entity.User;
+import facades.interfaces.ITeamFacade;
+import httpErrors.TeamNotFoundException;
 import java.util.List;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,6 +24,9 @@ import static org.junit.Assert.*;
  * @author Staal
  */
 public class TeamFacadeTest {
+    
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
+    private static final ITeamFacade teamFacade = new TeamFacade(emf);
     
     public TeamFacadeTest() {
     }
@@ -39,35 +47,42 @@ public class TeamFacadeTest {
     public void tearDown() {
     }
 
-//    /**
-//     * Test of createTeam method, of class TeamFacade.
-//     */
-//    @Test
-//    public void testCreateTeam() {
-//        System.out.println("createTeam");
-//        Team team = null;
-//        TeamFacade instance = null;
-//        Team expResult = null;
-//        Team result = instance.createTeam(team);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
-//
-//    /**
-//     * Test of deleteTeam method, of class TeamFacade.
-//     */
-//    @Test
-//    public void testDeleteTeam() throws Exception {
-//        System.out.println("deleteTeam");
-//        int id = 0;
-//        TeamFacade instance = null;
-//        Team expResult = null;
-//        Team result = instance.deleteTeam(id);
-//        assertEquals(expResult, result);
-//        // TODO review the generated test code and remove the default call to fail.
-//        fail("The test case is a prototype.");
-//    }
+    /**
+     * Test of createTeam method, of class TeamFacade.
+     * @throws httpErrors.TeamNotFoundException
+     */
+    @Test
+    public void testCreateTeam() throws TeamNotFoundException {
+        System.out.println("createTeam");
+        
+        String username = "Lucas";
+        List<Team> oldTeams = teamFacade.getTeamsByUsername(username);
+        int oldTeamsCount = oldTeams.size();
+        
+        Team team = new Team();
+        User user = new User();
+        user.setUsername("Lucas");
+        team.setUser(user);
+        teamFacade.createTeam(team);
+        
+        List<Team> newTeams = teamFacade.getTeamsByUsername(user.getUserName());
+        int newTeamsCount = newTeams.size();
+        
+        assertTrue(newTeamsCount > oldTeamsCount);
+    }
+
+    /**
+     * Test of deleteTeam method, of class TeamFacade.
+     * @throws httpErrors.TeamNotFoundException
+     */
+    @Test
+    public void testDeleteTeam() throws TeamNotFoundException {
+        /*System.out.println("deleteTeam");
+        int id = 1;
+        int expResult = id;
+        Team result = teamFacade.deleteTeam(id);
+        assertTrue(expResult == result.getId());*/
+    }
 //
 //    /**
 //     * Test of getTeamById method, of class TeamFacade.
