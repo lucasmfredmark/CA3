@@ -33,5 +33,4 @@
       <property name="eclipselink.canonicalmodel.subpackage" value="test"/>
     </properties>
   </persistence-unit>
- 
 </persistence>
