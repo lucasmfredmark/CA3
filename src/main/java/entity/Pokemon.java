@@ -1,6 +1,12 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,9 +14,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -18,6 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author lucasmfredmark
  */
 @Entity
+@Table(name = "pokemon")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pokemon.findAll", query = "SELECT p FROM Pokemon p"),
@@ -33,12 +43,12 @@ public class Pokemon implements Serializable {
     private Integer id;
     @Column(name = "pokedex_id")
     private Integer pokedexId;
-    @JoinColumn(name = "fk_team_id", referencedColumnName = "id")
-    @ManyToOne
-    private Team team;
     @JoinColumn(name = "fk_user_username", referencedColumnName = "username")
     @ManyToOne
-    private User user;
+    private User fkUserUsername;
+
+    @ManyToMany(mappedBy = "pokemon")
+    List<Team> teams;
 
     public Pokemon() {
     }
@@ -63,20 +73,20 @@ public class Pokemon implements Serializable {
         this.pokedexId = pokedexId;
     }
 
-    public Team getTeam() {
-        return team;
+    public User getFkUserUsername() {
+        return fkUserUsername;
     }
 
-    public void setTeam(Team team) {
-        this.team = team;
+    public void setFkUserUsername(User fkUserUsername) {
+        this.fkUserUsername = fkUserUsername;
     }
 
-    public User getUser() {
-        return user;
+    public List<Team> getTeams() {
+        return teams;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 
     @Override
@@ -103,5 +113,5 @@ public class Pokemon implements Serializable {
     public String toString() {
         return "entity.Pokemon[ id=" + id + " ]";
     }
-    
+
 }

@@ -62,7 +62,7 @@ public class TeamFacadeTest {
         Team team = new Team();
         User user = new User();
         user.setUsername("Lucas");
-        team.setUser(user);
+        team.setFkUserUsername(user);
         teamFacade.createTeam(team);
         
         List<Team> newTeams = teamFacade.getTeamsByUsername(user.getUserName());

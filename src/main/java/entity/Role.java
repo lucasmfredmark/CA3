@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package entity;
 
 import java.io.Serializable;
@@ -7,21 +12,20 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author lucasmfredmark
  */
 @Entity
+@Table(name = "role")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r"),
@@ -35,11 +39,9 @@ public class Role implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "rolename")
     private String rolename;
-    @JoinTable(joinColumns = {
-        @JoinColumn(name = "roles_rolename", referencedColumnName = "rolename")}, inverseJoinColumns = {
-        @JoinColumn(name = "users_username", referencedColumnName = "username")})
-    @ManyToMany
-    private List<User> userList;
+
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users;
 
     public Role() {
     }
@@ -54,22 +56,6 @@ public class Role implements Serializable {
 
     public void setRolename(String rolename) {
         this.rolename = rolename;
-    }
-
-    @XmlTransient
-    public List<User> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
-    }
-
-    public void addUser(User user) {
-        if (userList == null) {
-            userList = new ArrayList();
-        }
-        userList.add(user);
     }
 
     @Override
@@ -95,6 +81,17 @@ public class Role implements Serializable {
     @Override
     public String toString() {
         return "entity.Role[ rolename=" + rolename + " ]";
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void addUser(User user) {
+        if (users == null) {
+            users = new ArrayList();
+        }
+        users.add(user);
     }
 
 }

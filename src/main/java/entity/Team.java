@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package entity;
 
 import java.io.Serializable;
@@ -9,10 +14,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -21,12 +27,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author lucasmfredmark
  */
 @Entity
+@Table(name = "team")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Team.findAll", query = "SELECT t FROM Team t"),
     @NamedQuery(name = "Team.findById", query = "SELECT t FROM Team t WHERE t.id = :id"),
-    @NamedQuery(name = "Team.findByUsername", query = "SELECT t FROM Team t WHERE t.user.username = :username"),
-    @NamedQuery(name = "Team.findByName", query = "SELECT t FROM Team t WHERE t.name = :name")})
+    @NamedQuery(name = "Team.findByName", query = "SELECT t FROM Team t WHERE t.name = :name"),
+    @NamedQuery(name = "Team.findByUsername", query = "SELECT t FROM Team t WHERE t.fkUserUsername.username = :username")})
 public class Team implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,11 +45,12 @@ public class Team implements Serializable {
     @Size(max = 255)
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "team")
-    private List<Pokemon> pokemonList;
     @JoinColumn(name = "fk_user_username", referencedColumnName = "username")
     @ManyToOne
-    private User user;
+    private User fkUserUsername;
+    
+    @ManyToMany
+    List<Pokemon> pokemon;
 
     public Team() {
     }
@@ -67,20 +75,20 @@ public class Team implements Serializable {
         this.name = name;
     }
 
-    public List<Pokemon> getPokemonList() {
-        return pokemonList;
+    public User getFkUserUsername() {
+        return fkUserUsername;
     }
 
-    public void setPokemonList(List<Pokemon> pokemonList) {
-        this.pokemonList = pokemonList;
+    public void setFkUserUsername(User fkUserUsername) {
+        this.fkUserUsername = fkUserUsername;
     }
 
-    public User getUser() {
-        return user;
+    public List<Pokemon> getPokemon() {
+        return pokemon;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setPokemon(List<Pokemon> pokemon) {
+        this.pokemon = pokemon;
     }
 
     @Override

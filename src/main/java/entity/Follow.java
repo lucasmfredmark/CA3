@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package entity;
 
 import java.io.Serializable;
@@ -11,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -18,12 +24,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author lucasmfredmark
  */
 @Entity
+@Table(name = "follow")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Follower.findAll", query = "SELECT f FROM Follower f"),
-    @NamedQuery(name = "Follower.findByOwner", query = "SELECT f FROM Follower f WHERE f.user = :username"),
-    @NamedQuery(name = "Follower.findById", query = "SELECT f FROM Follower f WHERE f.id = :id")})
-public class Follower implements Serializable {
+    @NamedQuery(name = "Follow.findAll", query = "SELECT f FROM Follow f"),
+    @NamedQuery(name = "Follow.findById", query = "SELECT f FROM Follow f WHERE f.id = :id")})
+public class Follow implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -31,17 +37,17 @@ public class Follower implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @JoinColumn(name = "fk_user_follow_username", referencedColumnName = "username")
+    @JoinColumn(name = "me_user_username", referencedColumnName = "username")
     @ManyToOne
-    private User followUser;
-    @JoinColumn(name = "fk_user_username", referencedColumnName = "username")
+    private User meUserUsername;
+    @JoinColumn(name = "you_user_username", referencedColumnName = "username")
     @ManyToOne
-    private User user;
+    private User youUserUsername;
 
-    public Follower() {
+    public Follow() {
     }
 
-    public Follower(Integer id) {
+    public Follow(Integer id) {
         this.id = id;
     }
 
@@ -53,20 +59,20 @@ public class Follower implements Serializable {
         this.id = id;
     }
 
-    public User getFollowUser() {
-        return followUser;
+    public User getMeUserUsername() {
+        return meUserUsername;
     }
 
-    public void setFollowUser(User followUser) {
-        this.followUser = followUser;
+    public void setMeUserUsername(User meUserUsername) {
+        this.meUserUsername = meUserUsername;
     }
 
-    public User getUser() {
-        return user;
+    public User getYouUserUsername() {
+        return youUserUsername;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setYouUserUsername(User youUserUsername) {
+        this.youUserUsername = youUserUsername;
     }
 
     @Override
@@ -79,10 +85,10 @@ public class Follower implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Follower)) {
+        if (!(object instanceof Follow)) {
             return false;
         }
-        Follower other = (Follower) object;
+        Follow other = (Follow) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -91,7 +97,7 @@ public class Follower implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.Follower[ id=" + id + " ]";
+        return "entity.Follow[ id=" + id + " ]";
     }
     
 }
