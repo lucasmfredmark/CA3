@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package entity;
 
 import java.io.Serializable;
@@ -24,6 +29,7 @@ import security.PasswordStorage;
  * @author lucasmfredmark
  */
 @Entity
+@Table(name = "user")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
@@ -56,25 +62,30 @@ public class User implements IUser, Serializable {
     private String passwordhash;
     @Column(name = "points")
     private Integer points;
-    @ManyToMany(mappedBy = "userList")
-    private List<Role> roleList;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "fkUserUsername")
     private List<Pokemon> pokemonList;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "fkUserUsername")
     private List<Team> teamList;
-    @OneToMany(mappedBy = "followUser")
-    private List<Follower> followerList;
-    @OneToMany(mappedBy = "user")
-    private List<Follower> followerList1;
+    @OneToMany(mappedBy = "meUserUsername")
+    private List<Follow> followList;
+    @OneToMany(mappedBy = "youUserUsername")
+    private List<Follow> followList1;
+
+    @ManyToMany
+    List<Role> roles;
 
     public User() {
+    }
+
+    public User(String username) {
+        this.username = username;
     }
 
     public User(String username, String password) throws PasswordStorage.CannotPerformOperationException {
         this.username = username;
         this.passwordhash = PasswordStorage.createHash(password);
     }
-    
+
     public String getUsername() {
         return username;
     }
@@ -119,29 +130,16 @@ public class User implements IUser, Serializable {
         return points;
     }
 
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
+
     public void addPoints(Integer points) {
         this.points += points;
     }
-    
+
     public void removePoints(Integer points) {
         this.points -= points;
-    }
-
-    @XmlTransient
-    public List<Role> getRoleList() {
-        return roleList;
-    }
-
-    public void setRoleList(List<Role> roleList) {
-        this.roleList = roleList;
-    }
-
-    public void addRole(Role role) {
-        if (roleList == null) {
-            roleList = new ArrayList();
-        }
-        roleList.add(role);
-        role.addUser(this);
     }
 
     @XmlTransient
@@ -151,10 +149,6 @@ public class User implements IUser, Serializable {
 
     public void setPokemonList(List<Pokemon> pokemonList) {
         this.pokemonList = pokemonList;
-    }
-    
-    public void addPokemon(Pokemon pokemon){
-        this.pokemonList.add(pokemon);
     }
 
     @XmlTransient
@@ -167,21 +161,21 @@ public class User implements IUser, Serializable {
     }
 
     @XmlTransient
-    public List<Follower> getFollowerList() {
-        return followerList;
+    public List<Follow> getFollowList() {
+        return followList;
     }
 
-    public void setFollowerList(List<Follower> followerList) {
-        this.followerList = followerList;
+    public void setFollowList(List<Follow> followList) {
+        this.followList = followList;
     }
 
     @XmlTransient
-    public List<Follower> getFollowerList1() {
-        return followerList1;
+    public List<Follow> getFollowList1() {
+        return followList1;
     }
 
-    public void setFollowerList1(List<Follower> followerList1) {
-        this.followerList1 = followerList1;
+    public void setFollowList1(List<Follow> followList1) {
+        this.followList1 = followList1;
     }
 
     @Override
@@ -209,13 +203,25 @@ public class User implements IUser, Serializable {
         return "entity.User[ username=" + username + " ]";
     }
 
+    public void addRole(Role role) {
+        if (roles == null) {
+            roles = new ArrayList();
+        }
+        roles.add(role);
+        role.addUser(this);
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
     @Override
     public List<String> getRolesAsStrings() {
-        if (roleList.isEmpty()) {
+        if (roles.isEmpty()) {
             return null;
         }
         List<String> rolesAsStrings = new ArrayList();
-        for (Role role : roleList) {
+        for (Role role : roles) {
             rolesAsStrings.add(role.getRolename());
         }
         return rolesAsStrings;
@@ -223,7 +229,7 @@ public class User implements IUser, Serializable {
 
     @Override
     public String getUserName() {
-        return getUsername();
+        return username;
     }
 
     @Override

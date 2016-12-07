@@ -70,7 +70,7 @@ public class UserFacade implements IUserFacade {
         try{
             em.getTransaction().begin();
             User user = em.find(User.class, username);
-            user.addPokemon(pokemon);
+            //user.addPokemon(pokemon);
             em.merge(user);
             em.getTransaction().commit();
             return pokemon;

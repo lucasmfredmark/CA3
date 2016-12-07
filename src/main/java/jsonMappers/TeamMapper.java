@@ -7,7 +7,6 @@ package jsonMappers;
 
 import entity.Pokemon;
 import entity.Team;
-import entity.User;
 import java.util.List;
 
 /**
@@ -17,20 +16,20 @@ import java.util.List;
 public class TeamMapper {
     private final int id;
     private final String name;
-    private final List<Pokemon> pokemonList;
     private final String username;
+    private final List<Pokemon> pokemonList;
 
     public TeamMapper(Team team) {
         this.id = team.getId();
         this.name = team.getName();
-        this.pokemonList = removeCircRefPokeList(team.getPokemonList());
-        this.username = team.getUser().getUserName();
+        this.pokemonList = removeCircRefPokeList(team.getPokemon());
+        this.username = team.getFkUserUsername().getUsername();
     }
     
     private List<Pokemon> removeCircRefPokeList(List<Pokemon> pl) {
         for (Pokemon p : pl) {
-            p.setTeam(null);
-            p.setUser(null);
+            p.setTeams(null);
+            p.setFkUserUsername(null);
         }
         return pl;
     }

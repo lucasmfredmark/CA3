@@ -2,7 +2,7 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="pu_development" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>entity.Follower</class>
+    <class>entity.Follow</class>
     <class>entity.Pokemon</class>
     <class>entity.Role</class>
     <class>entity.Team</class>
@@ -12,26 +12,8 @@
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ca3?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="root"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
       <property name="eclipselink.canonicalmodel.subpackage" value="development"/>
-    </properties>
-  </persistence-unit>
-  
-  <persistence-unit name="pu_test" transaction-type="RESOURCE_LOCAL">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>entity.Follower</class>
-    <class>entity.Pokemon</class>
-    <class>entity.Role</class>
-    <class>entity.Team</class>
-    <class>entity.User</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ca3test?zeroDateTimeBehavior=convertToNull"/>
-      <property name="javax.persistence.jdbc.user" value="root"/>
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="root"/>
-      <property name="eclipselink.canonicalmodel.subpackage" value="test"/>
-      <property name="javax.persistence.sql-load-script-source" value="scripts/ca3test.sql"/>
     </properties>
   </persistence-unit>
   
@@ -53,5 +35,5 @@
     </properties>
   </persistence-unit>-->
   
-  
+ 
 </persistence>

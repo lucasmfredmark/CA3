@@ -5,9 +5,8 @@
  */
 package jsonMappers;
 
-import entity.Follower;
+import entity.Follow;
 import entity.Pokemon;
-import entity.Role;
 import entity.Team;
 import entity.User;
 import java.util.List;
@@ -18,37 +17,34 @@ import java.util.List;
  */
 public class UserMapper {
     
-    private String username;
-    private String firstname;
-    private String lastname;
-    private String gender;
-    private String passwordHash;
-    private int points;
-    private List<Role> roleList;
+    private final String username;
+    private final String firstname;
+    private final String lastname;
+    private final String gender;
+    private final Integer points;
     private List<Pokemon> pokemonList;
     private List<Team> teamList;
-    private List<Follower> followerList;
-    private List<Follower> followerList1;
+    private List<Follow> followList;
+    private List<Follow> followList1;
 
     public UserMapper(User user) {
-        this.username = user.getUserName();
+        this.username = user.getUsername();
         this.firstname = user.getFirstname();
         this.lastname = user.getLastname();
         this.gender = user.getGender();
-        this.passwordHash = user.getPasswordhash();
         this.points = user.getPoints();
-        this.roleList = null;
+//        this.roleList = null;
 //        this.pokemonList = null;
 //        this.teamList = null;
-        this.followerList = null;
-        this.followerList1 = null;
-        this.pokemonList = filterPokemonList(user.getPokemonList());
-        this.teamList = filterTeamList(user.getTeamList());
+//        this.followList = null;
+//        this.followList1 = null;
+//        this.pokemonList = filterPokemonList(user.getPokemon());
+//        this.teamList = filterTeamList(user.getTeamList());
 //        this.followerList = filterFollowerList(user.getFollowerList());
 //        this.followerList1 = filterFollowerList1(user.getFollowerList1());
     }
     
-    private List<Pokemon> filterPokemonList(List<Pokemon> pl) {
+    /*private List<Pokemon> filterPokemonList(List<Pokemon> pl) {
         for (Pokemon p : pl) {
             p.setTeam(null);
             p.setUser(null);
@@ -82,7 +78,7 @@ public class UserMapper {
             f.setFollowUser(null);
         }
         return fl;
-    }
+    }*/
     
     
 }
