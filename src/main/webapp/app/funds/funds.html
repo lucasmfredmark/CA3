@@ -1,22 +1,102 @@
-<div class="container">
-    <div class="text-center">
-    <img src="images/fundslogo.png" class="img-responsive">
-    <h1>Purchase points for your PokeTrainer account!</h1>
-    <img id="cards" src="images/cards.jpg" class="img-responsive">
+<div id="fundsCtrl" ng-controller="FundCtrl as funds" class="container">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <table id="packs" class="center-table">
-        <tr class="packsRow">
-            <th class="packsHead">Regular tier</th>
-            <th class="packsHead">Great tier</th>
-            <th class="packsHead">Ultra tier</th>
-            <th class="packsHead">Master tier</th>
-        </tr>
-        <tr class="packsRow">
-            <td class="packsData"><img src="images/regular.png" class="img-responsive"></td>
-            <td class="packsData"><img src="images/great.png" class="img-responsive"></td>
-            <td class="packsData"><img src="images/ultra.png" class="img-responsive"></td>
-            <td class="packsData"><img src="images/master.png" class="img-responsive"></td>
-        </tr>
-    </table>
+    <div class="container">
+        <img src="images/fundslogo.png" class="img-responsive">
+        <h1>Purchase points for your PokeTrainer account!</h1>
+        <img id="cards" src="images/cards.jpg" class="img-responsive">
+
+        <!-- Trigger the modal with a button -->
+        <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-sm">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Purchase</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please input your credit card information to make your purchase</p>
+                        <div id="purchase_error" class="alert alert-warning"></div>
+                        Card:
+                        <select name="card_type" form="purchase">
+                            <option value="VISA">VISA</option>
+                            <option value="Mastercard">Mastercard</option>
+                            <option value="Maestro">Maestro</option>
+                            <option value="VISA electron">VISA electron</option>
+                            <option value="SOLO">SOLO</option>
+                            <option value="DELTA">DELTA</option>
+                        </select> <br> <br>
+                        <div class="form-group">
+                            <label for="card_number">Card Number</label>
+                            <input type="text" class="form-control" id="card_number">
+                        </div>
+                        <div class="form-group">
+                            <label for="card_expiration">Expiration Date</label>
+                            <input type="date" class="form-control" id="card_expiration">
+                        </div>
+                        <div class="form-group">
+                            <label for="card_cvr">CVR</label>
+                            <input type="text" class="form-control" id="card_cvr">
+                        </div>
+                        <div class="form-group">
+                            <button class="form-control" id="purchase_submit">Submit</button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <table id="packs" class="center-table">
+            <tr class="packsRow">
+                <th class="packsHead">Regular tier</th>
+                <th class="packsHead">Great tier</th>
+                <th class="packsHead">Ultra tier</th>
+                <th class="packsHead">Master tier</th>
+            </tr>
+            <tr class="packsRow">
+                <td class="packsData"><a data-toggle="modal" data-target="#myModal"><img ng-click="funds.select(100)" src="images/regular.png" class="img-responsive"></a></td>
+                <td class="packsData"><a data-toggle="modal" data-target="#myModal"><img ng-click="funds.select(600)" src="images/great.png" class="img-responsive"></a></td>
+                <td class="packsData"><a data-toggle="modal" data-target="#myModal"><img ng-click="funds.select(1200)" src="images/ultra.png" class="img-responsive"></a></td>
+                <td class="packsData"><a data-toggle="modal" data-target="#myModal"><img ng-click="funds.select(2500)" src="images/master.png" class="img-responsive"></a></td>
+            </tr>
+        </table>
+
+
+
     </div>
+
 </div>
+
+<script>
+    $(document).ready(function() {
+   $("#purchase_error").hide();
+   $("#purchase_submit").click(function() {
+       if (!$("#card_cvr").val() || !$("#card_number").val() || !$("#card_expiration").val()) {
+           $("#purchase_error").html("Please input all fields");
+           $("#purchase_error").show();
+       } else {
+           $("#purchase_error").hide();
+           $(".modal-body").empty();
+           $(".modal-body").html("Authenticating...");
+           setTimeout(function() {pay();}, 5000);
+       }
+   }); 
+   function pay() {
+        console.log(angular.element($("#fundsCtrl")).scope().funds.selection);
+        angular.element($("#fundsCtrl")).scope().funds.addFunds(angular.element($("#fundsCtrl")).scope().funds.selection);
+        $("#myModal .close").click();
+        location.reload(true);
+   };
+});
+</script>
