@@ -315,11 +315,8 @@
 }
 
 #cards {
-    
-    height:200px;
-    width:300px;
-    display:block;
-    margin:auto;
+    width: 40%;
+    margin: 0 auto;
 }
 
 .packsHead {

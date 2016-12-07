@@ -39,7 +39,6 @@ CREATE TABLE `FOLLOWER` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-
 # Dump of table POKEMON
 # ------------------------------------------------------------
 

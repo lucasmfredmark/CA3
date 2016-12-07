@@ -24,7 +24,6 @@ import security.PasswordStorage;
  * @author lucasmfredmark
  */
 @Entity
-@Table(name="tbl_user")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),

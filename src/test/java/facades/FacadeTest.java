@@ -27,7 +27,7 @@
 // * @author Låne PC
 // */
 //public class FacadeTest {
-//    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_development");
+//    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu_test");
 ////    private static final Facade facade = = new Facade(emf);
 //    private static final UserFacade uf = new UserFacade(emf);
 //    private static final TeamFacade tf = new TeamFacade(emf);
@@ -72,80 +72,80 @@
 //    /**
 //     * Test of getAllUsers method, of class Facade.
 //     */
-////    @Test
-////    public void testGetAllUsers() throws UserNotFoundException {
-////        List<User> users = uf.getAllUsers();
-////        // If fails, check database for users. Should have 3
-////        assertTrue(users.size() > 1);
-////    }
+//    @Test
+//    public void testGetAllUsers() throws UserNotFoundException {
+//        List<User> users = uf.getAllUsers();
+//        // If fails, check database for users. Should have 3
+//        assertTrue(users.size() > 1);
+//    }
 //
 //    /**
 //     * Test of getUserByName method, of class Facade.
 //     */
-////    @Test
-////    public void testGetUserByName() throws UserNotFoundException {
-////        String username = "Lucas";
-////        User user = uf.getUserByUsername(username);
-////        assertTrue(user != null);
-////    }
+//    @Test
+//    public void testGetUserByName() throws UserNotFoundException {
+//        String username = "Lucas";
+//        User user = uf.getUserByUsername(username);
+//        assertTrue(user != null);
+//    }
 //
 //    /**
 //     * Test of getfollowList method, of class Facade.
 //     * Test will fail because facade needs to be refactored and method implemented
 //     * properly
 //     */
-////    @Test
-////    public void testGetfollowList() throws UserNotFoundException {
-////        String user = "Lucas";
-////        User forUser = uf.getUserByUsername(user);
-////        List<Follower> followList = ff.getFollowList(forUser);
-////        assertTrue(followList.size() > 1);
-////    }
+//    @Test
+//    public void testGetfollowList() throws UserNotFoundException {
+//        String user = "Lucas";
+//        User forUser = uf.getUserByUsername(user);
+//        List<Follower> followList = ff.getFollowList(forUser);
+//        assertTrue(followList.size() > 1);
+//    }
 //
 //    /**
 //     * Test of addUserToFollowList method, of class Facade.
 //     * Test will fail because of missing implementation in facade. addUserToFollowList
 //     * is not properly implemented
 //     */
-////    @Test
-////    public void testAddUserToFollowList() throws UserNotFoundException {
-////        String username = "Lucas";
-////        String usernameF = "Thomas";
-////        User me = uf.getUserByUsername(username);
-////        User friend = uf.getUserByUsername(username);
-////        List<Follower> followList = ff.getFollowList(me);
-////        int beforeAdd = followList.size();
-////        ff.addUserToFollowList(friend, me);
-////        followList = ff.getFollowList(me);
-////        int afterAdd = followList.size();
-////        assertTrue(afterAdd > beforeAdd);
-////    }
+//    @Test
+//    public void testAddUserToFollowList() throws UserNotFoundException {
+//        String username = "Lucas";
+//        String usernameF = "Thomas";
+//        User me = uf.getUserByUsername(username);
+//        User friend = uf.getUserByUsername(username);
+//        List<Follower> followList = ff.getFollowList(me);
+//        int beforeAdd = followList.size();
+//        ff.addUserToFollowList(friend, me);
+//        followList = ff.getFollowList(me);
+//        int afterAdd = followList.size();
+//        assertTrue(afterAdd > beforeAdd);
+//    }
 //
 //    /**
 //     * Test of createTeam method, of class Facade.
 //     * Missing implementation of facade method
 //     */
-////    @Test
-////    public void testCreateTeam() throws UserNotFoundException {
-////        Team team = new Team();
-////        String lookUp = "Lucas";
-////        team.setName("FacadeTeam");
-////        User user = uf.getUserByUsername(lookUp);
-////        team.setFkUserUsername(user);
-////        tf.createTeam(team);
-////        user = uf.getUserByUsername(lookUp);
-////        assertTrue(user.getTeamList().size() > 1);
-////    }
+//    @Test
+//    public void testCreateTeam() throws UserNotFoundException {
+//        Team team = new Team();
+//        String lookUp = "Lucas";
+//        team.setName("FacadeTeam");
+//        User user = uf.getUserByUsername(lookUp);
+//        team.setUser(user);
+//        tf.createTeam(team);
+//        user = uf.getUserByUsername(lookUp);
+//        assertTrue(user.getTeamList().size() > 1);
+//    }
 //
 //    /**
 //     * Test of getTeams method, of class Facade.
 //     */
-////    @Test
-////    public void testGetTeams() throws UserNotFoundException {
-////        String lookUp = "Lucas";
-////        User user = uf.getUserByUsername(lookUp);
-////        assertTrue(user.getTeamList().size() > 0);
-////    }
+//    @Test
+//    public void testGetTeams() throws UserNotFoundException {
+//        String lookUp = "Lucas";
+//        User user = uf.getUserByUsername(lookUp);
+//        assertTrue(user.getTeamList().size() > 0);
+//    }
 //
 //    /**
 //     * Test of getTeamById method, of class Facade.
@@ -161,14 +161,14 @@
 //    /**
 //     * Test of createPokemon method, of class Facade.
 //     */
-////    @Test
-////    public void testCreatePokemon() throws PokemonNotFoundException {
-////        Pokemon pokemon = new Pokemon();
-////        pokemon.setPokedexId(13);
-////        pf.createPokemon(pokemon);
-////        Pokemon returnedPokemon = pf.getPokemonById(7);
-////        assertTrue(returnedPokemon != null);
-////    }
+//    @Test
+//    public void testCreatePokemon() throws PokemonNotFoundException {
+//        Pokemon pokemon = new Pokemon();
+//        pokemon.setPokedexId(13);
+//        pf.createPokemon(pokemon);
+//        Pokemon returnedPokemon = pf.getPokemonById(7);
+//        assertTrue(returnedPokemon != null);
+//    }
 //
 //    /**
 //     * Test of getAllPokemon method, of class Facade.
@@ -183,11 +183,11 @@
 //     * Test of getPokemonById method, of class Facade.
 //     * Refactor getPokemonById to take int instead of object
 //     */
-////    @Test
-////    public void testGetPokemonById() throws PokemonNotFoundException {
-////        Pokemon pokemon = pf.getPokemonById(1);
-////        assertTrue(pokemon != null);
-////    }
+//    @Test
+//    public void testGetPokemonById() throws PokemonNotFoundException {
+//        Pokemon pokemon = pf.getPokemonById(1);
+//        assertTrue(pokemon != null);
+//    }
 //
 //    /**
 //     * Test of getPokemonByTeam method, of class Facade.
@@ -205,17 +205,17 @@
 //     * Test of addPoints method, of class Facade.
 //     * Missing implementation of edit user to make this happen
 //     */ 
-////    @Test
-////    public void testAddPoints() {
-////        String lookUp = "Lucas";
-////        User user = uf.getUserByUsername(lookUp);
-////        int pointsToAdd = 100;
-////        int beforeAdd = user.getPoints();
-////        user.addPoints(pointsToAdd);
-////        user = uf.getUserByUsername(lookUp);
-////        int afterAdd = user.getPoints();
-////        assertTrue(afterAdd > beforeAdd);
-////    }
+//    @Test
+//    public void testAddPoints() throws UserNotFoundException {
+//        String lookUp = "Lucas";
+//        User user = uf.getUserByUsername(lookUp);
+//        int pointsToAdd = 100;
+//        int beforeAdd = user.getPoints();
+//        user.addPoints(pointsToAdd);
+//        user = uf.getUserByUsername(lookUp);
+//        int afterAdd = user.getPoints();
+//        assertTrue(afterAdd > beforeAdd);
+//    }
 //    
 //    
 //}

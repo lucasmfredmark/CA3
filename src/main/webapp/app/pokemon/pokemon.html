@@ -1,14 +1,16 @@
-<div ng-show="!pokemon.isLoaded">
-    <h1>Loading data from pokeapi.co...</h1>
-</div>
-<div ng-show="pokemon.isLoaded">
-    <h1>#{{pokemon.pokemon.id}} {{pokemon.pokemon.name| uppercase}}</h1>
-    <h4>Data on this page is loaded from the API at pokeapi.co</h4>
-    <img src="https://img.pokemondb.net/artwork/{{pokemon.pokemon.name}}.jpg" class="img-responsive center-block" alt="{{pokemon.pokemon.name| uppercase}}" title="{{pokemon.pokemon.name| uppercase}}">
-    <p>
-        Types:
-        <span ng-repeat="type in pokemon.pokemon.types">
-            <span class="type-icon type-{{type.type.name}}">{{type.type.name}}</span>
-        </span>
-    </p>
+<div class="container">
+    <div ng-show="!pokemon.isLoaded">
+        <h1>Loading data from pokeapi.co...</h1>
+    </div>
+    <div ng-show="pokemon.isLoaded">
+        <h1>#{{pokemon.pokemon.id}} {{pokemon.pokemon.name| uppercase}}</h1>
+        <h4>Data on this page is loaded from the API at pokeapi.co</h4>
+        <img src="https://img.pokemondb.net/artwork/{{pokemon.pokemon.name}}.jpg" class="img-responsive center-block" alt="{{pokemon.pokemon.name| uppercase}}" title="{{pokemon.pokemon.name| uppercase}}">
+        <p>
+            Types:
+            <span ng-repeat="type in pokemon.pokemon.types">
+                <span class="type-icon type-{{type.type.name}}">{{type.type.name}}</span>
+            </span>
+        </p>
+    </div>
 </div>

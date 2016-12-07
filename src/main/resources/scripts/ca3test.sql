@@ -1,3 +1,4 @@
+USE CA3;
 INSERT INTO `ROLE` (`rolename`)
 VALUES
 	('Admin'),
