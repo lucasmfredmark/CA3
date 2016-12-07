@@ -31,6 +31,7 @@
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value=""/>
       <property name="eclipselink.canonicalmodel.subpackage" value="test"/>
+      <property name="javax.persistence.sql-load-script-source" value="scripts/ca3_2016-12-07_content.sql"/>
     </properties>
   </persistence-unit>
 </persistence>
