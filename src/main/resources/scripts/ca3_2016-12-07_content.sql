@@ -9,7 +9,7 @@
 # Database: ca3
 # Generation Time: 2016-12-07 12:09:45 +0000
 # ************************************************************
-
+USE ca3;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,17 +31,26 @@
 LOCK TABLES `pokemon` WRITE;
 /*!40000 ALTER TABLE `pokemon` DISABLE KEYS */;
 
-INSERT INTO `pokemon` (`id`, `pokedex_id`, `fk_user_username`)
+INSERT INTO `pokemon` (`pokedex_id`, `fk_user_username`)
 VALUES
-	(1,1,'Lucas'),
-	(2,4,'Lucas'),
-	(3,7,'Lucas'),
-	(4,1,'Patrick'),
-	(5,4,'Patrick'),
-	(6,7,'Patrick'),
-	(7,1,'Thomas'),
-	(8,4,'Thomas'),
-	(9,7,'Thomas');
+	(3,'Lucas'),
+	(6,'Lucas'),
+	(9,'Lucas'),
+	(25,'Lucas'),
+	(150,'Lucas'),
+	(208,'Lucas'),
+	(38,'Patrick'),
+	(134,'Patrick'),
+	(186,'Patrick'),
+	(38,'Patrick'),
+	(134,'Patrick'),
+	(186,'Patrick'),
+    (144,'Thomas'),
+	(145,'Thomas'),
+	(146,'Thomas'),
+	(243,'Thomas'),
+	(244,'Thomas'),
+	(245,'Thomas');
 
 /*!40000 ALTER TABLE `pokemon` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -89,12 +98,21 @@ VALUES
 	(1,1),
 	(2,1),
 	(3,1),
-	(4,2),
-	(5,2),
-	(6,2),
-	(7,3),
-	(8,3),
-	(9,3);
+	(4,1),
+	(5,1),
+	(6,1),
+	(7,2),
+	(8,2),
+	(9,2),
+	(10,2),
+	(11,3),
+	(12,3),
+	(13,3),
+	(14,3),
+	(15,3),
+	(16,3),
+	(17,3),
+	(18,3);
 
 /*!40000 ALTER TABLE `team_pokemon` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -108,9 +126,9 @@ LOCK TABLES `user` WRITE;
 
 INSERT INTO `user` (`username`, `firstname`, `gender`, `lastname`, `passwordhash`, `points`)
 VALUES
-	('Lucas',NULL,NULL,NULL,'sha1:64000:18:I99jQvIYh5J8md2CnFw0Mo4qoUfJGKWP:/tofGsjTqR7eKMPYvu6jZPKe',0),
-	('Patrick',NULL,NULL,NULL,'sha1:64000:18:ORgJ4ICIhHo4wW5FRdgvu8ndPGbP43+D:NGR0O7iZsAniwCdg71ZefDG8',NULL),
-	('Thomas',NULL,NULL,NULL,'sha1:64000:18:wrBtd4+bBU3h1DHUDfouu7MEwKJTqZcI:06UjMAJ92eagg4RFpYLMpQLA',NULL);
+	('Lucas','Lucas','Male','Fredmark','sha1:64000:18:I99jQvIYh5J8md2CnFw0Mo4qoUfJGKWP:/tofGsjTqR7eKMPYvu6jZPKe',1000),
+	('Patrick','Patrick','Male','Johansen','sha1:64000:18:ORgJ4ICIhHo4wW5FRdgvu8ndPGbP43+D:NGR0O7iZsAniwCdg71ZefDG8',1000),
+	('Thomas','Thomas','Male','Staal','sha1:64000:18:wrBtd4+bBU3h1DHUDfouu7MEwKJTqZcI:06UjMAJ92eagg4RFpYLMpQLA',1000);
 
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
