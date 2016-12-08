@@ -361,3 +361,30 @@ body.loading {
 body.loading .modal {
     display: block;
 }
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: tomato;
+    color:white;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) a {
+    color:whitesmoke;
+}
+
+.table-striped>tbody>tr:nth-of-type(even) a {
+    color:tomato;
+}
+
+body > div.ng-scope > div > div > table > tbody > tr:nth-child(1) {
+    background-color: rgba(255,0,0,0.9);
+}
+
+.panel-default>.panel-heading {
+    background-color:red;
+    color:white;
+}
+
+.panel-title>.small, .panel-title>.small>a, .panel-title>a, .panel-title>small, .panel-title>small>a {
+    color: inherit;
+    font-weight:bold;
+}
