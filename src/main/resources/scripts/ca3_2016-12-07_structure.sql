@@ -9,7 +9,7 @@
 # Database: ca3
 # Generation Time: 2016-12-07 12:09:22 +0000
 # ************************************************************
-
+USE ca3;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
