@@ -84,8 +84,8 @@ LOCK TABLES `team` WRITE;
 INSERT INTO `team` (`id`, `name`, `fk_user_username`) VALUES
 	(1,'My awesome team','Lucas'),
 	(2,'Team Domination','Patrick'),
-	(3,'Team Lars','Thomas');
-        (4,'Acceptance Test', 'Tue');
+	(3,'Team Lars','Thomas'),
+	(4,'Acceptance Test', 'Tue');
 
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
