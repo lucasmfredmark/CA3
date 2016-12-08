@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div ng-init="teamCtrl.getTeamsByUsername(teamCtrl.userService.getUsername())" class="wrapper">
     <section class="banner">
         <div class="container">
             <div class="row">
@@ -15,11 +15,11 @@
                 <div id="pokemon_teams" class="container-innr">
                     <div class="main_bdy_in">
                         <div class="container">
-                            <h1>My Teams <span class="badge">{{app.team.getTeamList().length}}</span></h1>
-                            <button class="btn btn-primary" type="button" ng-click="team.openCreateTeamModal()" style="margin: 20px 0;">Create team</button>
-                            <h4 ng-show="!!!app.team.getTeamList().length">You have no teams.</h4>
-                            <uib-accordion ng-show="app.team.getTeamList().length">
-                                <div uib-accordion-group class="panel-default" is-open="status.open" ng-repeat="team in app.team.getTeamList() track by $index">
+                            <h1>My Teams <span class="badge">{{teamCtrl.teamList.length}}</span></h1>
+                            <button class="btn btn-primary" type="button" ng-click="teamCtrl.openCreateTeamModal()" style="margin: 20px 0;">Create team</button>
+                            <h4 ng-show="!!!teamCtrl.teamList.length">You have no teams.</h4>
+                            <uib-accordion ng-show="teamCtrl.teamList.length">
+                                <div uib-accordion-group class="panel-default" is-open="status.open" ng-repeat="team in teamCtrl.teamList track by $index">
                                     <uib-accordion-heading>{{team.name}} (<span>{{team.pokemonList.length|| 0}}</span>)<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></uib-accordion-heading>
                                     <p class="text-muted" ng-show="!!!team.pokemonList.length">This team has no Pokémon.</p>
                                     <div class="row">
@@ -29,6 +29,7 @@
                                             </a>
                                         </div>
                                     </div>
+                                    <a ng-click="teamCtrl.deleteTeam(team.id)" style="cursor: pointer;">Delete this team</a>
                                 </div>
                             </uib-accordion>
                         </div>
