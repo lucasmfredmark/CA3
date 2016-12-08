@@ -36,7 +36,7 @@ textarea::-webkit-placeholder { opacity: 1; }
 .aro{width: 140px; height: 146px; position: absolute; bottom: -190px; left:50%; margin-left: -70px;}
 .banner_pic img{width: 100%; display: block;}
 .main_bdy{width: 100%; }
-.main_bdy_in{background:#fff;}
+.main_bdy_in{padding:75px 0;background:#fff;}
 .main_bdy_in_box1{width: 100%; padding: 100px 46px 40px;text-align: center;}
 .main_bdy_in_box1 h2{font: 700 39.28px/30px 'Montserrat', sans-serif; color: #404040;text-transform: uppercase;padding-bottom: 30px;}
 .main_bdy_in_box1 p{font: 400 14px/26px 'Arimo', sans-serif; color: #555555;padding-bottom: 15px;}

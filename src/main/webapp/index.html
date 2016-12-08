@@ -10,14 +10,15 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="js/owl.carousel.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">   
-        <link rel="stylesheet" href="app/app.css">
-        <link href="css/doc.css" rel="stylesheet">
+        <link href="css/owl.carousel.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet"> 
         <link href="https://fonts.googleapis.com/css?family=Arimo:400,400i,700,700i" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" /> 
-        <link href="css/owl.carousel.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+        <link rel="stylesheet" href="app/app.css">
+        <link href="css/doc.css" rel="stylesheet">
         <link rel="icon" href="images/favicon.png">
         <!-- In production use:
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
@@ -81,7 +82,7 @@
                             <button type="submit" class="btn btn-danger">Sign in</button>
                         </form>
                         <div class="navbar-right" ng-show="app.user.getIsAuthenticated()">
-                            
+
                             <p class="navbar-text">Logged on as: <a href="#/user/{{app.user.getUsername()}}">{{app.user.getUsername()}}</a> || <a href="#/funds">({{app.user.getPoints()}} pts)</a></p>
 
                             <button type="submit" class="btn btn-danger navbar-btn"  ng-click="logout()">Logout</button>
@@ -95,6 +96,9 @@
             <div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
         </div>
         <div ng-view></div>
+        <section class="footer">
+            <p>&copy; 2016 MyPokeTrainer. All rights reserved.</p>
+        </section>
 
         <script type="text/ng-template" id="errorModal.html">
             <div class="modal-header">

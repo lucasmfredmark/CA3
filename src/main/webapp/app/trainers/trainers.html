@@ -9,27 +9,32 @@
             </div>
         </div>
     </section>
-    <section class="main_bdy innr" style="background-size:cover;"> 
-        <div id="pokemon_trainers" class="container">
-            <div ng-init="app.user.getAllUsers()">
-                <h1>Trainers</h1>
-                <h4 ng-show="!!!app.user.getUserList().length">There are no registered users.</h4>
-                <table class="table table-striped">
-                    <tr>
-                        <th>Username</th>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Gender</th>
-                        <th>Action</th>
-                    </tr>
-                    <tr ng-repeat="user in app.user.getUserList()">
-                        <td ng-bind="user.username"></td>
-                        <td ng-bind="user.firstname"></td>
-                        <td ng-bind="user.lastname"></td>
-                        <td ng-bind="user.gender"></td>
-                        <td><a href="#/user/{{user.username}}">View</a></td>
-                    </tr>
-                </table>
+    <section class="main_bdy" style="background: url(images/section_bg.jpg)no-repeat center center; background-size:cover;"> 
+        <div class="container-innr">
+            <div class="main_bdy_in">
+                <div id="pokemon_trainers" class="container">
+                    <div ng-init="app.user.getAllUsers()">
+                        <h1>Trainers</h1>
+                        <h4 ng-show="!!!app.user.getUserList().length">There are no registered users.</h4>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Username</th>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                                <th>Gender</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr ng-repeat="user in app.user.getUserList()">
+                                <td ng-bind="user.username"></td>
+                                <td ng-bind="user.firstname"></td>
+                                <td ng-bind="user.lastname"></td>
+                                <td ng-bind="user.gender"></td>
+                                <td><a href="#/user/{{user.username}}">View</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+</div>

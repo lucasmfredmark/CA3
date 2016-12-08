@@ -388,15 +388,3 @@ body > div.ng-scope > div > div > table > tbody > tr:nth-child(1) {
     color: inherit;
     font-weight:bold;
 }
-
-#pokemon_teams {
-    margin-top: 20px;
-}
-
-#pokemon_trainers {
-    margin-top: 20px;
-}
-
-#fundsCtrl {
-    margin-top: 60px;
-}
