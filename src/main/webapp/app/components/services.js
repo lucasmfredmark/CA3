@@ -11,8 +11,8 @@ angular.module('myApp.services', [])
     self.isAuthenticated = false;
     self.isAdmin = false;
     self.isUser = false;
-    self.points = 0;
     
+    self.points = 0;
     self.userList = [];
     
     return {
@@ -46,10 +46,12 @@ angular.module('myApp.services', [])
         setPoints: function(points) {
             self.points = points;
         },
+        getUserByUsername: function(username) {
+            return userFactory.getUserByUsername(username);
+        },
         getAllUsers: function() {
             userFactory.getAllUsers().then(function(response) {
                 self.userList = response.data;
-                console.log(self.userList);
             }, function() {
                 console.log('Couldn\'t get all users.');
             });
