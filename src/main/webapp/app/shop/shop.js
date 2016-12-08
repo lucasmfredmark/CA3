@@ -15,8 +15,8 @@ angular.module('myApp.shop', ['ngRoute'])
   
   self.pokemonList = [];
   
-  self.getAllPokemon = function() {
-      pokemonFactory.getAllPokemon().then(function(response) {
+  self.getAllPokemonPrices = function() {
+      pokemonFactory.getAllPokemonPrices().then(function(response) {
           self.pokemonList = response.data;
       });
   };
