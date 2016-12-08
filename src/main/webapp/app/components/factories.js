@@ -46,4 +46,18 @@ angular.module('myApp.factories', []).
     };
     
     return teamFactory;
+  }]).
+  factory('followFactory', ['$http', function ($http) {
+    var baseUrl = 'api/follow';
+    var followFactory = {};
+    
+    followFactory.getAllUsersFollowed = function() {
+        return $http.get(baseUrl + '/me');
+    };
+    
+    followFactory.followAUser = function(username) {
+        return $http.get(baseUrl + '/add/' + username);
+    };
+    
+    return followFactory;
   }]);

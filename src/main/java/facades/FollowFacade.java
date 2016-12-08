@@ -18,7 +18,7 @@ import javax.persistence.TypedQuery;
  * @author Låne PC
  */
 public class FollowFacade implements IFollowFacade {
-    
+
     EntityManagerFactory emf;
 
     public FollowFacade(EntityManagerFactory emf) {
@@ -28,38 +28,6 @@ public class FollowFacade implements IFollowFacade {
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    
-    /*
-    @Override
-    public List<Follower> getFollowList(User forUser) {
-        EntityManager em = getEntityManager();
-        // May not work *NOTICE
-        try {
-            TypedQuery<Follower> result = em.createNamedQuery("Follower.findByOwner", Follower.class);
-            List<Follower> followList = result.setParameter("username", forUser).getResultList();
-            return followList;
-        } finally {
-            em.close();
-        }
-    }
-
-    @Override
-    public Follower addUserToFollowList(User friend, User me) {
-        EntityManager em = getEntityManager();
-        
-        try {
-            Follower fEntry = new Follower();
-            fEntry.setFkUserFollowUsername(friend);
-            fEntry.setFkUserUsername(me);
-            em.getTransaction().begin();
-            em.persist(fEntry);
-            em.getTransaction().commit();
-            return fEntry;
-        } finally {
-            em.close();
-        }
-    }
-    */
 
     @Override
     public List<Follow> getAllUsersFollowed(String me) {
@@ -74,10 +42,10 @@ public class FollowFacade implements IFollowFacade {
     }
 
     @Override
-    public void followAUser(String me, String you) {
+    public Follow followAUser(String me, String you) {
         EntityManager em = getEntityManager();
         try {
-            
+
             Follow entry = new Follow();
             User first = new User();
             first.setUsername(me);
@@ -85,14 +53,15 @@ public class FollowFacade implements IFollowFacade {
             second.setUsername(you);
             entry.setMeUserUsername(first);
             entry.setYouUserUsername(second);
-            
+
             em.getTransaction().begin();
             em.persist(entry);
             em.getTransaction().commit();
-            
+
+            return entry;
         } finally {
             em.close();
         }
     }
-    
+
 }

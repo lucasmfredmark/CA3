@@ -18,7 +18,7 @@ import javax.persistence.TypedQuery;
  * @author Låne PC
  */
 public class PokemonFacade implements IPokemonFacade {
-    
+
     EntityManagerFactory emf;
 
     public PokemonFacade(EntityManagerFactory emf) {
@@ -28,7 +28,7 @@ public class PokemonFacade implements IPokemonFacade {
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    
+
     /*
     @Override
     public Pokemon createPokemon(Pokemon pokemon) {
@@ -43,8 +43,7 @@ public class PokemonFacade implements IPokemonFacade {
             em.close();
         }
     }
-    */
-
+     */
     @Override
     public List<Pokemon> getAllPokemon() throws PokemonNotFoundException {
         EntityManager em = getEntityManager();
@@ -52,9 +51,11 @@ public class PokemonFacade implements IPokemonFacade {
         try {
             TypedQuery<Pokemon> result = em.createNamedQuery("Pokemon.findAll", Pokemon.class);
             List<Pokemon> p = result.getResultList();
-            
-            if (p == null) throw new PokemonNotFoundException("No Pokémon was found.");
-            
+
+            if (p == null) {
+                throw new PokemonNotFoundException("No Pokémon was found.");
+            }
+
             return p;
         } finally {
             em.close();
@@ -90,5 +91,5 @@ public class PokemonFacade implements IPokemonFacade {
             em.close();
         }
     }
-    */
+     */
 }

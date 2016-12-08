@@ -6,7 +6,6 @@
 package facades.interfaces;
 
 import entity.Follow;
-import entity.User;
 import java.util.List;
 
 /**
@@ -16,6 +15,7 @@ import java.util.List;
 public interface IFollowFacade {
 
     public List<Follow> getAllUsersFollowed(String me);
-    public void followAUser(String me, String you);
-    
+
+    public Follow followAUser(String me, String you);
+
 }

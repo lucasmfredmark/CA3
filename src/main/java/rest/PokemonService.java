@@ -35,7 +35,7 @@ public class PokemonService {
 
     @Context
     private UriInfo context;
-    
+
     @Context
     private SecurityContext securityContext;
 
@@ -47,7 +47,7 @@ public class PokemonService {
      */
     public PokemonService() {
     }
-    
+
     /*
     @PUT
     @Path("createPokemon")
@@ -57,21 +57,20 @@ public class PokemonService {
         Pokemon p = (Pokemon) FACADE.createPokemon(pokemon);
         return GSON.toJson(p);
     }
-    */
-    
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllPokemon() throws PokemonNotFoundException {
         List<Pokemon> p = FACADE.getAllPokemon();
         List<PokemonMapper> pm = new ArrayList();
-        
+
         for (Pokemon pokemon : p) {
             pm.add(new PokemonMapper(pokemon));
         }
-        
+
         return GSON.toJson(pm);
     }
-    
+
     /*
     @GET
     @Path("getPokemonById")
@@ -80,5 +79,5 @@ public class PokemonService {
        FACADE.getPokemonById(json_id);
        return GSON.toJson(json_id);
     }
-    */
+     */
 }

@@ -48,7 +48,7 @@ public class Team implements Serializable {
     @JoinColumn(name = "fk_user_username", referencedColumnName = "username")
     @ManyToOne
     private User fkUserUsername;
-    
+
     @ManyToMany
     List<Pokemon> pokemon;
 
@@ -115,5 +115,5 @@ public class Team implements Serializable {
     public String toString() {
         return "entity.Team[ id=" + id + " ]";
     }
-    
+
 }
