@@ -43,15 +43,8 @@ angular.module('myApp.security', [])
             $scope.login = function () {
                 $http.post('api/login', $scope.user)
                         .success(function (data) {
-                            var userData = function () {
-                                $http.get('api/user/' + data.username)
-                                        .success(function (response) {
-                                            $window.sessionStorage.points = response.points;
-                                        });
-                            };
-                            userData();
                             $window.sessionStorage.id_token = data.token;
-                            initializeFromToken($window.sessionStorage.id_token, jwtHelper, userService, teamService, $window.sessionStorage.points);
+                            initializeFromToken($window.sessionStorage.id_token, jwtHelper, userService, teamService);
                             $location.path("#/");
                         })
                         .error(function (data) {
@@ -83,9 +76,8 @@ angular.module('myApp.security', [])
             //This sets the login data from session store if user pressed F5 (You are still logged in)
             var init = function () {
                 var token = $window.sessionStorage.id_token;
-                var userPoints = $window.sessionStorage.points;
                 if (token) {
-                    initializeFromToken($window.sessionStorage.id_token, jwtHelper, userService, teamService, userPoints);
+                    initializeFromToken($window.sessionStorage.id_token, jwtHelper, userService, teamService);
                 }
             };
             init();// and fire it after definition
@@ -118,15 +110,19 @@ angular.module('myApp.security', [])
 
 
 
-function initializeFromToken(token, jwtHelper, userService, teamService, userPoints) {
+function initializeFromToken(token, jwtHelper, userService, teamService) {
     var tokenPayload = jwtHelper.decodeToken(token);
     
     userService.setIsAuthenticated(true);
     userService.setUsername(tokenPayload.username);
     userService.setIsAdmin(false);
     userService.setIsUser(false);
-    userService.setPoints(userPoints);
-
+    userService.getUserByUsername(userService.getUsername()).then(function(response) {
+        // TODO: Fix caching problems? REST Service works fine
+        console.log(userService.getUsername() + ' has ' + response.data.points + ' points.');
+        userService.setPoints(response.data.points);
+    });
+    
     tokenPayload.roles.forEach(function (role) {
         if (role === "Admin") {
             userService.setIsAdmin(true);
@@ -135,7 +131,7 @@ function initializeFromToken(token, jwtHelper, userService, teamService, userPoi
             userService.setIsUser(true);
         }
     });
-
+    
     teamService.getTeamsByUsername(userService.getUsername());
 }
 
