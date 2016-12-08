@@ -5,14 +5,17 @@
  */
 package facades.interfaces;
 
+import entity.Follow;
+import entity.User;
+import java.util.List;
+
 /**
  *
  * @author Låne PC
  */
-public interface IFollowerFacade {
+public interface IFollowFacade {
 
-    //Follower addUserToFollowList(User friend, User me);
-
-    //List<Follower> getFollowList(User forUser);
+    public List<Follow> getAllUsersFollowed(String me);
+    public void followAUser(String me, String you);
     
 }

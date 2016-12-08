@@ -9,7 +9,7 @@
 # Database: ca3
 # Generation Time: 2016-12-07 12:09:45 +0000
 # ************************************************************
-USE ca3;
+USE ca3test;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,8 +31,7 @@ USE ca3;
 LOCK TABLES `pokemon` WRITE;
 /*!40000 ALTER TABLE `pokemon` DISABLE KEYS */;
 
-INSERT INTO `pokemon` (`pokedex_id`, `fk_user_username`)
-VALUES
+INSERT INTO `pokemon` (`pokedex_id`, `fk_user_username`) VALUES
 	(3,'Lucas'),
 	(6,'Lucas'),
 	(9,'Lucas'),
@@ -62,8 +61,7 @@ UNLOCK TABLES;
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
 
-INSERT INTO `role` (`rolename`)
-VALUES
+INSERT INTO `role` (`rolename`) VALUES
 	('Admin'),
 	('User');
 
@@ -77,8 +75,7 @@ UNLOCK TABLES;
 LOCK TABLES `team` WRITE;
 /*!40000 ALTER TABLE `team` DISABLE KEYS */;
 
-INSERT INTO `team` (`id`, `name`, `fk_user_username`)
-VALUES
+INSERT INTO `team` (`id`, `name`, `fk_user_username`) VALUES
 	(1,'My awesome team','Lucas'),
 	(2,'Team Domination','Patrick'),
 	(3,'Team Lars','Thomas');
@@ -93,8 +90,7 @@ UNLOCK TABLES;
 LOCK TABLES `team_pokemon` WRITE;
 /*!40000 ALTER TABLE `team_pokemon` DISABLE KEYS */;
 
-INSERT INTO `team_pokemon` (`pokemon_id`, `teams_id`)
-VALUES
+INSERT INTO `team_pokemon` (`pokemon_id`, `teams_id`) VALUES
 	(1,1),
 	(2,1),
 	(3,1),
@@ -124,8 +120,7 @@ UNLOCK TABLES;
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 
-INSERT INTO `user` (`username`, `firstname`, `gender`, `lastname`, `passwordhash`, `points`)
-VALUES
+INSERT INTO `user` (`username`, `firstname`, `gender`, `lastname`, `passwordhash`, `points`) VALUES
 	('Lucas','Lucas','Male','Fredmark','sha1:64000:18:I99jQvIYh5J8md2CnFw0Mo4qoUfJGKWP:/tofGsjTqR7eKMPYvu6jZPKe',1000),
 	('Patrick','Patrick','Male','Johansen','sha1:64000:18:ORgJ4ICIhHo4wW5FRdgvu8ndPGbP43+D:NGR0O7iZsAniwCdg71ZefDG8',1000),
 	('Thomas','Thomas','Male','Staal','sha1:64000:18:wrBtd4+bBU3h1DHUDfouu7MEwKJTqZcI:06UjMAJ92eagg4RFpYLMpQLA',1000);
@@ -140,8 +135,7 @@ UNLOCK TABLES;
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
 
-INSERT INTO `user_role` (`roles_rolename`, `users_username`)
-VALUES
+INSERT INTO `user_role` (`roles_rolename`, `users_username`) VALUES
 	('Admin','Lucas'),
 	('Admin','Patrick'),
 	('Admin','Thomas'),
@@ -150,6 +144,16 @@ VALUES
 	('User','Thomas');
 
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `follow` WRITE;
+
+INSERT INTO `follow` (`me_user_username`, `you_user_username`) VALUES
+	('Lucas','Patrick'),
+    ('Patrick','Lucas'),
+    ('Patrick','Thomas');
+    
+/*!40000 ALTER TABLE `follow` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
