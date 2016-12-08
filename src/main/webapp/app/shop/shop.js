@@ -10,7 +10,7 @@ angular.module('myApp.shop', ['ngRoute'])
   });
 }])
 
-.controller('ShopCtrl', ['pokemonFactory', function(pokemonFactory) {
+.controller('ShopCtrl', ['$rootScope', 'userService', 'pokemonFactory', function($rootScope, userService, pokemonFactory) {
   var self = this;
   
   self.pokemonList = [];
@@ -19,5 +19,15 @@ angular.module('myApp.shop', ['ngRoute'])
       pokemonFactory.getAllPokemonPrices().then(function(response) {
           self.pokemonList = response.data;
       });
+  };
+  
+  self.buyPokemon = function(pokedexId) {
+      var price = self.pokemonList[pokedexId-1].price;
+      
+      if (userService.getPoints() < price) {
+          $rootScope.openErrorModal("You can't afford that Pokémon!");
+      } else {
+          
+      }
   };
 }]);
