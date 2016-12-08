@@ -407,3 +407,9 @@ body > div.ng-scope > div > div > table > tbody > tr:nth-child(1) {
     border: 1px solid black;
     margin: 1%;
 }
+
+#profile_banner_following {
+    
+    padding:10px;
+    
+}

@@ -45,7 +45,7 @@ public class FollowFacade implements IFollowFacade {
     public Follow followAUser(String me, String you) {
         EntityManager em = getEntityManager();
         try {
-
+          
             Follow entry = new Follow();
             User first = new User();
             first.setUsername(me);

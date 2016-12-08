@@ -61,6 +61,18 @@ public class FollowService {
         }
         return GSON.toJson(fm);
     }
+    
+    @GET
+    @Path("user/{username}")
+    @Produces(MediaType.APPLICATION_JSON) 
+    public String getAllUsersFollowedByUsername(@PathParam("username")String username) {
+        List<Follow> usersFollowed = FACADE.getAllUsersFollowed(username);
+        List<FollowMapper> fm = new ArrayList();
+        for (Follow f : usersFollowed) {
+            fm.add(new FollowMapper(f));
+        }
+        return GSON.toJson(fm);
+    }
 
     @PUT
     @Path("add/{username}")

@@ -55,8 +55,12 @@ angular.module('myApp.factories', []).
         return $http.get(baseUrl + '/me');
     };
     
+    followFactory.getAllUsersFollowedByUsername = function(username) {
+        return $http.get(baseUrl + '/user/' + username);
+    };
+    
     followFactory.followAUser = function(username) {
-        return $http.get(baseUrl + '/add/' + username);
+        return $http.put(baseUrl + '/add/' + username);
     };
     
     return followFactory;
