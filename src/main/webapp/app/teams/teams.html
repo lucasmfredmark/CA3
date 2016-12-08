@@ -1,17 +1,35 @@
-<div class="container">
-    <h1>My Teams <span class="badge">{{app.team.getTeamList().length}}</span></h1>
-    <h4 ng-show="!!!app.team.getTeamList().length">You have no teams.</h4>
-    <uib-accordion ng-show="app.team.getTeamList().length">
-        <div uib-accordion-group class="panel-default" is-open="status.open" ng-repeat="team in app.team.getTeamList() track by $index">
-            <uib-accordion-heading>{{team.name}} (<span>{{team.pokemonList.length || 0}}</span>)<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></uib-accordion-heading>
-            <p class="text-muted" ng-show="!!!team.pokemonList.length">This team has no Pokémon.</p>
+<div class="wrapper">
+    <section class="banner">
+        <div class="container">
             <div class="row">
-                <div class="col-sm-2" ng-repeat="pokemon in team.pokemonList track by $index">
-                    <a href="#/pokemon/{{pokemon.pokedexId}}" uib-tooltip="Click to show details">
-                        <img ng-src="images/sprites/{{pokemon.pokedexId}}.png" class="img-responsive center-block" alt="#{{pokemon.pokedexId}}" title="#{{pokemon.pokedexId}}">
-                    </a>
+                <div class="col-sm-12">
+                    <div class="banner_pic"><img src="images/title_banner.png" alt=""/>  </div>
+                    <div class="aro"><a href="#"><img src="images/aro_big.png" alt=""/></a> </div>
                 </div>
             </div>
         </div>
-    </uib-accordion>
+    </section>
+    <section class="main_bdy innr" style="background-size:cover;"> 
+        <div id="pokemon_teams" class="container-innr">
+            <div class="main_bdy_in">
+                <div class="container">
+                    <h1>My Teams <span class="badge">{{app.team.getTeamList().length}}</span></h1>
+                    <h4 ng-show="!!!app.team.getTeamList().length">You have no teams.</h4>
+                    <uib-accordion ng-show="app.team.getTeamList().length">
+                        <div uib-accordion-group class="panel-default" is-open="status.open" ng-repeat="team in app.team.getTeamList() track by $index">
+                            <uib-accordion-heading>{{team.name}} (<span>{{team.pokemonList.length|| 0}}</span>)<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i></uib-accordion-heading>
+                            <p class="text-muted" ng-show="!!!team.pokemonList.length">This team has no Pokémon.</p>
+                            <div class="row">
+                                <div class="col-sm-2" ng-repeat="pokemon in team.pokemonList track by $index">
+                                    <a href="#/pokemon/{{pokemon.pokedexId}}" uib-tooltip="Click to show details">
+                                        <img ng-src="images/sprites/{{pokemon.pokedexId}}.png" class="img-responsive center-block" alt="#{{pokemon.pokedexId}}" title="#{{pokemon.pokedexId}}">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>

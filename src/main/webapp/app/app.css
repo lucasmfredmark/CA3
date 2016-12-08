@@ -345,9 +345,9 @@
     height:     100%;
     width:      100%;
     background: rgba( 255, 255, 255, .8 ) 
-                url('http://i.stack.imgur.com/FhHRx.gif') 
-                50% 50% 
-                no-repeat;
+        url('http://i.stack.imgur.com/FhHRx.gif') 
+        50% 50% 
+        no-repeat;
 }
 
 /* When the body has the loading class, we turn
@@ -387,4 +387,16 @@ body > div.ng-scope > div > div > table > tbody > tr:nth-child(1) {
 .panel-title>.small, .panel-title>.small>a, .panel-title>a, .panel-title>small, .panel-title>small>a {
     color: inherit;
     font-weight:bold;
+}
+
+#pokemon_teams {
+    margin-top: 20px;
+}
+
+#pokemon_trainers {
+    margin-top: 20px;
+}
+
+#fundsCtrl {
+    margin-top: 60px;
 }
