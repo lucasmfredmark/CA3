@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
 <div class="wrapper">
     <section class="banner">
         <div class="container">
@@ -12,7 +16,7 @@
     <section class="main_bdy" style="background: url(images/section_bg.jpg)no-repeat center center; background-size:cover;"> 
         <div class="container-innr">
             <div class="main_bdy_in">
-                <div id="fundsCtrl" ng-controller="FundCtrl as funds" class="container">
+                <div id="fundsCtrl" class="container">
                     <div class="container">
                         <h1 class="text-center">Purchase points for your PokeTrainer account!</h1>
                         <img id="cards" src="images/cards.jpg" class="img-responsive">
@@ -74,10 +78,10 @@
                                 <th class="packsHead">Master tier</th>
                             </tr>
                             <tr class="packsRow">
-                                <td class="packsData"><a data-toggle="modal" data-target="#myModal"><img ng-click="funds.select(100)" src="images/regular.png" class="img-responsive"></a></td>
-                                <td class="packsData"><a data-toggle="modal" data-target="#myModal"><img ng-click="funds.select(600)" src="images/great.png" class="img-responsive"></a></td>
-                                <td class="packsData"><a data-toggle="modal" data-target="#myModal"><img ng-click="funds.select(1200)" src="images/ultra.png" class="img-responsive"></a></td>
-                                <td class="packsData"><a data-toggle="modal" data-target="#myModal"><img ng-click="funds.select(2500)" src="images/master.png" class="img-responsive"></a></td>
+                                <td class="packsData"><a data-toggle="modal" data-target="#myModal"><img ng-click="fund.select(100)" src="images/regular.png" class="img-responsive"></a></td>
+                                <td class="packsData"><a data-toggle="modal" data-target="#myModal"><img ng-click="fund.select(600)" src="images/great.png" class="img-responsive"></a></td>
+                                <td class="packsData"><a data-toggle="modal" data-target="#myModal"><img ng-click="fund.select(1200)" src="images/ultra.png" class="img-responsive"></a></td>
+                                <td class="packsData"><a data-toggle="modal" data-target="#myModal"><img ng-click="fund.select(2500)" src="images/master.png" class="img-responsive"></a></td>
                             </tr>
                         </table>
                     </div>
