@@ -1,3 +1,4 @@
+USE ca3test;
 INSERT INTO pokemon_prices (pokedex_id, price) VALUES
 (1,100),
 (2,200),

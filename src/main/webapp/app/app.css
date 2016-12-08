@@ -375,6 +375,20 @@ body.loading .modal {
     color:tomato;
 }
 
+#pokemon_trainers > div > table > tbody > tr:nth-child(1) {
+    
+    background-color:red;
+}
+
+.packsRow img{
+    cursor: pointer;
+}
+
+.shop_box a {
+    cursor: pointer;
+}
+
+
 body > div.ng-scope > div > div > table > tbody > tr:nth-child(1) {
     background-color: rgba(255,0,0,0.9);
 }
