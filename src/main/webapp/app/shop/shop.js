@@ -28,7 +28,9 @@ angular.module('myApp.shop', ['ngRoute'])
           $rootScope.openBaseModal("Not enough points", "You can't afford that Pokémon!");
       } else {
           userFactory.buyPokemon(pokedexId).then(function() {
+              console.log("Activate modal");
               userService.setPoints(userService.getPoints() - price);
+              console.log($rootScope);
               $rootScope.openBaseModal("Congratulations!", "Your Pokémon has been transferred to your storage.");
           });
       }

@@ -107,8 +107,8 @@ $(document).ready(function () {
         }
     });
     function pay() {
-        console.log(angular.element($("#fundsCtrl")).scope().funds.selection);
-        angular.element($("#fundsCtrl")).scope().funds.addFunds(angular.element($("#fundsCtrl")).scope().funds.selection);
+        console.log(angular.element($("#fundsCtrl")).scope().fund.selection);
+        angular.element($("#fundsCtrl")).scope().fund.addFunds(angular.element($("#fundsCtrl")).scope().fund.selection);
         $("#myModal .close").click();
         location.reload(true);
     }

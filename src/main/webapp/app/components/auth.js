@@ -62,9 +62,10 @@ angular.module('myApp.security', [])
             $rootScope.openErrorModal = function (msg) {
                 var modalInstance = $uibModal.open({
                     animation: true,
-                    templateUrl: 'errorModal.html',
+                    templateUrl: 'baseModal.html',
                     controller: function ($scope, $uibModalInstance) {
                         $scope.msg = msg;
+                        $scope.title = "Error";
                         $scope.closeModal = function () {
                             $uibModalInstance.close();
                         };
@@ -72,6 +73,23 @@ angular.module('myApp.security', [])
                     size: 'sm'
                 });
             };
+            
+            $rootScope.openBaseModal = function (title, msg) {
+                var modalInstance = $uibModal.open({
+                    animation: true,
+                    templateUrl: 'baseModal.html',
+                    controller: function ($scope, $uibModalInstance) {
+                        $scope.msg = msg;
+                        $scope.title = title;
+                        $scope.closeModal = function () {
+                            $uibModalInstance.close();
+                        };
+                    },
+                    size: 'sm'
+                });
+            };
+            
+            
             
             //This sets the login data from session store if user pressed F5 (You are still logged in)
             var init = function () {
