@@ -55,7 +55,7 @@ INSERT INTO `pokemon` (`pokedex_id`, `fk_user_username`) VALUES
         (30,'Tue'),
         (40,'Tue'),
         (50,'Tue'),
-        (60,'Tue'),
+        (60,'Tue');
 
 /*!40000 ALTER TABLE `pokemon` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -116,12 +116,12 @@ INSERT INTO `team_pokemon` (`pokemon_id`, `teams_id`) VALUES
 	(16,3),
 	(17,3),
 	(18,3),
-        (19,4);
-        (20,4);
-        (21,4);
-        (22,4);
-        (23,4);
-        (24,4);
+	(19,4),
+	(20,4),
+	(21,4),
+	(22,4),
+	(23,4),
+	(24,4);
 /*!40000 ALTER TABLE `team_pokemon` ENABLE KEYS */;
 UNLOCK TABLES;
 
