@@ -8,6 +8,7 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entity.Pokemon;
+import entity.PokemonPrice;
 import facades.interfaces.IPokemonFacade;
 import facades.PokemonFacade;
 import httpErrors.PokemonNotFoundException;
@@ -32,7 +33,7 @@ import jsonMappers.PokemonMapper;
  * @author Staal
  */
 @Path("pokemon")
-//@RolesAllowed({"User", "Admin"})
+
 public class PokemonService {
 
     @Context
@@ -50,50 +51,40 @@ public class PokemonService {
     public PokemonService() {
     }
 
-    /*
-    @PUT
-    @Path("createPokemon")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public String createPokemon(String json_pokemon) {
-        Pokemon pokemon = GSON.fromJson(json_pokemon, Pokemon.class);
-        Pokemon p = (Pokemon) FACADE.createPokemon(pokemon);
-        return GSON.toJson(p);
-    }
-     */
     @GET
+    @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public String getAllPokemon() throws PokemonNotFoundException {
-        List<Pokemon> p = FACADE.getAllPokemon();
+        List<Pokemon> pokemon = FACADE.getAllPokemon();
         List<PokemonMapper> pm = new ArrayList();
 
-        for (Pokemon pokemon : p) {
-            pm.add(new PokemonMapper(pokemon));
+        for (Pokemon p : pokemon) {
+            pm.add(new PokemonMapper(p));
+        }
+
+        return GSON.toJson(pm);
+    }
+
+    @GET
+    @Path("username/{username}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getAllPokemonByUsername(@PathParam("username") String username) throws PokemonNotFoundException {
+        List<Pokemon> pokemon = FACADE.getAllPokemonByUsername(username);
+        List<PokemonMapper> pm = new ArrayList();
+
+        for (Pokemon p : pokemon) {
+            pm.add(new PokemonMapper(p));
         }
 
         return GSON.toJson(pm);
     }
     
     @GET
-    @Path("username/{username}")
-    @Produces(MediaType.TEXT_PLAIN)
-    @Consumes(MediaType.TEXT_PLAIN)
-    public String getAllPokemonByUsername(@PathParam("username") String username) throws PokemonNotFoundException {
-//        return "Hello from get all pokemon by username, " + username;
-          List<Pokemon> pokemon = FACADE.getAllPokemonByUsername(username);
-          List<PokemonMapper> pokemonMapped = new ArrayList();
-          for (Pokemon p : pokemon) {
-              pokemonMapped.add(new PokemonMapper(p));
-          }
-          return GSON.toJson(pokemonMapped);
-    }
-
-    /*
-    @GET
-    @Path("getPokemonById")
+    @Path("prices")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getPokemonById(int json_id) throws PokemonNotFoundException {
-       FACADE.getPokemonById(json_id);
-       return GSON.toJson(json_id);
+    public String getAllPokemonPrices() throws PokemonNotFoundException {
+        List<PokemonPrice> pp = FACADE.getAllPokemonPrices();
+        
+        return GSON.toJson(pp);
     }
-     */
 }

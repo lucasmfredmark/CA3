@@ -7,6 +7,7 @@ package facades;
 
 import facades.interfaces.IPokemonFacade;
 import entity.Pokemon;
+import entity.PokemonPrice;
 import httpErrors.PokemonNotFoundException;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -72,6 +73,20 @@ public class PokemonFacade implements IPokemonFacade {
             
             if (pokemon == null) { throw new PokemonNotFoundException("You own no Pokemon");}
             return pokemon;
+        } finally {
+            em.close();
+        }
+    }
+    
+    @Override
+    public List<PokemonPrice> getAllPokemonPrices() throws PokemonNotFoundException {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<PokemonPrice> result = em.createNamedQuery("PokemonPrice.findAll", PokemonPrice.class);
+            List<PokemonPrice> pokemonPrices = result.getResultList();
+            
+            if (pokemonPrices == null) { throw new PokemonNotFoundException("No Pokémon was found.");}
+            return pokemonPrices;
         } finally {
             em.close();
         }

@@ -6,6 +6,7 @@
 package facades.interfaces;
 
 import entity.Pokemon;
+import entity.PokemonPrice;
 import httpErrors.PokemonNotFoundException;
 import java.util.List;
 
@@ -16,10 +17,8 @@ import java.util.List;
 public interface IPokemonFacade {
 
     List<Pokemon> getAllPokemon() throws PokemonNotFoundException;
+
     List<Pokemon> getAllPokemonByUsername(String username) throws PokemonNotFoundException;
 
-    //Pokemon getPokemonById(int id) throws PokemonNotFoundException;
-
-    //List<Pokemon> getPokemonByTeam(int team_id) throws PokemonNotFoundException, TeamNotFoundException;
-
+    List<PokemonPrice> getAllPokemonPrices() throws PokemonNotFoundException;
 }

@@ -10,6 +10,14 @@ angular.module('myApp.shop', ['ngRoute'])
   });
 }])
 
-.controller('ShopCtrl', [function() {
+.controller('ShopCtrl', ['pokemonFactory', function(pokemonFactory) {
+  var self = this;
   
+  self.pokemonList = [];
+  
+  self.getAllPokemon = function() {
+      pokemonFactory.getAllPokemon().then(function(response) {
+          self.pokemonList = response.data;
+      });
+  };
 }]);

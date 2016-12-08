@@ -65,12 +65,16 @@ angular.module('myApp.factories', []).
     var baseUrl = 'api/pokemon';
     var pokemonFactory = {};
     
+    pokemonFactory.getAllPokemon = function() {
+        return $http.get(baseUrl + '/all');
+    };
+    
     pokemonFactory.getAllPokemonByUsername = function(username) {
         return $http.get(baseUrl + '/username/' + username);
     };
     
-    pokemonFactory.getAllPokemon = function() {
-        return $http.get(baseUrl);
+    pokemonFactory.getAllPokemonPrices = function() {
+        return $http.get(baseUrl + '/prices');
     };
     
     return pokemonFactory;
