@@ -389,18 +389,6 @@ body > div.ng-scope > div > div > table > tbody > tr:nth-child(1) {
     font-weight:bold;
 }
 
-#pokemon_teams {
-    margin-top: 20px;
-}
-
-#pokemon_trainers {
-    margin-top: 20px;
-}
-
-#fundsCtrl {
-    margin-top: 60px;
-}
-
 .storage_box_each {
     border: 1px solid black;
     margin: 1%;
