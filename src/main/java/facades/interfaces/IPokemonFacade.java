@@ -16,6 +16,7 @@ import java.util.List;
 public interface IPokemonFacade {
 
     List<Pokemon> getAllPokemon() throws PokemonNotFoundException;
+    List<Pokemon> getAllPokemonByUsername(String username) throws PokemonNotFoundException;
 
     //Pokemon getPokemonById(int id) throws PokemonNotFoundException;
 

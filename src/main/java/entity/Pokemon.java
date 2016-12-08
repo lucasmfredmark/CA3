@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Pokemon.findAll", query = "SELECT p FROM Pokemon p"),
     @NamedQuery(name = "Pokemon.findById", query = "SELECT p FROM Pokemon p WHERE p.id = :id"),
+    @NamedQuery(name = "Pokemon.findByfkUserUsername", query = "SELECT p FROM Pokemon p WHERE p.fkUserUsername.username = :username"),
     @NamedQuery(name = "Pokemon.findByPokedexId", query = "SELECT p FROM Pokemon p WHERE p.pokedexId = :pokedexId")})
 public class Pokemon implements Serializable {
 

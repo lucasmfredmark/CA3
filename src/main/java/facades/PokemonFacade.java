@@ -61,6 +61,21 @@ public class PokemonFacade implements IPokemonFacade {
             em.close();
         }
     }
+    
+    @Override
+    public List<Pokemon> getAllPokemonByUsername(String username) throws PokemonNotFoundException {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Pokemon> result = em.createNamedQuery("Pokemon.findByfkUserUsername", Pokemon.class);
+            result.setParameter("username", username);
+            List<Pokemon> pokemon = result.getResultList();
+            
+            if (pokemon == null) { throw new PokemonNotFoundException("You own no Pokemon");}
+            return pokemon;
+        } finally {
+            em.close();
+        }
+    }
 
     /*
     @Override

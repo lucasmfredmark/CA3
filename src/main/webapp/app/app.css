@@ -400,3 +400,8 @@ body > div.ng-scope > div > div > table > tbody > tr:nth-child(1) {
 #fundsCtrl {
     margin-top: 60px;
 }
+
+.storage_box_each {
+    border: 1px solid black;
+    margin: 1%;
+}

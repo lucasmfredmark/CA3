@@ -60,4 +60,18 @@ angular.module('myApp.factories', []).
     };
     
     return followFactory;
+  }]).
+  factory('pokemonFactory', ['$http', function ($http) {
+    var baseUrl = 'api/pokemon';
+    var pokemonFactory = {};
+    
+    pokemonFactory.getAllPokemonByUsername = function(username) {
+        return $http.get(baseUrl + '/username/' + username);
+    };
+    
+    pokemonFactory.getAllPokemon = function() {
+        return $http.get(baseUrl);
+    };
+    
+    return pokemonFactory;
   }]);

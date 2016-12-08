@@ -6,7 +6,6 @@
 package jsonMappers;
 
 import entity.Pokemon;
-import entity.User;
 
 /**
  *
@@ -15,11 +14,11 @@ import entity.User;
 public class PokemonMapper {
     private final Integer id;
     private final Integer pokedexId;
-    private final User user;
+    private final String user;
 
     public PokemonMapper(Pokemon pokemon) {
         this.id = pokemon.getId();
         this.pokedexId = pokemon.getPokedexId();
-        this.user = pokemon.getFkUserUsername();
+        this.user = pokemon.getFkUserUsername().getUsername();
     }
 }

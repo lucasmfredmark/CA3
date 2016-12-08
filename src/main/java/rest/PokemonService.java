@@ -15,11 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.Persistence;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.SecurityContext;
 import jsonMappers.PokemonMapper;
@@ -30,7 +32,7 @@ import jsonMappers.PokemonMapper;
  * @author Staal
  */
 @Path("pokemon")
-@RolesAllowed({"User", "Admin"})
+//@RolesAllowed({"User", "Admin"})
 public class PokemonService {
 
     @Context
@@ -69,6 +71,20 @@ public class PokemonService {
         }
 
         return GSON.toJson(pm);
+    }
+    
+    @GET
+    @Path("username/{username}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.TEXT_PLAIN)
+    public String getAllPokemonByUsername(@PathParam("username") String username) throws PokemonNotFoundException {
+//        return "Hello from get all pokemon by username, " + username;
+          List<Pokemon> pokemon = FACADE.getAllPokemonByUsername(username);
+          List<PokemonMapper> pokemonMapped = new ArrayList();
+          for (Pokemon p : pokemon) {
+              pokemonMapped.add(new PokemonMapper(p));
+          }
+          return GSON.toJson(pokemonMapped);
     }
 
     /*
