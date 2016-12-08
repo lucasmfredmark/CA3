@@ -7,14 +7,21 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import entity.Follow;
 import facades.FollowFacade;
-import javax.annotation.security.RolesAllowed;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.SecurityContext;
 import facades.interfaces.IFollowFacade;
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.security.RolesAllowed;
+import javax.ws.rs.GET;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import jsonMappers.FollowMapper;
 
 
 /**
@@ -22,9 +29,9 @@ import facades.interfaces.IFollowFacade;
  *
  * @author Staal
  */
-@Path("follower")
+@Path("follow")
 @RolesAllowed({"User", "Admin"})
-public class FollowerService {
+public class FollowService {
 
     @Context
     private UriInfo context;
@@ -32,32 +39,25 @@ public class FollowerService {
     @Context
     private SecurityContext securityContext;
 
-    private static final IFollowFacade FACADE = new FollowFacade(Persistence.createEntityManagerFactory("pu_development"));
+    private static final IFollowFacade facade = new FollowFacade(Persistence.createEntityManagerFactory("pu_development"));
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     /**
      * Creates a new instance of Follower
      */
-    public FollowerService() {
+    public FollowService() {
     }
 
-    /*
     @GET
-    @Path("getFollowList")
+    @Path("me")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getFollowList(String forUser) {
-        User u = GSON.fromJson(forUser, User.class);
-        List<Follower> fl = FACADE.getFollowList(u);
-        return GSON.toJson(fl);
+    public String getAllUsersFollowed() {
+        String username = securityContext.getUserPrincipal().getName();
+        List<Follow> usersFollowed = facade.getAllUsersFollowed(username);
+        List<FollowMapper> fm = new ArrayList();
+        for (Follow f : usersFollowed) {
+            fm.add(new FollowMapper(f));
+        }
+        return GSON.toJson(fm);
     }
-
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public String addUserToFollowList(String json) {
-        Follower fw = GSON.fromJson(json, Follower.class);
-        Follower f = (Follower) FACADE.addUserToFollowList(fw.getFkUserFollowUsername(), fw.getFkUserUsername());
-        return GSON.toJson(f);
-    }
-    */
 }

@@ -66,10 +66,6 @@ public class User implements IUser, Serializable {
     private List<Pokemon> pokemonList;
     @OneToMany(mappedBy = "fkUserUsername")
     private List<Team> teamList;
-    @OneToMany(mappedBy = "meUserUsername")
-    private List<Follow> followList;
-    @OneToMany(mappedBy = "youUserUsername")
-    private List<Follow> followList1;
 
     @ManyToMany
     List<Role> roles;
@@ -158,24 +154,6 @@ public class User implements IUser, Serializable {
 
     public void setTeamList(List<Team> teamList) {
         this.teamList = teamList;
-    }
-
-    @XmlTransient
-    public List<Follow> getFollowList() {
-        return followList;
-    }
-
-    public void setFollowList(List<Follow> followList) {
-        this.followList = followList;
-    }
-
-    @XmlTransient
-    public List<Follow> getFollowList1() {
-        return followList1;
-    }
-
-    public void setFollowList1(List<Follow> followList1) {
-        this.followList1 = followList1;
     }
 
     @Override

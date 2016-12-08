@@ -24,7 +24,7 @@ public class ApplicationConfig extends Application {
         resources.add(httpErrors.PokemonNotFoundMapper.class);
         resources.add(httpErrors.TeamNotFoundMapper.class);
         resources.add(httpErrors.UserNotFoundMapper.class);
-        resources.add(rest.FollowerService.class);
+        resources.add(rest.FollowService.class);
         resources.add(rest.PokemonService.class);
         resources.add(rest.TeamService.class);
         resources.add(rest.UserService.class);
