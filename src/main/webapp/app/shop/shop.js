@@ -10,7 +10,7 @@ angular.module('myApp.shop', ['ngRoute'])
   });
 }])
 
-.controller('ShopCtrl', ['$rootScope', 'userService', 'pokemonFactory', function($rootScope, userService, pokemonFactory) {
+.controller('ShopCtrl', ['$rootScope', 'userService', 'userFactory', 'pokemonFactory', function($rootScope, userService, userFactory, pokemonFactory) {
   var self = this;
   
   self.pokemonList = [];
@@ -25,9 +25,12 @@ angular.module('myApp.shop', ['ngRoute'])
       var price = self.pokemonList[pokedexId-1].price;
       
       if (userService.getPoints() < price) {
-          $rootScope.openErrorModal("You can't afford that Pokémon!");
+          $rootScope.openBaseModal("Not enough points", "You can't afford that Pokémon!");
       } else {
-          
+          userFactory.buyPokemon(pokedexId).then(function() {
+              userService.setPoints(userService.getPoints() - price);
+              $rootScope.openBaseModal("Congratulations!", "Your Pokémon has been transferred to your storage.");
+          });
       }
   };
 }]);

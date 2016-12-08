@@ -11,6 +11,7 @@ import entity.Pokemon;
 import entity.User;
 import facades.interfaces.IUserFacade;
 import facades.UserFacade;
+import httpErrors.PokemonNotFoundException;
 import httpErrors.UserNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +71,7 @@ public class UserService {
         return GSON.toJson(u);
     }
 
+    /*
     @POST
     @Path("points/remove/{points:\\d+}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -79,17 +81,7 @@ public class UserService {
 
         return GSON.toJson(u);
     }
-
-    @PUT
-    @Path("pokemon/add")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public String addPokemon(String json_pokemon) {
-        Pokemon pokemon = FACADE.addPokemon(GSON.fromJson(json_pokemon, Pokemon.class), securityContext.getUserPrincipal().getName());
-        PokemonMapper p = new PokemonMapper(pokemon);
-
-        return GSON.toJson(p);
-    }
+    */
 
     @GET
     @Path("{username}")
@@ -113,5 +105,15 @@ public class UserService {
         }
 
         return GSON.toJson(u);
+    }
+    
+    @PUT
+    @Path("buy/{pokedexId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String buyPokemon(@PathParam("pokedexId") int pokedexId) throws PokemonNotFoundException, Exception {
+        Pokemon p = FACADE.buyPokemon(pokedexId, securityContext.getUserPrincipal().getName());
+        PokemonMapper pm = new PokemonMapper(p);
+        
+        return GSON.toJson(pm);
     }
 }

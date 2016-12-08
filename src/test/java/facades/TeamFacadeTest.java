@@ -64,7 +64,7 @@ public class TeamFacadeTest {
         User user = new User();
         user.setUsername("Lucas");
         team.setFkUserUsername(user);
-        teamFacade.createTeam(team);
+        //teamFacade.createTeam(team);
         
         List<Team> newTeams = teamFacade.getTeamsByUsername(user.getUserName());
         int newTeamsCount = newTeams.size();

@@ -14,9 +14,12 @@ import java.util.List;
  * @author Låne PC
  */
 public interface ITeamFacade {
-    Team createTeam(Team team);
+
+    Team createTeam(String name, String username);
+
     Team deleteTeam(int id) throws TeamNotFoundException;
-    //List<Team> getTeams() throws TeamNotFoundException;
+
     Team getTeamById(int id) throws TeamNotFoundException;
+
     List<Team> getTeamsByUsername(String username) throws TeamNotFoundException;
 }

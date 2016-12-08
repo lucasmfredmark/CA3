@@ -11,13 +11,9 @@ angular.module('myApp.factories', []).
         return $http.post(baseUrl + '/points/add/' + points);
     };
     
-    userFactory.removePoints = function(points) {
+    /*userFactory.removePoints = function(points) {
         return $http.post(baseUrl + '/points/remove/' + points);
-    };
-    
-    userFactory.addPokemon = function(pokemon) {
-        return $http.put(baseUrl + '/pokemon/add', pokemon);
-    };
+    };*/
     
     userFactory.getUserByUsername = function(username) {
         return $http.get(baseUrl + '/' + username);
@@ -27,14 +23,18 @@ angular.module('myApp.factories', []).
         return $http.get(baseUrl + '/all');
     };
     
+    userFactory.buyPokemon = function(pokedexId) {
+        return $http.put(baseUrl + '/buy/' + pokedexId);
+    };
+    
     return userFactory;
   }]).
   factory('teamFactory', ['$http', function ($http) {
     var baseUrl = 'api/team';
     var teamFactory = {};
     
-    teamFactory.createTeam = function(team) {
-        return $http.put(baseUrl + '/create', team);
+    teamFactory.createTeam = function(name) {
+        return $http.put(baseUrl + '/create/' + name);
     };
     
     teamFactory.deleteTeam = function(teamId) {

@@ -1,5 +1,5 @@
 angular.module('myApp.security', [])
-        .controller('AppLoginCtrl', function ($scope, $rootScope, $http, $window, $location, $uibModal, jwtHelper, userService, teamService) {
+        .controller('AppLoginCtrl', function ($scope, $rootScope, $http, $window, $location, $uibModal, jwtHelper, userService, teamService, teamFactory) {
 
             $rootScope.$on('logOutEvent', function () {
                 $scope.logout();
@@ -59,20 +59,20 @@ angular.module('myApp.security', [])
                 $location.path("#/");
             };
 
-            $rootScope.openErrorModal = function (text) {
+            $rootScope.openErrorModal = function (msg) {
                 var modalInstance = $uibModal.open({
                     animation: true,
                     templateUrl: 'errorModal.html',
                     controller: function ($scope, $uibModalInstance) {
-                        $scope.error = text;
-                        $scope.ok = function () {
+                        $scope.msg = msg;
+                        $scope.closeModal = function () {
                             $uibModalInstance.close();
                         };
                     },
                     size: 'sm'
                 });
             };
-
+            
             //This sets the login data from session store if user pressed F5 (You are still logged in)
             var init = function () {
                 var token = $window.sessionStorage.id_token;

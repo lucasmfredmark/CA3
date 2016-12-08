@@ -7,6 +7,7 @@ package facades.interfaces;
 
 import entity.Pokemon;
 import entity.User;
+import httpErrors.PokemonNotFoundException;
 import httpErrors.UserNotFoundException;
 import java.util.List;
 
@@ -17,13 +18,15 @@ import java.util.List;
 public interface IUserFacade {
 
     User addPoints(int points, String username) throws UserNotFoundException;
-    
+
     User removePoints(int points, String username) throws UserNotFoundException;
-    
-    Pokemon addPokemon(Pokemon pokemon, String username);
-    
+
+    public Pokemon addPokemon(int pokedexId, String username);
+
     User getUserByUsername(String username) throws UserNotFoundException;
-    
+
     List<User> getAllUsers() throws UserNotFoundException;
-    
+
+    Pokemon buyPokemon(int pokedexId, String username) throws PokemonNotFoundException, UserNotFoundException, Exception;
+
 }
