@@ -81,8 +81,10 @@ public class UserFacadeTest {
         Pokemon pokemon = new Pokemon();
         String username = "Lucas";
         Pokemon expResult = new Pokemon();
-        Pokemon result = userFacade.addPokemon(pokemon, username);
-        assertEquals(expResult, result);
+        //Pokemon result = userFacade.addPokemon(pokemon, username);
+        //assertEquals(expResult, result);
+        
+        fail("Not implemented completely.");
     }
     
     @Test

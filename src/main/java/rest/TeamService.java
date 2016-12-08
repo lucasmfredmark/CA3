@@ -59,12 +59,10 @@ public class TeamService {
     }
 
     @PUT
-    @Path("create")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("create/{name}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String createTeam(String json_team) {
-        Team team = GSON.fromJson(json_team, Team.class);
-        Team t = FACADE.createTeam(team);
+    public String createTeam(@PathParam("name") String name) {
+        Team t = FACADE.createTeam(name, securityContext.getUserPrincipal().getName());
         TeamMapper tm = new TeamMapper(t);
 
         return GSON.toJson(tm);

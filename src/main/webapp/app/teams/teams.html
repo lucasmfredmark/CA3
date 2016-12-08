@@ -16,6 +16,7 @@
                     <div class="main_bdy_in">
                         <div class="container">
                             <h1>My Teams <span class="badge">{{app.team.getTeamList().length}}</span></h1>
+                            <button class="btn btn-primary" type="button" ng-click="team.openCreateTeamModal()" style="margin: 20px 0;">Create team</button>
                             <h4 ng-show="!!!app.team.getTeamList().length">You have no teams.</h4>
                             <uib-accordion ng-show="app.team.getTeamList().length">
                                 <div uib-accordion-group class="panel-default" is-open="status.open" ng-repeat="team in app.team.getTeamList() track by $index">
@@ -37,3 +38,18 @@
         </div>
     </section>
 </div>
+<script type="text/ng-template" id="createTeamModal.html">
+    <div class="modal-header">
+    <h3 class="modal-title">Create new team</h3>
+    </div>
+    <div class="modal-body">
+    <div class="form-group">
+    <label for="teamName">Team name</label>
+    <input type="text" class="form-control" ng-model="name" placeholder="Team name">
+    </div>
+    </div>
+    <div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="createTeam(name)">Create team</button>
+    <button class="btn btn-primary" type="button" ng-click="closeModal()">Close</button>
+    </div>
+</script>

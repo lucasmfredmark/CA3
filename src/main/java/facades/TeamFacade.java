@@ -7,6 +7,7 @@ package facades;
 
 import facades.interfaces.ITeamFacade;
 import entity.Team;
+import entity.User;
 import httpErrors.TeamNotFoundException;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -30,11 +31,14 @@ public class TeamFacade implements ITeamFacade {
     }
 
     @Override
-    public Team createTeam(Team team) {
+    public Team createTeam(String name, String username) {
         EntityManager em = getEntityManager();
 
         try {
             em.getTransaction().begin();
+            Team team = new Team();
+            team.setName(name);
+            team.setFkUserUsername(new User(username));
             em.persist(team);
             em.getTransaction().commit();
 

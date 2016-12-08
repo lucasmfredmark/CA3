@@ -9,14 +9,19 @@
             </div>
         </div>
     </section>
-    <section class="main_bdy innr" style="background-size:cover;"> 
-        <div ng-init="storage.getAllPokemonByUsername(storage.userService.getUsername())" id="fundsCtrl" ng-controller="StorageCtrl as storage" class="container">
-            <div class="row">
-                <div class="storage_box_each col-sm-2" ng-repeat="pokemon in storage.pokemon track by $index">
-                    <a href="#/pokemon/{{pokemon.pokedexId}}" uib-tooltip="Click to show details">
-                        <img ng-src="images/sprites/{{pokemon.pokedexId}}.png" class="img-responsive center-block" alt="#{{pokemon.pokedexId}}" title="#{{pokemon.pokedexId}}">
-                    </a>
+    <section class="main_bdy" style="background: url(images/section_bg.jpg)no-repeat center center; background-size:cover;"> 
+        <div class="container-innr">
+            <div class="main_bdy_in">
+                <div ng-init="storage.getAllPokemonByUsername(storage.userService.getUsername())" id="fundsCtrl" ng-controller="StorageCtrl as storage" class="container">
+                    <div class="row">
+                        <div class="storage_box_each col-sm-2" ng-repeat="pokemon in storage.pokemon track by $index">
+                            <a href="#/pokemon/{{pokemon.pokedexId}}" uib-tooltip="Click to show details">
+                                <img ng-src="images/sprites/{{pokemon.pokedexId}}.png" class="img-responsive center-block" alt="#{{pokemon.pokedexId}}" title="#{{pokemon.pokedexId}}">
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+</div>
