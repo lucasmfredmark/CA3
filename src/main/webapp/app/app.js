@@ -14,6 +14,7 @@ angular.module('myApp', [
   'myApp.trainers',
   'myApp.funds',
   'myApp.storage',
+  'myApp.userprofile',
   'myApp.docs',
   'myApp.filters',
   'myApp.directives',

@@ -1,0 +1,41 @@
+<div ng-init="userprofile.getAllUsersFollowedByUsername(userprofile.username)" class="wrapper">
+    <section class="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="banner_pic"><img src="images/title_banner.png" alt=""/>  </div>
+                    <div class="aro"><a href="#"><img src="images/aro_big.png" alt=""/></a> </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="main_bdy" style="background: url(images/section_bg.jpg)no-repeat center center; background-size:cover;"> 
+        <div class="container-innr">
+            <div class="main_bdy_in">
+
+                <div class="row">
+                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+
+                    <!-- Add the extra clearfix for only the required viewport -->
+                    <div class="clearfix visible-xs-block"></div>
+
+                    <div class="col-xs-6 col-sm-3">.col-xs-6 .col-sm-3</div>
+                    <div class="col-xs-6 col-sm-3">
+                        <img id="profile_banner_following" src="images/banner_following.png">
+                        <table style="width: auto; margin-left:40px;" class="table">
+                            <tr ng-repeat="user in userprofile.usersFollowed">
+                                <td>
+                                    <a ng-click="userprofile.username = user.youUserUsername" ng-href="#/userprofile/{{userprofile.username}}">{{user.youUserUsername}}</a>
+                                </td>
+                            </tr>
+                        </table>
+                        <button  ng-click='userprofile.followAUser(userprofile.username)' ng-show='userprofile.username !== userprofile.currentUser && !userprofile.hasUser(userprofile.username)' style='margin-left:40px' class='btn-default'>Follow</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+</div>
