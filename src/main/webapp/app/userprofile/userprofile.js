@@ -8,7 +8,7 @@ angular.module('myApp.userprofile', ['ngRoute'])
                 });
             }])
 
-        .controller('userprofileCtrl', ['$routeParams', 'userFactory', 'followFactory', 'userService', function ($routeParams, userFactory, followFactory, userService) {
+        .controller('userprofileCtrl', ['$rootScope', '$routeParams', 'userFactory', 'followFactory', 'userService', function ($rootScope, $routeParams, userFactory, followFactory, userService) {
                 var self = this;
                 self.username = $routeParams.username;
                 self.currentUser = userService.getUsername();
@@ -33,6 +33,7 @@ angular.module('myApp.userprofile', ['ngRoute'])
                 };
                 self.followAUser = function (username) {
                     followFactory.followAUser(username).then(function (response) {
+                        $rootScope.openBaseModal("All right!", "You are now following: " + username);
                     });
                 };
             }]);
