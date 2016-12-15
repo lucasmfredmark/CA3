@@ -39,6 +39,8 @@ public class FollowFacadeTest {
     
     @Before
     public void setUp() {
+        // Set up dummy data for apache derby
+        
     }
     
     @After

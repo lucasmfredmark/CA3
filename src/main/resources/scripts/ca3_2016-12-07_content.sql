@@ -9,7 +9,7 @@
 # Database: ca3
 # Generation Time: 2016-12-07 12:09:45 +0000
 # ************************************************************
-USE ca3test;
+USE ca3;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -50,12 +50,12 @@ INSERT INTO `pokemon` (`pokedex_id`, `fk_user_username`) VALUES
 	(243,'Thomas'),
 	(244,'Thomas'),
 	(245,'Thomas'),
-        (10,'Tue'),
-        (20,'Tue'),
-        (30,'Tue'),
-        (40,'Tue'),
-        (50,'Tue'),
-        (60,'Tue');
+        (10,'Lasse'),
+        (20,'Lasse'),
+        (30,'Lasse'),
+        (40,'Lasse'),
+        (50,'Lasse'),
+        (60,'Lasse');
 
 /*!40000 ALTER TABLE `pokemon` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -85,7 +85,7 @@ INSERT INTO `team` (`id`, `name`, `fk_user_username`) VALUES
 	(1,'My awesome team','Lucas'),
 	(2,'Team Domination','Patrick'),
 	(3,'Team Lars','Thomas'),
-	(4,'Acceptance Test', 'Tue');
+	(4,'Acceptance Test', 'Lasse');
 
 /*!40000 ALTER TABLE `team` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -136,7 +136,7 @@ INSERT INTO `user` (`username`, `firstname`, `gender`, `lastname`, `passwordhash
 	('Lucas','Lucas','Male','Fredmark','sha1:64000:18:I99jQvIYh5J8md2CnFw0Mo4qoUfJGKWP:/tofGsjTqR7eKMPYvu6jZPKe',1000),
 	('Patrick','Patrick','Male','Johansen','sha1:64000:18:ORgJ4ICIhHo4wW5FRdgvu8ndPGbP43+D:NGR0O7iZsAniwCdg71ZefDG8',1000),
 	('Thomas','Thomas','Male','Staal','sha1:64000:18:wrBtd4+bBU3h1DHUDfouu7MEwKJTqZcI:06UjMAJ92eagg4RFpYLMpQLA',1000),
-        ('Tue', 'Tue','Male', 'Jeg kan ikke dit efternavn', 'sha1:64000:18:wrBtd4+bBU3h1DHUDfouu7MEwKJTqZcI:06UjMAJ92eagg4RFpYLMpQLA',0);
+	('Lasse', 'Bjørn','Male', 'Jeg kan ikke dit efternavn', 'sha1:64000:18:wrBtd4+bBU3h1DHUDfouu7MEwKJTqZcI:06UjMAJ92eagg4RFpYLMpQLA',0);
 
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -155,7 +155,7 @@ INSERT INTO `user_role` (`roles_rolename`, `users_username`) VALUES
 	('User','Lucas'),
 	('User','Patrick'),
 	('User','Thomas'),
-        ('User','Tue');
+        ('User','Lasse');
 
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
